@@ -1,0 +1,41 @@
+[
+  {
+    "id": "633d6d3fb88e7947df08a6ca",
+    "name": "International Shares",
+    "startBalance": 15000.0,
+    "currentBalance": {
+      "accountBalance": 15000.0,
+      "closedPositions": 0.0,
+      "deposits": 0.0,
+      "taxes": 0.0,
+      "withdrawals": 0.0
+    },
+    "lastBalance": "2022-10-05 13:40:47"
+  },
+  {
+    "id": "633d6d3fb88e7947df08a6cb",
+    "name": "National Shares",
+    "startBalance": 10000.0,
+    "currentBalance": {
+      "accountBalance": 10000.0,
+      "closedPositions": 0.0,
+      "deposits": 0.0,
+      "taxes": 0.0,
+      "withdrawals": 0.0
+    },
+    "lastBalance": "2022-10-05 13:40:47"
+  },
+  {
+    "id": "633d6d3fb88e7947df08a6cc",
+    "name": "FOREX",
+    "startBalance": 5000.0,
+    "currentBalance": {
+      "accountBalance": 5000.0,
+      "closedPositions": 0.0,
+      "deposits": 0.0,
+      "taxes": 0.0,
+      "withdrawals": 0.0
+    },
+    "lastBalance": "2022-10-05 13:40:47"
+  }
+]
