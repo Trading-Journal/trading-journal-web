@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { JournalTabs as journalsComponent } from '../../components/journals/JournalTabs';
+import { JournalTabs } from '../../components/journals/JournalTabs';
 import { Loading } from '../../components/loading/Loading';
 import { JournalModel } from '../../model/JournalModel';
 
@@ -9,7 +9,7 @@ interface Load {
 }
 
 export const JournalsPage = () => {
-  const JournalsLoading = Loading(journalsComponent);
+  const JournalsLoading = Loading(JournalTabs);
 
   const [appState, setAppState] = useState<Load>({
     loading: false,

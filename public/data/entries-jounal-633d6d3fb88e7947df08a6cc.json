@@ -1,0 +1,28 @@
+[
+  {
+    "id": "634016eab88e7947df08a6d9",
+    "date": "2022-10-07 14:09:13",
+    "type": "TRADE",
+    "price": 1362.38,
+    "graphType": "RENKO",
+    "graphMeasure": 7,
+    "symbol": "GOOGL",
+    "direction": "SHORT",
+    "size": 6.73,
+    "profitPrice": 1158.02,
+    "lossPrice": 1702.98,
+    "costs": 1.36,
+    "exitPrice": null,
+    "exitDate": null,
+    "screenshotBefore": null,
+    "screenshotAfter": null,
+    "notes": null,
+    "accountRisked": 0.1528,
+    "plannedRR": 0.6,
+    "grossResult": null,
+    "netResult": null,
+    "accountChange": null,
+    "accountBalance": null,
+    "finished": false
+  }
+]

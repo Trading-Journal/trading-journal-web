@@ -1,10 +1,11 @@
+import TuneIcon from '@mui/icons-material/Tune';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { JournalModel } from '../../model/JournalModel';
-import { SingleJournal } from './SingleJournal';
+import { JournalEntries } from './JournalEntries';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -17,18 +18,7 @@ function TabPanel(props: TabPanelProps) {
 
   return (
     <div role="tabpanel" hidden={value !== index} {...other}>
-      {value === index && (
-        <Box
-          sx={{
-            p: 3,
-            flexGrow: 1,
-            bgcolor: 'background.paper',
-            display: 'flex',
-          }}
-        >
-          {children}
-        </Box>
-      )}
+      {value === index && <div>{children}</div>}
     </div>
   );
 }
@@ -36,43 +26,53 @@ function TabPanel(props: TabPanelProps) {
 export const JournalTabs = (props: any) => {
   const [value, setValue] = React.useState(0);
   const [journals, setJournals] = useState<JournalModel[]>([]);
+  const journalsList: JournalModel[] = props.journals;
 
   useEffect(() => {
-    if (props.journals != null && props.journals.length > 0) {
-      setJournals(props.journals);
+    if (journalsList != null && journalsList.length > 0) {
+      setJournals(journalsList);
+      if (journalsList.length > 0) {
+        setValue(1);
+      }
     }
-  }, [props]);
+  }, [journalsList]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
+  // const handleEdit = (journal: JournalModel) => {
+  //   alert('Editing ' + journal.name);
+  // };
+
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        bgcolor: 'background.paper',
-        display: 'flex',
-      }}
-    >
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="fullWidth"
-        orientation="vertical"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
-      >
-        {journals.map((journal: JournalModel, index: number) => (
-          <Tab key={`journal-item-${journal.id}`} label={journal.name} />
-        ))}
-      </Tabs>
+    <Box sx={{ width: '100%' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="auto"
+          sx={{ borderRight: 1, borderColor: 'divider' }}
+        >
+          <Tab icon={<TuneIcon sx={{ fontSize: 30 }} />} />
+          {journals.map((journal: JournalModel) => (
+            <Tab
+              key={`journal-item-${journal.id}`}
+              label={journal.name}
+              // icon={<EditButton onClick={() => handleOpen()} />}
+              iconPosition="end"
+            />
+          ))}
+        </Tabs>
+      </Box>
       {journals.map((journal: JournalModel, index: number) => (
         <TabPanel
           key={`journal-tab-panel-${journal.id}`}
           value={value}
-          index={index}
+          index={index + 1}
         >
-          <SingleJournal journal={journal} />
+          <JournalEntries journal={journal} />
         </TabPanel>
       ))}
     </Box>

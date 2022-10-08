@@ -9,33 +9,8 @@ import { TopBar } from './components/top-bar/TopBar';
 import { HomePage } from './pages/home/HomePage';
 import { JournalsPage } from './pages/journals/JournalsPage';
 
-// const colunas: Column[] = [
-//   {
-//     name: 'dessert',
-//     label: 'Dessert',
-//   },
-//   {
-//     name: 'carbs',
-//     label: 'Carbs (g)',
-//   },
-//   {
-//     name: 'protein',
-//     label: 'Protein (g)',
-//   },
-//   {
-//     name: 'Comments',
-//     label: 'comments',
-//   },
-// ];
-
 function App() {
   return (
-    // <div className="App">
-    //   {/* <TopBar /> */}
-    //   <Button variant="contained">Hello World</Button>
-    //   <Table columns={colunas} />
-    // </div>
-
     <Box
       sx={{
         display: 'flex',

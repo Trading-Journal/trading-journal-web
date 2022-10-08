@@ -1,0 +1,28 @@
+[
+  {
+    "id": "634016f2b88e7947df08a6da",
+    "date": "2022-10-07 14:09:22",
+    "type": "DEPOSIT",
+    "price": 1416.64,
+    "graphType": null,
+    "graphMeasure": null,
+    "symbol": null,
+    "direction": null,
+    "size": null,
+    "profitPrice": null,
+    "lossPrice": null,
+    "costs": null,
+    "exitPrice": null,
+    "exitDate": null,
+    "screenshotBefore": null,
+    "screenshotAfter": null,
+    "notes": null,
+    "accountRisked": null,
+    "plannedRR": null,
+    "grossResult": null,
+    "netResult": 1416.64,
+    "accountChange": 0.0944,
+    "accountBalance": 16416.64,
+    "finished": true
+  }
+]
