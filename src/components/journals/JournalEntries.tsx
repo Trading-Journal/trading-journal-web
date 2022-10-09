@@ -3,6 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { useEffect, useState } from 'react';
 import { EntryModel } from '../../model/EntryModel';
 import { JournalModel } from '../../model/JournalModel';
+import { getAllEntries } from '../../services/EntryService';
 import { Entries } from '../entries/Entries';
 import { Loading } from '../loading/Loading';
 import { JournalSummary } from './JournalSummary';
@@ -27,15 +28,10 @@ export const JournalEntries = (props: any) => {
   }, [props]);
 
   useEffect(() => {
-    // setAppState({ loading: true, entries: [] });
-    // const apiUrl = `https://api.github.com/users/hacktivist123/repos`;
-    const apiUrl = `./data/entries-jounal-${journal?.id}.json`;
     if (journal) {
-      fetch(apiUrl)
-        .then((res) => res.json())
-        .then((entriesList) => {
-          setAppState({ loading: false, entries: entriesList });
-        });
+      getAllEntries(journal.id).then((entriesList) => {
+        setAppState({ loading: false, entries: entriesList });
+      });
     }
   }, [journal]);
 
