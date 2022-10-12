@@ -1,33 +1,22 @@
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import PasswordIcon from '@mui/icons-material/Password';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import {
-  doLogin,
-  useAuthDispatch,
-  useAuthState,
-} from '../../context/UserContext';
 import { AlertCard } from '../alert-card/AlertCard';
 
-export const Login = () => {
-  const { user: loggedUser, status, error } = useAuthState();
-  const dispatch = useAuthDispatch();
-
+export const ChangePassword = () => {
+  const [showError, setShowError] = useState(false);
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('eliasnitzsche@mail.com');
-  const [password, setPassword] = useState('449#5GdPBab6@FQQ');
+  const [email, setEmail] = useState('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
     event.preventDefault();
-    doLogin(dispatch, email, password).finally(() => setLoading(false));
   };
-
-  if (loggedUser) return <Navigate to="/journals" />;
 
   return (
     <Box
@@ -40,10 +29,10 @@ export const Login = () => {
       }}
     >
       <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-        <LockOutlinedIcon />
+        <PasswordIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Sign in
+        Change Password
       </Typography>
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
         <TextField
@@ -58,18 +47,6 @@ export const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          value={password}
-          autoComplete="current-password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
         <LoadingButton
           type="submit"
           fullWidth
@@ -77,13 +54,9 @@ export const Login = () => {
           loading={loading}
           sx={{ mt: 3, mb: 2 }}
         >
-          Sign In
+          Change my password
         </LoadingButton>
-        <AlertCard
-          show={status === 'rejected'}
-          message={error}
-          severity="error"
-        />
+        <AlertCard show={showError} message={error} severity="error" />
       </Box>
     </Box>
   );

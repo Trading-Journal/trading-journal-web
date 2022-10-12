@@ -1,0 +1,30 @@
+import Collapse from '@mui/material/Collapse';
+import React, { useEffect, useState } from 'react';
+
+import Alert from '@mui/material/Alert';
+
+interface AlertProps {
+  severity: any;
+  show: boolean;
+  message: string;
+}
+
+export const AlertCard: React.FC<AlertProps> = ({
+  severity,
+  show,
+  message,
+}) => {
+  const [open, setOpen] = useState(show);
+
+  useEffect(() => {
+    setOpen(show);
+  }, [show]);
+
+  return (
+    <Collapse in={open}>
+      <Alert onClose={() => setOpen(false)} severity={severity}>
+        {message}
+      </Alert>
+    </Collapse>
+  );
+};

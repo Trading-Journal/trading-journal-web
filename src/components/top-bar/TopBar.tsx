@@ -33,10 +33,10 @@ const pages: Navigation[] = [
     label: 'Journals',
     to: '/journals',
   },
-  {
-    label: 'Strategies',
-    to: '/strategies',
-  },
+  // {
+  //   label: 'Strategies',
+  //   to: '/strategies',
+  // },
 ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
