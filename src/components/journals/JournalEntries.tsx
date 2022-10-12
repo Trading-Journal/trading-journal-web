@@ -29,8 +29,8 @@ export const JournalEntries = (props: any) => {
 
   useEffect(() => {
     if (journal) {
-      getAllEntries(journal.id).then((entriesList) => {
-        setAppState({ loading: false, entries: entriesList });
+      getAllEntries(journal.id).then((entries) => {
+        setAppState({ loading: false, entries: entries });
       });
     }
   }, [journal]);

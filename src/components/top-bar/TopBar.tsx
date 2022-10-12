@@ -13,6 +13,11 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import {
+  doLogout,
+  useAuthDispatch,
+  useAuthState,
+} from '../../context/UserContext';
 
 interface Navigation {
   label: string;
@@ -36,6 +41,9 @@ const pages: Navigation[] = [
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export const TopBar = () => {
+  const { user } = useAuthState();
+  const dispatch = useAuthDispatch();
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -46,6 +54,7 @@ export const TopBar = () => {
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -54,9 +63,14 @@ export const TopBar = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleMenuSelect = (setting: string) => {
+    if (setting === 'Logout') {
+      doLogout(dispatch);
+    }
     setAnchorElUser(null);
   };
+
+  if (!user) return <div></div>;
 
   return (
     <AppBar position="static">
@@ -178,10 +192,13 @@ export const TopBar = () => {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              onClose={handleMenuSelect}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleMenuSelect(setting)}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

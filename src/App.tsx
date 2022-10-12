@@ -1,13 +1,11 @@
-import './App.scss';
-
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import './App.scss';
 import { Footer } from './components/footer/Footer';
+import { Routes } from './components/routes/Routes';
 import { TopBar } from './components/top-bar/TopBar';
-
-import { HomePage } from './pages/home/HomePage';
-import { JournalsPage } from './pages/journals/JournalsPage';
+import { AuthProvider } from './context/UserContext';
 
 function App() {
   return (
@@ -19,16 +17,12 @@ function App() {
       }}
     >
       <CssBaseline />
-
-      <BrowserRouter>
-        <TopBar />
-        <Routes>
-          <Route path="" element={<HomePage />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/journals" element={<JournalsPage />} />
-        </Routes>
-      </BrowserRouter>
-
+      <AuthProvider>
+        <BrowserRouter>
+          <TopBar />
+          <Routes />
+        </BrowserRouter>
+      </AuthProvider>
       <Footer />
     </Box>
   );
