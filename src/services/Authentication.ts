@@ -1,17 +1,21 @@
 import { LoginResponse } from './../model/LoginResponse';
 
 const login = (email: string, password: string): Promise<LoginResponse> => {
-  if (email === 'a.cassianoweber@gmail.com' && password === '123456') {
-    const loginResponse = {
-      accessToken: '123',
-      refreshToken: '123',
-      issuedAt: new Date(),
-      user: 'user-1',
-    };
-    return Promise.resolve(loginResponse);
-  } else {
-    throw new Error('Invalid login');
-  }
+  return fetch('http://localhost:8080/authentication/signin', {
+    method: 'POST',
+    body: JSON.stringify({ email, password }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(async (response) => {
+      if (response.ok) return response.json();
+      else {
+        const err = await response.json();
+        throw new Error(err.error);
+      }
+    })
+    .then((response: LoginResponse) => response);
 };
 
 export { login };

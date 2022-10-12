@@ -1,16 +1,10 @@
 import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { EntryModel } from '../../model/EntryModel';
 import { columns } from './EntriesColumns';
 
-export const Entries = (props: any) => {
-  const [entries, setEntries] = useState<EntryModel[]>([]);
-
-  useEffect(() => {
-    setEntries(props.entries);
-  }, [props]);
-
+export const Entries: React.FC<{ entries: EntryModel[] }> = ({ entries }) => {
   return (
     <Box
       sx={{

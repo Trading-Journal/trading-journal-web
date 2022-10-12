@@ -28,6 +28,15 @@ function useAuthState() {
   return context;
 }
 
+function useAccessTokenState() {
+  const context = React.useContext(AuthStateContext);
+  const { user: { accessToken } = {} } = context;
+  if (!accessToken)
+    throw new Error('useAuthState must be used in AuthProvider');
+
+  return accessToken;
+}
+
 function useAuthDispatch() {
   const context = React.useContext(AuthDispatchContext);
   if (!context) throw new Error('useAuthDispatch must be used in AuthProvider');
@@ -66,4 +75,11 @@ function doLogout(dispatch: any) {
   dispatch(initialState);
 }
 
-export { AuthProvider, useAuthState, useAuthDispatch, doLogin, doLogout };
+export {
+  AuthProvider,
+  useAuthState,
+  useAccessTokenState,
+  useAuthDispatch,
+  doLogin,
+  doLogout,
+};

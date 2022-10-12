@@ -2,8 +2,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { JournalModel } from '../../model/JournalModel';
 import { JournalEntries } from './JournalEntries';
 
@@ -23,27 +22,19 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export const JournalTabs = (props: any) => {
-  const [value, setValue] = React.useState(0);
-  const [journals, setJournals] = useState<JournalModel[]>([]);
-  const journalsList: JournalModel[] = props.journals;
-
+export const JournalTabs: React.FC<{ journals: JournalModel[] }> = ({
+  journals,
+}) => {
+  const [value, setValue] = useState(0);
   useEffect(() => {
-    if (journalsList != null && journalsList.length > 0) {
-      setJournals(journalsList);
-      if (journalsList.length > 0) {
-        setValue(1);
-      }
+    if (journals.length > 0) {
+      setValue(1);
     }
-  }, [journalsList]);
+  }, [journals]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
-  // const handleEdit = (journal: JournalModel) => {
-  //   alert('Editing ' + journal.name);
-  // };
 
   return (
     <Box sx={{ width: '100%' }}>

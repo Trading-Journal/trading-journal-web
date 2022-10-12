@@ -1,7 +1,8 @@
 import { JournalModel } from '../model/JournalModel';
-import { accessToken } from './AccessToken';
 
-export async function getAllJournals(): Promise<JournalModel[]> {
+export async function getAllJournals(
+  accessToken: string
+): Promise<JournalModel[]> {
   try {
     const response = await fetch('http://localhost:8081/journals', {
       method: 'GET',

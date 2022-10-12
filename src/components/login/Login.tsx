@@ -19,8 +19,8 @@ export const Login = () => {
   const dispatch = useAuthDispatch();
 
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('eliasnitzsche@mail.com');
+  const [password, setPassword] = useState('449#5GdPBab6@FQQ');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -72,6 +72,7 @@ export const Login = () => {
           name="email"
           autoComplete="email"
           autoFocus
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
@@ -82,6 +83,7 @@ export const Login = () => {
           label="Password"
           type="password"
           id="password"
+          value={password}
           autoComplete="current-password"
           onChange={(e) => setPassword(e.target.value)}
         />

@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAccessTokenState } from '../../context/UserContext';
 import { EntryModel } from '../../model/EntryModel';
 import { JournalModel } from '../../model/JournalModel';
 import { getAllEntries } from '../../services/EntryService';
@@ -13,27 +14,25 @@ interface Load {
   entries: EntryModel[];
 }
 
-export const JournalEntries = (props: any) => {
+export const JournalEntries: React.FC<{ journal: JournalModel }> = ({
+  journal,
+}) => {
   const EntriesLoading = Loading(Entries);
-
-  const [journal, setJournal] = useState<JournalModel>();
 
   const [appState, setAppState] = useState<Load>({
     loading: false,
     entries: [],
   });
 
-  useEffect(() => {
-    setJournal(props.journal);
-  }, [props]);
+  const accessToken = useAccessTokenState();
 
   useEffect(() => {
     if (journal) {
-      getAllEntries(journal.id).then((entries) => {
+      getAllEntries(accessToken, journal.id).then((entries) => {
         setAppState({ loading: false, entries: entries });
       });
     }
-  }, [journal]);
+  }, [journal, accessToken]);
 
   return (
     <Box sx={{ p: 2, flexGrow: 1 }}>

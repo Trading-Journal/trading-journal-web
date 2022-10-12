@@ -7,16 +7,12 @@ import { StartBalanceCard } from '../balance-card/StartBalanceCard';
 import { TaxesCard } from '../balance-card/TaxesCard';
 import { WithdrawalsCard } from '../balance-card/WithdrawalsCard';
 
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { JournalModel } from '../../model/JournalModel';
 
-export const JournalSummaryCards = (props: any) => {
-  const [journal, setJournal] = useState<JournalModel>();
-
-  useEffect(() => {
-    setJournal(props.journal);
-  }, [props]);
-
+export const JournalSummaryCards: React.FC<{ journal: JournalModel }> = ({
+  journal,
+}) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>

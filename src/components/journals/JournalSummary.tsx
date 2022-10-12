@@ -3,17 +3,13 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { JournalModel } from '../../model/JournalModel';
 import { JournalSummaryCards } from './JournalSummaryCards';
 
-export const JournalSummary = (props: any) => {
-  const [journal, setJournal] = useState<JournalModel>();
-
-  useEffect(() => {
-    setJournal(props.journal);
-  }, [props]);
-
+export const JournalSummary: React.FC<{ journal: JournalModel }> = ({
+  journal,
+}) => {
   return (
     <Accordion
       variant="outlined"

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { JournalTabs } from '../../components/journals/JournalTabs';
 import { Loading } from '../../components/loading/Loading';
+import { useAccessTokenState } from '../../context/UserContext';
 import { JournalModel } from '../../model/JournalModel';
 import { getAllJournals } from '../../services/JournalService';
 
@@ -17,12 +18,14 @@ export const JournalsPage = () => {
     journals: [],
   });
 
+  const accessToken = useAccessTokenState();
+
   useEffect(() => {
     setAppState({ loading: true, journals: [] });
-    getAllJournals().then((journals) => {
+    getAllJournals(accessToken).then((journals) => {
       setAppState({ loading: false, journals });
     });
-  }, [setAppState]);
+  }, [setAppState, accessToken]);
   return (
     <JournalsLoading
       isLoading={appState.loading}
