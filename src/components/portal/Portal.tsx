@@ -1,16 +1,13 @@
-import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
+import React from 'react';
 
 interface PortalProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
+  children: React.ReactNode;
 }
 
-export const Portal = () => {
+export const Portal: React.FC<PortalProps> = ({ children }) => {
   return (
     <Grid container component="main" sx={{ height: '96vh' }}>
       <CssBaseline />
@@ -31,31 +28,7 @@ export const Portal = () => {
         }}
       />
       <Grid item xs={12} sm={12} md={5} component={Paper} elevation={6} square>
-        <Box
-          sx={{
-            my: 8,
-            mx: 4,
-          }}
-        >
-          <Grid
-            spacing={6}
-            container
-            direction="row"
-            justifyContent="space-evenly"
-            alignItems="center"
-          >
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
+        {children}
       </Grid>
     </Grid>
   );

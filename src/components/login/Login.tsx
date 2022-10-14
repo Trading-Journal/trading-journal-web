@@ -2,10 +2,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 import {
   doLogin,
   useAuthDispatch,
@@ -18,8 +20,8 @@ export const Login = () => {
   const dispatch = useAuthDispatch();
 
   const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState('eliasnitzsche@mail.com');
-  const [password, setPassword] = useState('449#5GdPBab6@FQQ');
+  const [email, setEmail] = useState('emailfortestsallan@gmail.com');
+  const [password, setPassword] = useState('dad231#$#4');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -84,6 +86,18 @@ export const Login = () => {
           message={error}
           severity="error"
         />
+        <Grid container>
+          <Grid item xs>
+            <Link component={RouterLink} to="/forgot-password" variant="body2">
+              Forgot password?
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link component={RouterLink} to="/register">
+              {"Don't have an account? Sign Up"}
+            </Link>
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );

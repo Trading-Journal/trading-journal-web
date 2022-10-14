@@ -18,7 +18,7 @@ export const AlertCard: React.FC<AlertProps> = ({
 
   useEffect(() => {
     setOpen(show);
-  }, [show]);
+  }, [show, open]);
 
   return (
     <Collapse in={open}>
