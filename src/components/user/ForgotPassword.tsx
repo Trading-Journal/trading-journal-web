@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { requestChangePassword } from '../../services/Authentication';
-import { AlertCard } from '../alert-card/AlertCard';
+import { AlertCard } from '../card/AlertCard';
 
 export const ForgotPassword = () => {
   const [error, setError] = useState({ show: false, message: '' });

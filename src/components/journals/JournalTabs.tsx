@@ -51,7 +51,6 @@ export const JournalTabs: React.FC<{ journals: JournalModel[] }> = ({
             <Tab
               key={`journal-item-${journal.id}`}
               label={journal.name}
-              // icon={<EditButton onClick={() => handleOpen()} />}
               iconPosition="end"
             />
           ))}

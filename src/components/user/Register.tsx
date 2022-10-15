@@ -14,7 +14,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { RegisterModel } from '../../model/RegisterModel';
 import { SignUpResponse } from '../../model/SignUpResponse';
 import { signUp } from '../../services/Authentication';
-import { AlertCard } from '../alert-card/AlertCard';
+import { AlertCard } from '../card/AlertCard';
 import { PortalFeedback } from '../portal/PortalFeedback';
 
 const initialState: RegisterModel = {

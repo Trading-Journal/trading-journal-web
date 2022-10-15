@@ -15,7 +15,7 @@ import {
 } from 'react-router-dom';
 import { ChangePasswordRequest } from '../../model/ChangePasswordRequest';
 import { changePassword } from '../../services/Authentication';
-import { AlertCard } from '../alert-card/AlertCard';
+import { AlertCard } from '../card/AlertCard';
 import { PortalFeedback } from '../portal/PortalFeedback';
 
 export const ChangePassword = () => {

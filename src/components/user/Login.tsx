@@ -13,7 +13,7 @@ import {
   useAuthDispatch,
   useAuthState,
 } from '../../context/UserContext';
-import { AlertCard } from '../alert-card/AlertCard';
+import { AlertCard } from '../card/AlertCard';
 
 export const Login = () => {
   const { user: loggedUser, status, error } = useAuthState();

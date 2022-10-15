@@ -1,5 +1,5 @@
 import { Portal } from '../../components/portal/Portal';
-import { VerifyEmail } from '../../components/verify-email/VerifyEmail';
+import { VerifyEmail } from '../../components/user/VerifyEmail';
 
 export const EmailVerified = () => {
   return (

@@ -17,7 +17,7 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 import { sendVerification, verify } from '../../services/Authentication';
-import { AlertCard } from '../alert-card/AlertCard';
+import { AlertCard } from '../card/AlertCard';
 import { PortalFeedback } from '../portal/PortalFeedback';
 
 export const VerifyEmail = () => {
