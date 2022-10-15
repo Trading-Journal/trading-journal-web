@@ -1,6 +1,6 @@
 import React from 'react';
 import { LoginResponse } from '../model/LoginResponse';
-import { login } from '../services/Authentication';
+import { signIn } from '../services/Authentication';
 
 interface UserContextState {
   status: string;
@@ -60,7 +60,7 @@ async function doLogin(dispatch: any, email: string, password: string) {
   try {
     dispatch({ status: 'pending' });
 
-    const result = await login(email, password);
+    const result = await signIn(email, password);
     dispatch({
       status: 'resolved',
       user: result,

@@ -1,4 +1,5 @@
 import PasswordIcon from '@mui/icons-material/Password';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import LoadingButton from '@mui/lab/LoadingButton';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -15,6 +16,7 @@ import {
 import { ChangePasswordRequest } from '../../model/ChangePasswordRequest';
 import { changePassword } from '../../services/Authentication';
 import { AlertCard } from '../alert-card/AlertCard';
+import { PortalFeedback } from '../portal/PortalFeedback';
 
 export const ChangePassword = () => {
   const [error, setError] = useState({ show: false, message: '' });
@@ -55,6 +57,19 @@ export const ChangePassword = () => {
         });
     }
   };
+
+  if (passwordChanged) {
+    return (
+      <PortalFeedback
+        icon={<ThumbUpIcon />}
+        header="Your password as successfully change"
+        link={{
+          to: '/login',
+          label: 'You are all set, go to login',
+        }}
+      ></PortalFeedback>
+    );
+  }
 
   return (
     <Box
@@ -120,16 +135,7 @@ export const ChangePassword = () => {
         >
           Change my password
         </LoadingButton>
-        <AlertCard
-          show={error.show && !passwordChanged}
-          message={error.message}
-          severity="error"
-        />
-        <AlertCard
-          show={passwordChanged}
-          message="Password changed, you can go back to Login"
-          severity="success"
-        />
+        <AlertCard show={error.show} message={error.message} severity="error" />
         <Grid container>
           <Grid item xs>
             <Link component={RouterLink} to="/login" variant="body2">
@@ -138,7 +144,7 @@ export const ChangePassword = () => {
           </Grid>
           <Grid item>
             <Link component={RouterLink} to="/register">
-              {"Don't have an account? Sign Up"}
+              Don't have an account? Sign Up
             </Link>
           </Grid>
         </Grid>
