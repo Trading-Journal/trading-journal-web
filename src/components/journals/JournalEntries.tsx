@@ -1,38 +1,17 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import React, { useEffect, useState } from 'react';
-import { useAccessTokenState } from '../../context/UserContext';
-import { EntryModel } from '../../model/EntryModel';
+import React from 'react';
 import { JournalModel } from '../../model/JournalModel';
-import { getAllEntries } from '../../services/EntryService';
 import { Entries } from '../entries/Entries';
 import { Loading } from '../loading/Loading';
+import { useEntries } from '../queries/EntriesQueries';
 import { JournalSummary } from './JournalSummary';
-
-interface Load {
-  loading: boolean;
-  entries: EntryModel[];
-}
 
 export const JournalEntries: React.FC<{ journal: JournalModel }> = ({
   journal,
 }) => {
   const EntriesLoading = Loading(Entries);
-
-  const [appState, setAppState] = useState<Load>({
-    loading: false,
-    entries: [],
-  });
-
-  const accessToken = useAccessTokenState();
-
-  useEffect(() => {
-    if (journal) {
-      getAllEntries(accessToken, journal.id).then((entries) => {
-        setAppState({ loading: false, entries: entries });
-      });
-    }
-  }, [journal, accessToken]);
+  const { data, error, isLoading } = useEntries(journal);
 
   return (
     <Box sx={{ p: 2, flexGrow: 1 }}>
@@ -41,10 +20,7 @@ export const JournalEntries: React.FC<{ journal: JournalModel }> = ({
           <JournalSummary journal={journal} />
         </Grid>
         <Grid xs={12} sm={12}>
-          <EntriesLoading
-            isLoading={appState.loading}
-            entries={appState.entries}
-          />
+          <EntriesLoading isLoading={isLoading} entries={data} />
         </Grid>
       </Grid>
     </Box>

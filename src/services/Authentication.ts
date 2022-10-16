@@ -99,7 +99,6 @@ const sendVerification = (email: string): Promise<any> => {
       },
     }
   ).then(async (response) => {
-    console.log(response);
     if (response.ok) return response;
     else {
       const errors = await readErrors(response);

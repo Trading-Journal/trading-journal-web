@@ -1,15 +1,19 @@
 import { JournalModel } from '../model/JournalModel';
+import { readErrors } from './ErrorsReader';
 
-export async function getAllJournals(
+export const getAllJournals = (
   accessToken: string
-): Promise<JournalModel[]> {
-  try {
-    const response = await fetch('http://localhost:8081/journals', {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
-    return await response.json();
-  } catch (error) {
-    return [];
-  }
-}
+): Promise<JournalModel[]> => {
+  return fetch('http://localhost:8081/journals', {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+    .then(async (response) => {
+      if (response.ok) return response.json();
+      else {
+        const errors = await readErrors(response);
+        throw new Error(errors);
+      }
+    })
+    .then((response: JournalModel[]) => response);
+};
