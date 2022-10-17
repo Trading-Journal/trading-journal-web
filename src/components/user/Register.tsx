@@ -9,10 +9,10 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { RegisterModel } from '../../model/RegisterModel';
-import { SignUpResponse } from '../../model/SignUpResponse';
 import { signUp } from '../../services/Authentication';
 import { AlertCard } from '../card/AlertCard';
 import { PortalFeedback } from '../portal/PortalFeedback';
@@ -29,36 +29,16 @@ const initialState: RegisterModel = {
 };
 
 export const Register = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState({ show: false, message: '' });
+  const mutation = useMutation((request: RegisterModel) => signUp(request));
   const [request, setRequest] = useState<RegisterModel>(initialState);
-  const [feedback, setFeedback] = useState<SignUpResponse>();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    setLoading(true);
     event.preventDefault();
-    if (request.password !== request.confirmPassword) {
-      setError({
-        show: true,
-        message: 'Password and confirmation must be equal',
-      });
-      setLoading(false);
-    } else {
-      signUp(request)
-        .then((response: SignUpResponse) => {
-          setFeedback(response);
-        })
-        .catch((err) => {
-          setError({ show: true, message: err.message });
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
+    mutation.mutate(request);
   };
 
-  if (feedback) {
-    if (feedback.enabled) {
+  if (mutation.isSuccess) {
+    if (mutation.data.enabled) {
       return (
         <PortalFeedback
           icon={<ThumbUpIcon />}
@@ -219,12 +199,18 @@ export const Register = () => {
           type="submit"
           fullWidth
           variant="contained"
-          loading={loading}
+          loading={mutation.isLoading}
           sx={{ mt: 3, mb: 2 }}
         >
           Sign Up
         </LoadingButton>
-        <AlertCard show={error.show} message={error.message} severity="error" />
+        {mutation.isError && mutation.error instanceof Error ? (
+          <AlertCard
+            show={true}
+            message={mutation.error.message}
+            severity="error"
+          />
+        ) : null}
         <Grid container justifyContent="flex-end">
           <Grid item>
             <Link component={RouterLink} to="/login" variant="body2">

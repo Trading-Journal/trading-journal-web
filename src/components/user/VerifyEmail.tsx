@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import {
   Link as RouterLink,
@@ -21,42 +22,31 @@ import { AlertCard } from '../card/AlertCard';
 import { PortalFeedback } from '../portal/PortalFeedback';
 
 export const VerifyEmail = () => {
-  const [pageLoading, setPageLoading] = useState(true);
-  const [buttonLoading, setButtonLoading] = useState(false);
-  const [sentAgain, setSentAgain] = useState(false);
-  const [error, setError] = useState({ show: false, message: '' });
+  const mutationVerify = useMutation((hash: string) => verify(hash));
+
+  const mutationSendAgain = useMutation((email: string) =>
+    sendVerification(email)
+  );
+
   const [email, setEmail] = useState('');
   const [searchParams] = useSearchParams();
   const hash = searchParams.get('hash') ?? '';
 
   useEffect(() => {
     if (hash) {
-      verify(hash)
-        .catch((err) => {
-          setError({ show: true, message: err.message });
-        })
-        .finally(() => {
-          setPageLoading(false);
-        });
+      mutationVerify.mutate(hash);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hash]);
 
   if (!hash) return <Navigate to="/Login" />;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    setButtonLoading(true);
     event.preventDefault();
-    sendVerification(email)
-      .then(() => setSentAgain(true))
-      .catch((err) => {
-        setError({ show: true, message: err.message });
-      })
-      .finally(() => {
-        setButtonLoading(false);
-      });
+    mutationSendAgain.mutate(email);
   };
 
-  if (pageLoading) {
+  if (mutationVerify.isLoading) {
     return (
       <div>
         <Box
@@ -77,7 +67,7 @@ export const VerifyEmail = () => {
         </Box>
         <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={pageLoading}
+          open={mutationVerify.isLoading}
         >
           <CircularProgress color="inherit" />
         </Backdrop>
@@ -85,7 +75,7 @@ export const VerifyEmail = () => {
     );
   }
 
-  if (sentAgain) {
+  if (mutationSendAgain.isSuccess) {
     return (
       <div>
         <PortalFeedback
@@ -98,7 +88,7 @@ export const VerifyEmail = () => {
     );
   }
 
-  if (error.show) {
+  if (mutationVerify.isError) {
     return (
       <Box
         sx={{
@@ -132,19 +122,34 @@ export const VerifyEmail = () => {
             type="submit"
             fullWidth
             variant="contained"
-            loading={buttonLoading}
+            loading={mutationSendAgain.isLoading}
             sx={{ mt: 3, mb: 2 }}
           >
             Send the verification link again
           </LoadingButton>
         </Box>
-        <Box sx={{ mt: 5 }}>
-          <AlertCard
-            show={error.show}
-            message={error.message}
-            severity="error"
-          />
-        </Box>
+
+        {mutationSendAgain.isError &&
+        mutationSendAgain.error instanceof Error ? (
+          <Box sx={{ mt: 5 }}>
+            <AlertCard
+              show={true}
+              message={mutationSendAgain.error.message}
+              severity="error"
+            />
+          </Box>
+        ) : null}
+
+        {mutationVerify.isError && mutationVerify.error instanceof Error ? (
+          <Box sx={{ mt: 5 }}>
+            <AlertCard
+              show={true}
+              message={mutationVerify.error.message}
+              severity="error"
+            />
+          </Box>
+        ) : null}
+
         <Link component={RouterLink} to="/login" variant="h5" sx={{ mt: 5 }}>
           Go back to login and start trading
         </Link>

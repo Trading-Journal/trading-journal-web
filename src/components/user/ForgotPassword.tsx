@@ -6,32 +6,22 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { requestChangePassword } from '../../services/Authentication';
 import { AlertCard } from '../card/AlertCard';
 
 export const ForgotPassword = () => {
-  const [error, setError] = useState({ show: false, message: '' });
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
-  const [instructions, setInstructions] = useState(false);
+  const mutation = useMutation((email: string) => requestChangePassword(email));
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    setLoading(true);
     event.preventDefault();
-
-    requestChangePassword(email)
-      .then(() => {
-        setInstructions(true);
-      })
-      .catch((err) => setError({ show: true, message: err.message }))
-      .finally(() => {
-        setLoading(false);
-      });
+    mutation.mutate(email);
   };
 
-  if (instructions) {
+  if (mutation.isSuccess) {
     return (
       <Box
         sx={{
@@ -90,16 +80,19 @@ export const ForgotPassword = () => {
             type="submit"
             fullWidth
             variant="contained"
-            loading={loading}
+            loading={mutation.isLoading}
             sx={{ mt: 3, mb: 2 }}
           >
             Change my password
           </LoadingButton>
-          <AlertCard
-            show={error.show}
-            message={error.message}
-            severity="error"
-          />
+          {mutation.isError && mutation.error instanceof Error ? (
+            <AlertCard
+              show={true}
+              message={mutation.error.message}
+              severity="error"
+            />
+          ) : null}
+
           <Grid container>
             <Grid item xs>
               <Link component={RouterLink} to="/login" variant="body2">
