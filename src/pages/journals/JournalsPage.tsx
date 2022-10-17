@@ -6,5 +6,7 @@ export const JournalsPage = () => {
   const JournalsLoading = Loading(JournalTabs);
   const { data, error, isLoading } = useJournals();
 
-  return <JournalsLoading isLoading={isLoading} journals={data} />;
+  return (
+    <JournalsLoading isLoading={isLoading} error={error} journals={data} />
+  );
 };

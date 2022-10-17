@@ -20,7 +20,7 @@ export const JournalEntries: React.FC<{ journal: JournalModel }> = ({
           <JournalSummary journal={journal} />
         </Grid>
         <Grid xs={12} sm={12}>
-          <EntriesLoading isLoading={isLoading} entries={data} />
+          <EntriesLoading isLoading={isLoading} error={error} entries={data} />
         </Grid>
       </Grid>
     </Box>
