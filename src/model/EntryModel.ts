@@ -3,7 +3,7 @@ import { EntryTypeEnum } from './EntryTypeEnum';
 import { GraphTypeEnum } from './GraphTypeEnum';
 
 export interface EntryModel {
-  id: string;
+  id?: string;
 
   date: Date;
 
@@ -11,41 +11,41 @@ export interface EntryModel {
 
   price: number;
 
-  graphType: GraphTypeEnum;
+  graphType?: GraphTypeEnum;
 
-  graphMeasure: number;
+  graphMeasure?: number;
 
-  symbol: string;
+  symbol?: string;
 
-  direction: DirectionModel;
+  direction?: DirectionModel;
 
-  size: number;
+  size?: number;
 
-  profitPrice: number;
+  profitPrice?: number;
 
-  lossPrice: number;
+  lossPrice?: number;
 
-  costs: number;
+  costs?: number;
 
-  exitPrice: number;
+  exitPrice?: number;
 
-  exitDate: Date;
+  exitDate?: Date;
 
-  screenshotBefore: string;
+  screenshotBefore?: string;
 
-  screenshotAfter: string;
+  screenshotAfter?: string;
 
-  notes: string;
+  notes?: string;
 
-  accountRisked: number;
+  accountRisked?: number;
 
-  plannedRR: number;
+  plannedRR?: number;
 
-  grossResult: number;
+  grossResult?: number;
 
-  netResult: number;
+  netResult?: number;
 
-  accountChange: number;
+  accountChange?: number;
 
-  accountBalance: number;
+  accountBalance?: number;
 }

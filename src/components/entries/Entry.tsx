@@ -2,10 +2,18 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { EntryModel } from '../../model/EntryModel';
+import { EntryTypeEnum } from '../../model/EntryTypeEnum';
 import { JournalModel } from '../../model/JournalModel';
+
+const initialState: EntryModel = {
+  date: new Date(),
+  type: EntryTypeEnum.TRADE,
+  price: 0,
+};
 
 interface EntryProps {
   journal: JournalModel;
@@ -29,7 +37,15 @@ function renderHeader(journal: JournalModel, entry?: EntryModel) {
 }
 
 export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
-  const { journal, entry, onSave, onCancel } = props;
+  const { journal, entry: selectedEntry, onSave, onCancel } = props;
+
+  const [entry, setEntry] = useState<EntryModel>(initialState);
+
+  useEffect(() => {
+    if (selectedEntry) {
+      setEntry(selectedEntry);
+    }
+  }, [selectedEntry]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -52,6 +68,20 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
       {renderHeader(journal, entry)}
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              autoComplete="symbol"
+              name="symbol"
+              required
+              fullWidth
+              id="symbol"
+              label="Symbol"
+              autoFocus
+              value={entry.symbol}
+              onChange={(e) => setEntry({ ...entry, symbol: e.target.value })}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}></Grid>
           <Grid item xs={12} sm={6}>
             <Button
               fullWidth
