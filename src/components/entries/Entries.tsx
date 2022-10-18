@@ -83,12 +83,14 @@ export const Entries: React.FC<{
           icon={<EditIcon />}
           onClick={() => editClick(params.row)}
           label="Edit"
+          key={`edit-${params.row.id}`}
         />,
         <GridActionsCellItem
           color="primary"
           icon={<DeleteIcon />}
           onClick={() => deleteClick(params.row)}
           label="Delete"
+          key={`delete-${params.row.id}`}
         />,
       ],
     },
