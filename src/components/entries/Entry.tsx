@@ -53,6 +53,16 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
+            <Button
+              fullWidth
+              variant="outlined"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={handleCancel}
+            >
+              Cancel
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6}>
             <LoadingButton
               type="submit"
               fullWidth
@@ -62,16 +72,6 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
             >
               Save
             </LoadingButton>
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Button
-              fullWidth
-              variant="outlined"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={handleCancel}
-            >
-              Cancel
-            </Button>
           </Grid>
         </Grid>
       </Box>

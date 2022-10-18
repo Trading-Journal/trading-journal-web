@@ -7,7 +7,8 @@ import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import React, { useState } from 'react';
 import { EntryModel } from '../../model/EntryModel';
 import { JournalModel } from '../../model/JournalModel';
-import { ConfirmationDialog } from '../dialog/ConfirmationDialog';
+import { dateFormat } from '../../util/DateFormat';
+import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
 import { ContentDialog } from '../dialog/ContentDialog';
 
 import {
@@ -26,8 +27,7 @@ export const Entries: React.FC<{
   const [formOpen, setFormOpen] = useState(false);
 
   const EntryDialog = ContentDialog(Entry);
-
-  const dialog = ConfirmationDialog();
+  const modalContext = useConfirmationModalContext();
 
   const onCancel = () => {
     setFormOpen(false);
@@ -48,14 +48,25 @@ export const Entries: React.FC<{
     setFormOpen(true);
   };
 
-  const deleteClick = (entry: EntryModel) => {
-    dialog('aaaaa', 'adasdsad');
+  const deleteClick = async (entry: EntryModel) => {
+    const result = await modalContext.showConfirmation(
+      'Delete entry',
+      `Are you sure do you want to remove ${entry.type} ${
+        entry.symbol ? entry.symbol : ''
+      } added on ${dateFormat(entry.date)}?`
+    );
+    console.log('Result is :' + result);
   };
 
   function CustomFooter() {
     return (
       <Box sx={{ p: 1, display: 'flex' }}>
-        <Button color="secondary" startIcon={<AddIcon />} onClick={addClick}>
+        <Button
+          color="primary"
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={addClick}
+        >
           Add Trade
         </Button>
       </Box>
@@ -68,13 +79,13 @@ export const Entries: React.FC<{
       type: 'actions',
       renderCell: (params) => [
         <GridActionsCellItem
-          color="secondary"
+          color="primary"
           icon={<EditIcon />}
           onClick={() => editClick(params.row)}
           label="Edit"
         />,
         <GridActionsCellItem
-          color="secondary"
+          color="primary"
           icon={<DeleteIcon />}
           onClick={() => deleteClick(params.row)}
           label="Delete"
