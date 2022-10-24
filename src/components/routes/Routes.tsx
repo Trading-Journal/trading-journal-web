@@ -31,28 +31,17 @@ export const Routes = () => {
           />
         }
       />
-      <Route
-        path="/home"
-        element={
-          <PrivateRoute>
-            <HomePage />
-          </PrivateRoute>
-        }
-      />
-
-      <Route
-        path="/journals"
-        element={
-          <PrivateRoute>
-            <JournalsPage />
-          </PrivateRoute>
-        }
-      />
       <Route path="/login" element={<SignIn />} />
       <Route path="/register" element={<SignUp />} />
       <Route path="/email-verified" element={<EmailVerified />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/change-password" element={<ChangePassword />} />
+      <Route path="/journals" element={<PrivateRoute />}>
+        <Route path="" element={<JournalsPage />} />
+      </Route>
+      <Route path="*" element={<PrivateRoute />}>
+        <Route path="" element={<HomePage />} />
+      </Route>
     </ReactRoutes>
   );
 };
