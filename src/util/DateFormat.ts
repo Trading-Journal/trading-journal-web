@@ -1,26 +1,16 @@
-export const dateFormat = (value: any): string => {
-  let date: Date;
-  if (value instanceof Date) {
-    date = value;
-  } else {
-    date = new Date(value);
-  }
+import dayjs from 'dayjs';
 
-  const yyyy = date.getFullYear();
-  let MM = formatNumber(date.getMonth() + 1);
-  let dd = formatNumber(date.getDate());
-  let hh = formatNumber(date.getHours());
-  let mm = formatNumber(date.getMinutes());
-  let ss = formatNumber(date.getSeconds());
+const DISPLAY_FORMAT: string = 'DD/MM/YYYY HH:mm';
+const API_FORMAT: string = 'YYYY-MM-DD HH:mm:ss';
 
-  const formattedToday = `${dd}/${MM}/${yyyy} ${hh}:${mm}:${ss}`;
-  return formattedToday;
+export const displayFormat = (value: any): string => {
+  return dayjs(value).format(DISPLAY_FORMAT);
 };
 
-const formatNumber = (value: number): string => {
-  let valueString = value.toString();
-  if (value < 10) {
-    valueString = '0' + valueString;
+export const apiFormat = (value: Date | null): string => {
+  if (value) {
+    return dayjs(value).format(API_FORMAT);
+  } else {
+    return '';
   }
-  return valueString;
 };

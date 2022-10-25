@@ -7,10 +7,9 @@ import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import React, { useState } from 'react';
 import { EntryModel } from '../../model/EntryModel';
 import { JournalModel } from '../../model/JournalModel';
-import { dateFormat } from '../../util/DateFormat';
+import { displayFormat } from '../../util/DateFormat';
 import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
 import { ContentDialog } from '../dialog/ContentDialog';
-
 import {
   formatCellValue,
   formatCurrency,
@@ -34,7 +33,6 @@ export const Entries: React.FC<{
   };
 
   const onSave = (entry: EntryModel) => {
-    console.log(entry);
     setFormOpen(false);
   };
 
@@ -53,7 +51,7 @@ export const Entries: React.FC<{
       'Delete entry',
       `Are you sure do you want to remove ${entry.type} ${
         entry.symbol ? entry.symbol : ''
-      } added on ${dateFormat(entry.date)}?`
+      } added on ${displayFormat(entry.date)}?`
     );
     console.log('Result is :' + result);
   };

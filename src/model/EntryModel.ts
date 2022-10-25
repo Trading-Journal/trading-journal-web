@@ -1,4 +1,4 @@
-import { DirectionModel } from './DirectionModel';
+import { DirectionEnum } from './DirectionEnum';
 import { EntryTypeEnum } from './EntryTypeEnum';
 import { GraphTypeEnum } from './GraphTypeEnum';
 
@@ -17,7 +17,7 @@ export interface EntryModel {
 
   symbol?: string;
 
-  direction?: DirectionModel;
+  direction?: DirectionEnum;
 
   size?: number;
 

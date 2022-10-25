@@ -1,6 +1,6 @@
 export enum GraphTypeEnum {
-  CANDLESTICK = 'Candlestick',
-  RENKO = 'Renko',
-  KAGI = 'Kagi',
-  LINE = 'Line',
+  CANDLESTICK = 'CANDLESTICK',
+  RENKO = 'RENKO',
+  KAGI = 'KAGI',
+  LINE = 'LINE',
 }

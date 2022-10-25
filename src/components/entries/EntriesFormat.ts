@@ -1,7 +1,7 @@
 import { GridCellParams, GridValueFormatterParams } from '@mui/x-data-grid';
 import clsx from 'clsx';
-import { dateFormat } from '../../util/DateFormat';
 import { currencyFormatter } from '../../util/NumberFormat';
+import { displayFormat } from './../../util/DateFormat';
 
 export const formatCurrency = (
   params: GridValueFormatterParams<number>,
@@ -31,7 +31,7 @@ export const formatDate = (params: GridValueFormatterParams<Date>) => {
   if (params.value == null) {
     return '';
   }
-  const valueFormatted = dateFormat(params.value);
+  const valueFormatted = displayFormat(params.value);
   return `${valueFormatted}`;
 };
 

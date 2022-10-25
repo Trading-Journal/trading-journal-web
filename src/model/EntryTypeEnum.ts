@@ -1,6 +1,6 @@
 export enum EntryTypeEnum {
-  TRADE = 'Trade',
-  WITHDRAWAL = 'Withdrawal',
-  DEPOSIT = 'Deposit',
-  TAXES = 'Taxes',
+  TRADE = 'TRADE',
+  WITHDRAWAL = 'WITHDRAWAL',
+  DEPOSIT = 'DEPOSIT',
+  TAXES = 'TAXES',
 }
