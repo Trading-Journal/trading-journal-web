@@ -17,3 +17,21 @@ export const getAllJournals = (
     })
     .then((response: JournalModel[]) => response);
 };
+
+export const getJournal = (
+  accessToken: string,
+  journalId: string
+): Promise<JournalModel> => {
+  return fetch(`http://localhost:8081/journals/${journalId}`, {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${accessToken}` },
+  })
+    .then(async (response) => {
+      if (response.ok) return response.json();
+      else {
+        const errors = await readErrors(response);
+        throw new Error(errors);
+      }
+    })
+    .then((response: JournalModel) => response);
+};

@@ -10,7 +10,14 @@ import { Routes } from './components/routes/Routes';
 import { TopBar } from './components/top-bar/TopBar';
 import { AuthProvider } from './context/UserContext';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    },
+  },
+});
 
 function App() {
   return (

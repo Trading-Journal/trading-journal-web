@@ -4,14 +4,14 @@ import React from 'react';
 import { JournalModel } from '../../model/JournalModel';
 import { Entries } from '../entries/Entries';
 import { Loading } from '../loading/Loading';
-import { useEntries } from '../queries/EntriesQueries';
+import { useEntriesQuery } from '../queries/EntriesQueries';
 import { JournalSummary } from './JournalSummary';
 
 export const JournalEntries: React.FC<{ journal: JournalModel }> = ({
   journal,
 }) => {
   const EntriesLoading = Loading(Entries);
-  const { data, error, isLoading } = useEntries(journal);
+  const { data, error, isLoading } = useEntriesQuery(journal);
 
   return (
     <Box sx={{ p: 2, flexGrow: 1 }}>

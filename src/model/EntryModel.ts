@@ -13,7 +13,7 @@ export interface EntryModel {
 
   graphType?: GraphTypeEnum;
 
-  graphMeasure?: number;
+  graphMeasure?: string;
 
   symbol?: string;
 

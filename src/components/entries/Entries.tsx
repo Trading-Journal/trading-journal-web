@@ -10,6 +10,7 @@ import { JournalModel } from '../../model/JournalModel';
 import { displayFormat } from '../../util/DateFormat';
 import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
 import { ContentDialog } from '../dialog/ContentDialog';
+import { useEntryDelete } from '../queries/EntriesQueries';
 import {
   formatCellValue,
   formatCurrency,
@@ -27,12 +28,13 @@ export const Entries: React.FC<{
 
   const EntryDialog = ContentDialog(Entry);
   const modalContext = useConfirmationModalContext();
+  const deleteMutation = useEntryDelete(journal.id);
 
   const onCancel = () => {
     setFormOpen(false);
   };
 
-  const onSave = (entry: EntryModel) => {
+  const onSave = () => {
     setFormOpen(false);
   };
 
@@ -53,7 +55,9 @@ export const Entries: React.FC<{
         entry.symbol ? entry.symbol : ''
       } added on ${displayFormat(entry.date)}?`
     );
-    console.log('Result is :' + result);
+    if (result) {
+      deleteMutation.mutate(entry);
+    }
   };
 
   function CustomFooter() {
@@ -215,7 +219,7 @@ export const Entries: React.FC<{
     {
       field: 'graphType',
       headerName: 'Graph',
-      width: 130,
+      width: 150,
       renderCell: (params) => {
         if (params.row.graphType) {
           return `${params.row.graphType}(${params.row.graphMeasure})`;

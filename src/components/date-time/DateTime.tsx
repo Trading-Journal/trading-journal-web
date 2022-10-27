@@ -10,13 +10,15 @@ interface DateTimeProps {
   label: string;
   required: boolean;
   value?: string | Date | null;
+  startNow?: boolean;
   onChange: (date: Date | null) => void;
 }
 
 export const Datetime: React.FC<DateTimeProps> = (props: DateTimeProps) => {
-  const { label, required, value, onChange } = props;
+  const { label, required, value, startNow, onChange } = props;
 
-  const [current, setCurrentValue] = React.useState<Dayjs | null>(dayjs());
+  const now = startNow ? dayjs() : null;
+  const [current, setCurrentValue] = React.useState<Dayjs | null>(now);
   const [locale] = React.useState('en-gb');
 
   useEffect(() => {
@@ -41,8 +43,6 @@ export const Datetime: React.FC<DateTimeProps> = (props: DateTimeProps) => {
         label={label}
         value={current}
         ampm={false}
-        maxDate={dayjs()}
-        maxTime={dayjs().add(1, 'minute')}
         onChange={onDateChange}
       />
     </LocalizationProvider>

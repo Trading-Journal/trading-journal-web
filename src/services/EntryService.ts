@@ -42,3 +42,23 @@ export const saveEntry = (
     })
     .then((response: EntryModel) => response);
 };
+
+export const deleteEntry = (
+  accessToken: string,
+  journalId: string,
+  entry: EntryModel
+): Promise<any> => {
+  return fetch(`http://localhost:8081/entries/${journalId}/${entry.id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+  }).then(async (response) => {
+    if (response.ok) return response;
+    else {
+      const errors = await readErrors(response);
+      throw new Error(errors);
+    }
+  });
+};

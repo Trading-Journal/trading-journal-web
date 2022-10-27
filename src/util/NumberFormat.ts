@@ -7,8 +7,8 @@ interface Format {
 
 const defaultOptions: Format = {
   digits: 2,
-  thousandsSeparator: ',',
-  decimalSeparator: '.',
+  thousandsSeparator: '.',
+  decimalSeparator: ',',
   symbol: '$',
 };
 
