@@ -62,7 +62,7 @@ export const JournalTabs: React.FC<{ journals: JournalModel[] }> = ({
           value={value}
           index={index + 1}
         >
-          <JournalEntries journal={journal} />
+          <JournalEntries journalId={journal.id} />
         </TabPanel>
       ))}
     </Box>

@@ -23,6 +23,7 @@ export const useEntrySave = (journalId: string) => {
     (entry: EntryModel) => saveEntry(accessToken, journalId, entry),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries([`journal-${journalId}`]);
         queryClient.invalidateQueries([`entries-${journalId}`]);
       },
     }
@@ -36,6 +37,7 @@ export const useEntryDelete = (journalId: string) => {
     (entry: EntryModel) => deleteEntry(accessToken, journalId, entry),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries([`journal-${journalId}`]);
         queryClient.invalidateQueries([`entries-${journalId}`]);
       },
     }
