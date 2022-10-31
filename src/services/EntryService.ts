@@ -31,7 +31,11 @@ export const saveEntry = (
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ ...entry, date: apiFormat(entry.date) }),
+    body: JSON.stringify({
+      ...entry,
+      date: apiFormat(entry.date),
+      exitDate: apiFormat(entry.exitDate),
+    }),
   })
     .then(async (response) => {
       if (response.ok) return response.json();

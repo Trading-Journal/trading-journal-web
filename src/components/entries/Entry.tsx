@@ -1,4 +1,8 @@
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LoadingButton from '@mui/lab/LoadingButton';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
@@ -10,6 +14,7 @@ import { DirectionEnum } from '../../model/DirectionEnum';
 import { EntryModel } from '../../model/EntryModel';
 import { EntryTypeEnum } from '../../model/EntryTypeEnum';
 import { JournalModel } from '../../model/JournalModel';
+import { currencyFormatter, percentFormatter } from '../../util/NumberFormat';
 import { AlertCard } from '../card/AlertCard';
 import { Datetime } from '../date-time/DateTime';
 import { NumberInput } from '../number-input/NumberInput';
@@ -33,6 +38,30 @@ interface EntryProps {
   onSave: (entry: EntryModel | undefined) => void;
   onCancel: () => void;
 }
+
+const DetailField = ({
+  value,
+  text,
+  label,
+}: {
+  value: number | undefined;
+  text: string;
+  label: string;
+}) => {
+  const color = value === undefined ? 'black' : value >= 0 ? 'green' : 'red';
+  return (
+    <FormControl fullWidth>
+      <TextField
+        sx={{ input: { color: { color } } }}
+        name={label}
+        fullWidth
+        id={label}
+        label={label}
+        value={text}
+      />
+    </FormControl>
+  );
+};
 
 function renderHeader(journal: JournalModel, entry?: EntryModel) {
   if (entry) {
@@ -133,36 +162,6 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
                 }
                 entry={entry}
               />
-            </Grid>
-          </Grid>
-        )}
-
-        {isTrade() && (
-          <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12} sm={6}>
-              <GraphTypeSelect
-                key="graph-type-select"
-                onChange={(value: any) =>
-                  setEntry({ ...entry, graphType: value })
-                }
-                entry={entry}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
-                <TextField
-                  autoComplete="graph-measure"
-                  name="graph-measure"
-                  required={false}
-                  fullWidth
-                  id="graph-measure"
-                  label="Graph Measure"
-                  value={entry.graphMeasure}
-                  onChange={(e) =>
-                    setEntry({ ...entry, graphMeasure: e.target.value })
-                  }
-                />
-              </FormControl>
             </Grid>
           </Grid>
         )}
@@ -272,6 +271,125 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
             </Grid>
           </Grid>
         )}
+
+        {isTrade() && (
+          <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid item xs={12} sm={12}>
+              <Accordion variant="outlined">
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>Details and Images</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Grid container spacing={2} sx={{ mt: 1 }}>
+                    <Grid item xs={12} sm={6}>
+                      <GraphTypeSelect
+                        key="graph-type-select"
+                        onChange={(value: any) =>
+                          setEntry({ ...entry, graphType: value })
+                        }
+                        entry={entry}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <FormControl fullWidth>
+                        <TextField
+                          autoComplete="graph-measure"
+                          name="graph-measure"
+                          required={false}
+                          fullWidth
+                          id="graph-measure"
+                          label="Graph Measure"
+                          value={entry.graphMeasure}
+                          onChange={(e) =>
+                            setEntry({ ...entry, graphMeasure: e.target.value })
+                          }
+                        />
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
+            </Grid>
+          </Grid>
+        )}
+
+        <Grid container spacing={2} sx={{ mt: 1 }}>
+          <Grid item xs={12} sm={12}>
+            <Accordion variant="outlined">
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+              >
+                <Typography>Result</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Grid container spacing={2} sx={{ mt: 1 }}>
+                  <Grid item xs={12} sm={6}>
+                    <FormControl fullWidth>
+                      <TextField
+                        name="accountRisked"
+                        fullWidth
+                        id="accountRisked"
+                        label="Account Risked"
+                        value={percentFormatter(entry.accountRisked)}
+                      />
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <FormControl fullWidth>
+                      <TextField
+                        name="plannedRR"
+                        fullWidth
+                        id="plannedRR"
+                        label="Planned RR"
+                        value={entry.plannedRR}
+                      />
+                    </FormControl>
+                  </Grid>
+                </Grid>
+
+                <Grid container spacing={2} sx={{ mt: 1 }}>
+                  <Grid item xs={12} sm={6}>
+                    <DetailField
+                      value={entry.grossResult}
+                      text={currencyFormatter(entry.grossResult)}
+                      label="Gross Result"
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <DetailField
+                      value={entry.netResult}
+                      text={currencyFormatter(entry.netResult)}
+                      label="Net Result"
+                    />
+                  </Grid>
+                </Grid>
+
+                <Grid container spacing={2} sx={{ mt: 1 }}>
+                  <Grid item xs={12} sm={6}>
+                    <DetailField
+                      value={entry.accountChange}
+                      text={percentFormatter(entry.accountChange)}
+                      label="Account Changed"
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <DetailField
+                      value={entry.accountBalance}
+                      text={currencyFormatter(entry.accountBalance)}
+                      label="Account Balance"
+                    />
+                  </Grid>
+                </Grid>
+              </AccordionDetails>
+            </Accordion>
+          </Grid>
+        </Grid>
 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} sx={{ mt: 1 }}>

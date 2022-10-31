@@ -12,7 +12,33 @@ const defaultOptions: Format = {
   symbol: '$',
 };
 
-export const currencyFormatter = (value: number, options?: Format) => {
+export const currencyFormatter = (
+  value: number | undefined,
+  options?: Format
+) => {
+  if (!value) {
+    return '';
+  }
+  options = { ...defaultOptions, ...options };
+  const formatted = currencyFormat(value, options);
+
+  return `${options.symbol} ${formatted}`;
+};
+
+export const percentFormatter = (value: number | undefined) => {
+  if (value) {
+    const valueFormatted = currencyFormat(value * 100);
+    return `${valueFormatted} %`;
+  } else {
+    return '';
+  }
+};
+
+const currencyFormat = (value: number | undefined, options?: Format) => {
+  if (!value) {
+    return '';
+  }
+
   options = { ...defaultOptions, ...options };
   const fixed = value.toFixed(options.digits);
 
@@ -20,8 +46,7 @@ export const currencyFormatter = (value: number, options?: Format) => {
 
   const thousandsSeparator = options.thousandsSeparator ?? '.';
 
-  return `${options.symbol} ${currency.replace(
-    /\B(?=(\d{3})+(?!\d))/g,
-    thousandsSeparator
-  )}${options.decimalSeparator}${decimal}`;
+  return `${currency.replace(/\B(?=(\d{3})+(?!\d))/g, thousandsSeparator)}${
+    options.decimalSeparator
+  }${decimal}`;
 };

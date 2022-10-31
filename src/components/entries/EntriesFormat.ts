@@ -1,6 +1,6 @@
 import { GridCellParams, GridValueFormatterParams } from '@mui/x-data-grid';
 import clsx from 'clsx';
-import { currencyFormatter } from '../../util/NumberFormat';
+import { currencyFormatter, percentFormatter } from '../../util/NumberFormat';
 import { displayFormat } from './../../util/DateFormat';
 
 export const formatCurrency = (
@@ -20,11 +20,7 @@ export const formatCurrency = (
 };
 
 export const formatPercentage = (params: GridValueFormatterParams<number>) => {
-  if (params.value == null) {
-    return '';
-  }
-  const valueFormatted = currencyFormatter(params.value * 100);
-  return `${valueFormatted} %`;
+  return percentFormatter(params.value);
 };
 
 export const formatDate = (params: GridValueFormatterParams<Date>) => {

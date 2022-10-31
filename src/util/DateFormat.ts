@@ -7,10 +7,10 @@ export const displayFormat = (value: any): string => {
   return dayjs(value).format(DISPLAY_FORMAT);
 };
 
-export const apiFormat = (value: Date | null): string => {
+export const apiFormat = (value: Date | undefined): string | undefined => {
   if (value) {
     return dayjs(value).format(API_FORMAT);
   } else {
-    return '';
+    return undefined;
   }
 };
