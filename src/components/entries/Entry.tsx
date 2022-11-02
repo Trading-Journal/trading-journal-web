@@ -48,7 +48,12 @@ const DetailField = ({
   text: string;
   label: string;
 }) => {
-  const color = value === undefined ? 'black' : value >= 0 ? 'green' : 'red';
+  const color =
+    value === null || value === undefined
+      ? 'black'
+      : value >= 0
+      ? 'green'
+      : 'red';
   return (
     <FormControl fullWidth>
       <TextField

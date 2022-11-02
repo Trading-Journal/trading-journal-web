@@ -23,7 +23,7 @@ export const AlertCard: React.FC<AlertProps> = ({
   return (
     <Collapse in={open}>
       <Alert onClose={() => setOpen(false)} severity={severity}>
-        {message}
+        <span style={{ whiteSpace: 'pre-line' }}>{message}</span>
       </Alert>
     </Collapse>
   );
