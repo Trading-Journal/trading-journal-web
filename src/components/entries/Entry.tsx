@@ -63,11 +63,18 @@ const DetailField = ({
   );
 };
 
-function renderHeader(journal: JournalModel, entry?: EntryModel) {
+function renderHeader(
+  journal: JournalModel,
+  finished: boolean,
+  entry?: EntryModel
+) {
   if (entry) {
     return (
       <Typography fontSize={20}>
         Edit {entry.type} {entry.symbol}
+        {finished && (
+          <Typography>{entry.type} finished cannot be changed</Typography>
+        )}
       </Typography>
     );
   } else {
@@ -77,20 +84,26 @@ function renderHeader(journal: JournalModel, entry?: EntryModel) {
   }
 }
 
+const isEntryFinished = (entry: any) => {
+  return entry && entry.netResult;
+};
+
 export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
   const { journal, entry: selectedEntry, onCancel } = props;
   const [entry, setEntry] = useState<EntryModel>(initialState);
-
+  const [finished, setFinished] = useState<boolean>(false);
   const mutation = useEntrySave(journal.id);
 
   useEffect(() => {
     if (selectedEntry) {
       setEntry(selectedEntry);
     }
+    setFinished(isEntryFinished(selectedEntry));
   }, [selectedEntry]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     mutation.mutate(entry);
   };
 
@@ -111,7 +124,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
         alignItems: 'center',
       }}
     >
-      {renderHeader(journal, entry)}
+      {renderHeader(journal, finished, entry)}
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -281,7 +294,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
                   aria-controls="panel1a-content"
                   id="panel1a-header"
                 >
-                  <Typography>Details and Images</Typography>
+                  <Typography>Graphs</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Grid container spacing={2} sx={{ mt: 1 }}>
@@ -328,39 +341,43 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
                 <Typography>Result</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Grid container spacing={2} sx={{ mt: 1 }}>
-                  <Grid item xs={12} sm={6}>
-                    <FormControl fullWidth>
-                      <TextField
-                        name="accountRisked"
-                        fullWidth
-                        id="accountRisked"
-                        label="Account Risked"
-                        value={percentFormatter(entry.accountRisked)}
-                      />
-                    </FormControl>
+                {isTrade() && (
+                  <Grid container spacing={2} sx={{ mt: 1 }}>
+                    <Grid item xs={12} sm={6}>
+                      <FormControl fullWidth>
+                        <TextField
+                          name="accountRisked"
+                          fullWidth
+                          id="accountRisked"
+                          label="Account Risked"
+                          value={percentFormatter(entry.accountRisked)}
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <FormControl fullWidth>
+                        <TextField
+                          name="plannedRR"
+                          fullWidth
+                          id="plannedRR"
+                          label="Planned RR"
+                          value={entry.plannedRR}
+                        />
+                      </FormControl>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <FormControl fullWidth>
-                      <TextField
-                        name="plannedRR"
-                        fullWidth
-                        id="plannedRR"
-                        label="Planned RR"
-                        value={entry.plannedRR}
-                      />
-                    </FormControl>
-                  </Grid>
-                </Grid>
+                )}
 
                 <Grid container spacing={2} sx={{ mt: 1 }}>
-                  <Grid item xs={12} sm={6}>
-                    <DetailField
-                      value={entry.grossResult}
-                      text={currencyFormatter(entry.grossResult)}
-                      label="Gross Result"
-                    />
-                  </Grid>
+                  {isTrade() && (
+                    <Grid item xs={12} sm={6}>
+                      <DetailField
+                        value={entry.grossResult}
+                        text={currencyFormatter(entry.grossResult)}
+                        label="Gross Result"
+                      />
+                    </Grid>
+                  )}
                   <Grid item xs={12} sm={6}>
                     <DetailField
                       value={entry.netResult}
@@ -421,6 +438,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
               variant="contained"
               loading={mutation.isLoading}
               sx={{ mt: 3, mb: 2 }}
+              disabled={finished}
             >
               Save
             </LoadingButton>
