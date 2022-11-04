@@ -1,11 +1,15 @@
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import ImageIcon from '@mui/icons-material/Image';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import React, { useState } from 'react';
 import { EntryModel } from '../../model/EntryModel';
+import { EntryTypeEnum } from '../../model/EntryTypeEnum';
 import { JournalModel } from '../../model/JournalModel';
 import { displayFormat } from '../../util/DateFormat';
 import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
@@ -18,34 +22,43 @@ import {
   formatPercentage,
 } from './EntriesFormat';
 import { Entry } from './Entry';
+import { EntryImages } from './EntryImages';
 
 export const EntriesTable: React.FC<{
   entries: EntryModel[];
   journal: JournalModel;
 }> = ({ entries, journal }) => {
   const [entry, setEntry] = useState<EntryModel>();
-  const [formOpen, setFormOpen] = useState(false);
+  const [entryDialogOpen, setEntryDialogOpen] = useState(false);
+  const [entryImagesDialogOpen, setEntryImagesDialogOpen] = useState(false);
 
   const EntryDialog = ContentDialog(Entry);
+  const EntryImagesDialog = ContentDialog(EntryImages);
   const modalContext = useConfirmationModalContext();
   const deleteMutation = useEntryDelete(journal.id);
 
   const onCancel = () => {
-    setFormOpen(false);
+    setEntryDialogOpen(false);
+    setEntryImagesDialogOpen(false);
   };
 
-  const onSave = () => {
-    setFormOpen(false);
+  const onSave = (entry: EntryModel) => {
+    setEntryDialogOpen(false);
   };
 
   const addClick = () => {
     setEntry(undefined);
-    setFormOpen(true);
+    setEntryDialogOpen(true);
   };
 
   const editClick = (entry: EntryModel) => {
     setEntry(entry);
-    setFormOpen(true);
+    setEntryDialogOpen(true);
+  };
+
+  const imagesClick = (entry: EntryModel) => {
+    setEntry(entry);
+    setEntryImagesDialogOpen(true);
   };
 
   const deleteClick = async (entry: EntryModel) => {
@@ -81,15 +94,46 @@ export const EntriesTable: React.FC<{
       type: 'actions',
       renderCell: (params) => [
         <GridActionsCellItem
-          color="primary"
-          icon={<EditIcon />}
+          icon={
+            <Tooltip title="Edit Entry">
+              <IconButton size="small" sx={{ p: 0, ml: 1 }}>
+                <EditIcon color="primary" />
+              </IconButton>
+            </Tooltip>
+          }
           onClick={() => editClick(params.row)}
           label="Edit"
           key={`edit-${params.row.id}`}
         />,
         <GridActionsCellItem
-          color="primary"
-          icon={<DeleteIcon />}
+          sx={{
+            visibility:
+              params.row.type === EntryTypeEnum.TRADE ? 'visible' : 'collapse',
+          }}
+          icon={
+            <Tooltip title="Add or Edit Images">
+              <IconButton
+                size="small"
+                sx={{
+                  p: 0,
+                }}
+              >
+                <ImageIcon color="primary" />
+              </IconButton>
+            </Tooltip>
+          }
+          onClick={() => imagesClick(params.row)}
+          label="Images"
+          key={`images-${params.row.id}`}
+        />,
+        <GridActionsCellItem
+          icon={
+            <Tooltip title="Delete Entry">
+              <IconButton size="small" sx={{ p: 0 }}>
+                <DeleteIcon color="primary" />
+              </IconButton>
+            </Tooltip>
+          }
           onClick={() => deleteClick(params.row)}
           label="Delete"
           key={`delete-${params.row.id}`}
@@ -263,11 +307,17 @@ export const EntriesTable: React.FC<{
       }}
     >
       <EntryDialog
-        open={formOpen}
+        open={entryDialogOpen}
         journal={journal}
         entry={entry}
         onCancel={onCancel}
         onSave={onSave}
+      />
+      <EntryImagesDialog
+        open={entryImagesDialogOpen}
+        journal={journal}
+        entry={entry}
+        onCancel={onCancel}
       />
       <DataGrid
         autoHeight={true}

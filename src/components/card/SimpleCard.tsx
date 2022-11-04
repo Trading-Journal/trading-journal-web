@@ -1,20 +1,23 @@
 import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
 interface CardProps {
   title: any;
-  subtitle: string;
+  subtitle?: string;
   minWidth?: number;
   titleColor?: string;
+  children?: any;
 }
 
 export const SimpleCard: React.FC<CardProps> = ({
   title,
-  subtitle,
+  subtitle = undefined,
   minWidth = 250,
   titleColor = 'black',
+  children = undefined,
 }) => {
   return (
     <Card sx={{ minWidth: minWidth }} variant="outlined">
@@ -25,8 +28,11 @@ export const SimpleCard: React.FC<CardProps> = ({
             {title}
           </Typography>
         }
-        subheader={<Typography fontSize={12}>{subtitle}</Typography>}
+        subheader={
+          subtitle && <Typography fontSize={12}>{subtitle}</Typography>
+        }
       />
+      {children && <CardContent>{children}</CardContent>}
     </Card>
   );
 };

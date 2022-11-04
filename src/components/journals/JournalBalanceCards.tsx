@@ -8,31 +8,31 @@ import { TaxesCard } from '../balance-card/TaxesCard';
 import { WithdrawalsCard } from '../balance-card/WithdrawalsCard';
 
 import React from 'react';
-import { JournalModel } from '../../model/JournalModel';
+import { BalanceModel } from '../../model/BalanceModel';
 
-export const JournalSummaryCards: React.FC<{ journal: JournalModel }> = ({
-  journal,
+export const JournalBalanceCards: React.FC<{ balance: BalanceModel }> = ({
+  balance,
 }) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid xs={12} sm={4}>
-          <StartBalanceCard journal={journal} />
+          <StartBalanceCard balance={balance} />
         </Grid>
         <Grid xs={12} sm={4}>
-          <AccountBalanceCard journal={journal} />
+          <AccountBalanceCard balance={balance} />
         </Grid>
         <Grid xs={12} sm={4}>
-          <ClosedPositionsCard journal={journal} />
+          <ClosedPositionsCard balance={balance} />
         </Grid>
         <Grid xs={12} sm={4}>
-          <DepositsCard journal={journal} />
+          <DepositsCard balance={balance} />
         </Grid>
         <Grid xs={12} sm={4}>
-          <WithdrawalsCard journal={journal} />
+          <WithdrawalsCard balance={balance} />
         </Grid>
         <Grid xs={12} sm={4}>
-          <TaxesCard journal={journal} />
+          <TaxesCard balance={balance} />
         </Grid>
       </Grid>
     </Box>

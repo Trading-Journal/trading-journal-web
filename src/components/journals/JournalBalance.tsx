@@ -4,12 +4,14 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { JournalModel } from '../../model/JournalModel';
-import { JournalSummaryCards } from './JournalSummaryCards';
+import { useJournalBalanceQuery } from '../queries/JournalQueries';
+import { JournalBalanceCards } from './JournalBalanceCards';
 
-export const JournalSummary: React.FC<{ journal: JournalModel }> = ({
-  journal,
+export const JournalBalance: React.FC<{ journalId: string }> = ({
+  journalId,
 }) => {
+  const { data: balance, isSuccess } = useJournalBalanceQuery(journalId);
+
   return (
     <Accordion
       variant="outlined"
@@ -19,13 +21,13 @@ export const JournalSummary: React.FC<{ journal: JournalModel }> = ({
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
-        aria-controls={`journal-summary-accordion-${journal?.id}`}
-        id={`journal-summary-accordion-${journal?.id}-id`}
+        aria-controls={`journal-summary-accordion-${journalId}`}
+        id={`journal-summary-accordion-${journalId}-id`}
       >
         <Typography fontSize="20">Journal Summary</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <JournalSummaryCards journal={journal} />
+        {isSuccess && <JournalBalanceCards balance={balance} />}
       </AccordionDetails>
     </Accordion>
   );

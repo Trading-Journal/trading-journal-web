@@ -68,11 +68,15 @@ const DetailField = ({
   );
 };
 
-function renderHeader(
-  journal: JournalModel,
-  finished: boolean,
-  entry?: EntryModel
-) {
+const Header = ({
+  journal,
+  finished,
+  entry,
+}: {
+  journal: JournalModel;
+  finished: boolean;
+  entry?: EntryModel;
+}) => {
   if (entry) {
     return (
       <Typography fontSize={20}>
@@ -87,14 +91,14 @@ function renderHeader(
       <Typography fontSize={20}>Add new entry to {journal.name}</Typography>
     );
   }
-}
+};
 
 const isEntryFinished = (entry: any) => {
   return entry && entry.netResult;
 };
 
 export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
-  const { journal, entry: selectedEntry, onCancel } = props;
+  const { journal, entry: selectedEntry, onCancel, onSave } = props;
   const [entry, setEntry] = useState<EntryModel>(initialState);
   const [finished, setFinished] = useState<boolean>(false);
   const mutation = useEntrySave(journal.id);
@@ -108,9 +112,12 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     mutation.mutate(entry);
   };
+
+  if (mutation.isSuccess) {
+    onSave(mutation.data);
+  }
 
   const handleCancel = () => {
     onCancel();
@@ -129,7 +136,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
         alignItems: 'center',
       }}
     >
-      {renderHeader(journal, finished, entry)}
+      <Header journal={journal} finished={finished} entry={entry} />
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
@@ -292,45 +299,30 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
 
         {isTrade() && (
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12} sm={12}>
-              <Accordion variant="outlined">
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
-                  <Typography>Graphs</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Grid container spacing={2} sx={{ mt: 1 }}>
-                    <Grid item xs={12} sm={6}>
-                      <GraphTypeSelect
-                        key="graph-type-select"
-                        onChange={(value: any) =>
-                          setEntry({ ...entry, graphType: value })
-                        }
-                        entry={entry}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <FormControl fullWidth>
-                        <TextField
-                          autoComplete="graph-measure"
-                          name="graph-measure"
-                          required={false}
-                          fullWidth
-                          id="graph-measure"
-                          label="Graph Measure"
-                          value={entry.graphMeasure}
-                          onChange={(e) =>
-                            setEntry({ ...entry, graphMeasure: e.target.value })
-                          }
-                        />
-                      </FormControl>
-                    </Grid>
-                  </Grid>
-                </AccordionDetails>
-              </Accordion>
+            <Grid item xs={12} sm={6}>
+              <GraphTypeSelect
+                key="graph-type-select"
+                onChange={(value: any) =>
+                  setEntry({ ...entry, graphType: value })
+                }
+                entry={entry}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth>
+                <TextField
+                  autoComplete="graph-measure"
+                  name="graph-measure"
+                  required={false}
+                  fullWidth
+                  id="graph-measure"
+                  label="Graph Measure"
+                  value={entry.graphMeasure}
+                  onChange={(e) =>
+                    setEntry({ ...entry, graphMeasure: e.target.value })
+                  }
+                />
+              </FormControl>
             </Grid>
           </Grid>
         )}

@@ -39,7 +39,7 @@ export const Routes = () => {
       <Route path="/journals" element={<PrivateRoute />}>
         <Route path="" element={<JournalsPage />} />
       </Route>
-      <Route path="*" element={<PrivateRoute />}>
+      <Route path="/home" element={<PrivateRoute />}>
         <Route path="" element={<HomePage />} />
       </Route>
     </ReactRoutes>

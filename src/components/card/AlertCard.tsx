@@ -7,12 +7,16 @@ interface AlertProps {
   severity: any;
   show: boolean;
   message: string;
+  mt?: number;
+  mb?: number;
 }
 
 export const AlertCard: React.FC<AlertProps> = ({
   severity,
   show,
   message,
+  mt = 0,
+  mb = 0,
 }) => {
   const [open, setOpen] = useState(show);
 
@@ -22,7 +26,7 @@ export const AlertCard: React.FC<AlertProps> = ({
 
   return (
     <Collapse in={open}>
-      <Alert onClose={() => setOpen(false)} severity={severity}>
+      <Alert severity={severity} sx={{ mt, mb }}>
         <span style={{ whiteSpace: 'pre-line' }}>{message}</span>
       </Alert>
     </Collapse>

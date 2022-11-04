@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
+import { BalanceModel } from '../../model/BalanceModel';
 import { BalanceCard } from './BalanceCard';
 
-export const ClosedPositionsCard = (props: any) => {
-  const { journal } = props;
-  const [balance, setBalance] = useState(0);
+export const ClosedPositionsCard: React.FC<{ balance: BalanceModel }> = ({
+  balance,
+}) => {
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
-    if (journal && journal.currentBalance) {
-      setBalance(journal?.currentBalance.closedPositions);
+    if (balance) {
+      setValue(balance.closedPositions);
     }
-  }, [journal]);
+  }, [balance]);
 
   return (
     <BalanceCard
-      value={balance}
+      value={value}
       changeColors={true}
       subtitle="Closed Positions"
     />

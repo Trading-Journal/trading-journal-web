@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
+import { BalanceModel } from '../../model/BalanceModel';
 import { BalanceCard } from './BalanceCard';
 
-export const StartBalanceCard = (props: any) => {
-  const { journal } = props;
-  const [balance, setBalance] = useState(0);
+export const StartBalanceCard: React.FC<{ balance: BalanceModel }> = ({
+  balance,
+}) => {
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
-    if (journal) {
-      setBalance(journal?.startBalance);
+    if (balance) {
+      setValue(balance.startBalance);
     }
-  }, [journal]);
+  }, [balance]);
 
-  return <BalanceCard value={balance} subtitle="Start Balance" />;
+  return <BalanceCard value={value} subtitle="Start Balance" />;
 };

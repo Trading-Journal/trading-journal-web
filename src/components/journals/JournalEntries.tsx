@@ -4,12 +4,12 @@ import React from 'react';
 import { AlertCard } from '../card/AlertCard';
 import { Entries } from '../entries/Entries';
 import { useJournalQuery } from '../queries/JournalQueries';
-import { JournalSummary } from './JournalSummary';
+import { JournalBalance } from './JournalBalance';
 
 export const JournalEntries: React.FC<{ journalId: string }> = ({
   journalId,
 }) => {
-  const { data, error, isSuccess } = useJournalQuery(journalId);
+  const { data: journal, error, isSuccess } = useJournalQuery(journalId);
 
   return (
     <Box sx={{ p: 2, flexGrow: 1 }}>
@@ -20,10 +20,10 @@ export const JournalEntries: React.FC<{ journalId: string }> = ({
       {isSuccess && (
         <Grid container spacing={2}>
           <Grid xs={12} sm={12}>
-            <JournalSummary journal={data} />
+            <JournalBalance journalId={journalId} />
           </Grid>
           <Grid xs={12} sm={12}>
-            <Entries journal={data} />
+            <Entries journal={journal} />
           </Grid>
         </Grid>
       )}
