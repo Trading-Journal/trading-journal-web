@@ -1,7 +1,9 @@
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
+import { asUploadButton } from '@rpldy/upload-button';
 import UploadDropZone from '@rpldy/upload-drop-zone';
 import withPasteUpload from '@rpldy/upload-paste';
 import UploadPreview from '@rpldy/upload-preview';
@@ -11,7 +13,7 @@ import Uploady, {
   useItemProgressListener,
   useItemStartListener,
 } from '@rpldy/uploady';
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { useAccessTokenState } from '../../context/UserContext';
 import { AlertCard } from '../card/AlertCard';
 import { SimpleCard } from '../card/SimpleCard';
@@ -97,6 +99,16 @@ interface UploadProps {
   params?: Record<string, string> | undefined;
 }
 
+const ButtonAsUploadButton = asUploadButton(
+  forwardRef((props: any, ref: any) => {
+    return (
+      <Button fullWidth variant="contained" ref={ref} {...props}>
+        Or click here to upload
+      </Button>
+    );
+  })
+);
+
 export const Uploader: React.FC<UploadProps> = (props: UploadProps) => {
   const { url, paramName, params } = props;
   const center = {
@@ -135,6 +147,7 @@ export const Uploader: React.FC<UploadProps> = (props: UploadProps) => {
               </SimpleCard>
             </PasteArea>
           </PasteUploadDropZone>
+          <ButtonAsUploadButton />
           <UploadStatusView />
           <PreviewContainer>
             <UploadPreview />

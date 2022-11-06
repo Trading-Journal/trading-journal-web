@@ -31,10 +31,6 @@ export interface EntryModel {
 
   exitDate?: Date;
 
-  screenshotBefore?: string;
-
-  screenshotAfter?: string;
-
   notes?: string;
 
   accountRisked?: number;

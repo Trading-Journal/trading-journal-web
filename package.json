@@ -11,6 +11,7 @@
     "@mui/material": "^5.10.8",
     "@mui/x-data-grid": "^5.17.6",
     "@mui/x-date-pickers": "^5.0.4",
+    "@rpldy/upload-button": "^1.2.0",
     "@rpldy/upload-drop-zone": "^1.2.0",
     "@rpldy/upload-paste": "^1.2.0",
     "@rpldy/upload-preview": "^1.2.0",

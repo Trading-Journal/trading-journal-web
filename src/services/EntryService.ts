@@ -1,3 +1,5 @@
+import { EntryImageResponse } from '../model/EntryImageResponse';
+import { UploadTypeEnum } from '../model/UploadTypeEnum';
 import { apiFormat } from '../util/DateFormat';
 import { EntryModel } from './../model/EntryModel';
 import { readErrors } from './ErrorsReader';
@@ -65,4 +67,29 @@ export const deleteEntry = (
       throw new Error(errors);
     }
   });
+};
+
+export const getEntryImage = (
+  accessToken: string,
+  journalId: string,
+  entry: EntryModel,
+  type: UploadTypeEnum
+): Promise<EntryImageResponse> => {
+  return fetch(
+    `http://localhost:8081/entries/${journalId}/${entry.id}/image?type=${type}`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+    .then(async (response) => {
+      if (response.ok) return response.json();
+      else {
+        const errors = await readErrors(response);
+        throw new Error(errors);
+      }
+    })
+    .then((response: EntryImageResponse) => response);
 };
