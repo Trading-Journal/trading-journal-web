@@ -41,7 +41,7 @@ export const EntriesTable: React.FC<{
     setEntryImagesDialogOpen(false);
   };
 
-  const onSave = (entry: EntryModel) => {
+  const onSave = () => {
     setEntryDialogOpen(false);
   };
 

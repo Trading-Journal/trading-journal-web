@@ -1,7 +1,3 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -15,6 +11,9 @@ import { JournalModel } from '../../model/JournalModel';
 import { UploadTypeEnum } from '../../model/UploadTypeEnum';
 import { getEntryImage } from '../../services/EntryService';
 import { Uploader } from '../uploader/Uploader';
+
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 interface ImageProps {
   journal: JournalModel;
@@ -33,8 +32,8 @@ const Header = ({ entry }: { entry: EntryModel }) => {
 const SubHeader = () => {
   return (
     <Typography fontSize={15} marginTop={3}>
-      You can upload two images for when you started and when you finished the
-      trade
+      You can upload two images: one for when you started and one when you
+      finished the trade
     </Typography>
   );
 };
@@ -49,8 +48,8 @@ const PreviewContainer = styled('div')`
 export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
   const { journal, entry, onCancel } = props;
 
-  const [imageBefore, setImageBefore] = useState<string | undefined>(undefined);
-  const [imageAfter, setImageAfter] = useState<string | undefined>(undefined);
+  const [imageBefore, setImageBefore] = useState<string | undefined>('');
+  const [imageAfter, setImageAfter] = useState<string | undefined>('');
   const [hasAnyImage, setHasAnyImage] = useState<boolean>(false);
 
   const accessToken = useAccessTokenState();
@@ -141,15 +140,8 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
         </Grid>
       )}
 
-      <Accordion sx={{ mt: 2 }} defaultExpanded={!hasAnyImage}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="upload-new-images-content"
-          id="upload-new-images-header"
-        >
-          <Typography>Upload new Images</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+      <Card sx={{ mt: 2 }}>
+        <CardContent>
           <SubHeader />
 
           <Grid container spacing={2}>
@@ -166,8 +158,8 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
               <Uploader {...imageAfterRequest} />
             </Grid>
           </Grid>
-        </AccordionDetails>
-      </Accordion>
+        </CardContent>
+      </Card>
 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>

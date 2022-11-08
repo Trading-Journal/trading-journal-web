@@ -30,6 +30,7 @@ function useAuthState() {
 
 function useAccessTokenState() {
   const context = React.useContext(AuthStateContext);
+
   const { user: { accessToken } = {} } = context;
   if (!accessToken)
     throw new Error('useAuthState must be used in AuthProvider');
