@@ -27,9 +27,23 @@ const initialState: EntryModel = {
   date: new Date(),
   type: EntryTypeEnum.TRADE,
   price: 0,
-  size: undefined,
-  symbol: undefined,
+  size: 0,
+  symbol: '',
   direction: DirectionEnum.LONG,
+  graphType: undefined,
+  graphMeasure: '',
+  profitPrice: undefined,
+  lossPrice: undefined,
+  costs: undefined,
+  exitPrice: undefined,
+  exitDate: undefined,
+  notes: '',
+  accountRisked: 0,
+  plannedRR: 0,
+  grossResult: 0,
+  netResult: 0,
+  accountChange: 0,
+  accountBalance: 0,
 };
 
 interface EntryProps {
@@ -289,8 +303,8 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <Datetime
-                  label="Exit date"
                   required={false}
+                  label="Exit date"
                   value={entry.exitDate}
                   onChange={(value) => setEntry({ ...entry, exitDate: value! })}
                 />
@@ -315,7 +329,6 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
                 <TextField
                   autoComplete="graph-measure"
                   name="graph-measure"
-                  required={false}
                   fullWidth
                   id="graph-measure"
                   label="Graph Measure"
@@ -323,6 +336,28 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
                   onChange={(e) =>
                     setEntry({ ...entry, graphMeasure: e.target.value })
                   }
+                />
+              </FormControl>
+            </Grid>
+          </Grid>
+        )}
+
+        {isTrade() && (
+          <Grid container spacing={2} sx={{ mt: 1 }}>
+            <Grid item xs={12} sm={12}>
+              <FormControl fullWidth>
+                <TextField
+                  autoComplete="notes"
+                  name="notes"
+                  fullWidth
+                  id="notes"
+                  label="Notes"
+                  value={entry.notes}
+                  onChange={(e) =>
+                    setEntry({ ...entry, notes: e.target.value })
+                  }
+                  multiline
+                  maxRows={4}
                 />
               </FormControl>
             </Grid>
