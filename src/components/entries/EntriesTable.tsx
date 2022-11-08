@@ -4,7 +4,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import ImageIcon from '@mui/icons-material/Image';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import React, { useState } from 'react';
@@ -96,9 +95,7 @@ export const EntriesTable: React.FC<{
         <GridActionsCellItem
           icon={
             <Tooltip title="Edit Entry">
-              <IconButton size="small" sx={{ p: 0, ml: 1 }}>
-                <EditIcon color="primary" />
-              </IconButton>
+              <EditIcon color="primary" />
             </Tooltip>
           }
           onClick={() => editClick(params.row)}
@@ -112,14 +109,7 @@ export const EntriesTable: React.FC<{
           }}
           icon={
             <Tooltip title="Add or Edit Images">
-              <IconButton
-                size="small"
-                sx={{
-                  p: 0,
-                }}
-              >
-                <ImageIcon color="primary" />
-              </IconButton>
+              <ImageIcon color="primary" />
             </Tooltip>
           }
           onClick={() => imagesClick(params.row)}
@@ -129,9 +119,7 @@ export const EntriesTable: React.FC<{
         <GridActionsCellItem
           icon={
             <Tooltip title="Delete Entry">
-              <IconButton size="small" sx={{ p: 0 }}>
-                <DeleteIcon color="primary" />
-              </IconButton>
+              <DeleteIcon color="primary" />
             </Tooltip>
           }
           onClick={() => deleteClick(params.row)}

@@ -79,12 +79,14 @@ const Header = ({
 }) => {
   if (entry) {
     return (
-      <Typography fontSize={20}>
-        Edit {entry.type} {entry.symbol}
+      <div>
+        <Typography fontSize={20}>
+          Edit {entry.type} {entry.symbol}
+        </Typography>
         {finished && (
           <Typography>{entry.type} finished cannot be changed</Typography>
         )}
-      </Typography>
+      </div>
     );
   } else {
     return (
@@ -435,7 +437,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
               variant="contained"
               loading={mutation.isLoading}
               sx={{ mt: 3, mb: 2 }}
-              disabled={finished}
+              {...(finished && { disabled: true })}
             >
               Save
             </LoadingButton>

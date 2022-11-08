@@ -4,9 +4,6 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -114,41 +111,32 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
       <Header entry={entry} />
 
       {hasAnyImage && (
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={12}>
-            <Card>
-              <CardHeader subheader="Current Images"></CardHeader>
-              <CardContent>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} sm={6}>
-                    <Typography fontWeight="bold" fontSize={15} sx={center}>
-                      Start Trade
-                    </Typography>
-                    {imageBefore && (
-                      <PreviewContainer>
-                        <img
-                          src={`data:image/png;base64,${imageBefore}`}
-                          alt="Trade Before"
-                        />
-                      </PreviewContainer>
-                    )}
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <Typography fontWeight="bold" fontSize={15} sx={center}>
-                      Finish Trade
-                    </Typography>
-                    {imageAfter && (
-                      <PreviewContainer>
-                        <img
-                          src={`data:image/png;base64,${imageAfter}`}
-                          alt="Trade After"
-                        />
-                      </PreviewContainer>
-                    )}
-                  </Grid>
-                </Grid>
-              </CardContent>
-            </Card>
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <Typography fontWeight="bold" fontSize={15} sx={center}>
+              Start Trade
+            </Typography>
+            {imageBefore && (
+              <PreviewContainer>
+                <img
+                  src={`data:image/png;base64,${imageBefore}`}
+                  alt="Trade Before"
+                />
+              </PreviewContainer>
+            )}
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Typography fontWeight="bold" fontSize={15} sx={center}>
+              Finish Trade
+            </Typography>
+            {imageAfter && (
+              <PreviewContainer>
+                <img
+                  src={`data:image/png;base64,${imageAfter}`}
+                  alt="Trade After"
+                />
+              </PreviewContainer>
+            )}
           </Grid>
         </Grid>
       )}

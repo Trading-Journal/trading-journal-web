@@ -11,15 +11,15 @@ export interface EntryModel {
 
   price: number;
 
-  graphType?: GraphTypeEnum;
-
-  graphMeasure?: string;
-
   symbol?: string;
 
   direction?: DirectionEnum;
 
   size?: number;
+
+  graphType?: GraphTypeEnum;
+
+  graphMeasure?: string;
 
   profitPrice?: number;
 
