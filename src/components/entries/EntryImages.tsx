@@ -14,6 +14,7 @@ import { Uploader } from '../uploader/Uploader';
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { ContentDialog } from '../dialog/ContentDialog';
 
 interface ImageProps {
   journal: JournalModel;
@@ -43,6 +44,10 @@ const PreviewContainer = styled('div')`
     max-width: 260px;
     max-height: 260px;
   }
+  img:hover {
+    cursor: pointer;
+    opacity: 0.5;
+  }
 `;
 
 export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
@@ -51,6 +56,8 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
   const [imageBefore, setImageBefore] = useState<string | undefined>('');
   const [imageAfter, setImageAfter] = useState<string | undefined>('');
   const [hasAnyImage, setHasAnyImage] = useState<boolean>(false);
+  const [openImage, setOpenImage] = useState<boolean>(false);
+  const [currentImage, setCurrentImage] = useState<string>('');
 
   const accessToken = useAccessTokenState();
 
@@ -98,7 +105,15 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
     onCancel();
   };
 
-  // EXPAND IMAGE
+  const clickImage = (image: string) => {
+    setCurrentImage(image);
+    setOpenImage(true);
+  };
+
+  const onCloseImage = () => {
+    setCurrentImage('');
+    setOpenImage(false);
+  };
 
   return (
     <Box
@@ -118,8 +133,9 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
               Start Trade
             </Typography>
             {imageBefore && (
-              <PreviewContainer>
+              <PreviewContainer className="container">
                 <img
+                  onClick={() => clickImage(imageBefore)}
                   src={`data:image/png;base64,${imageBefore}`}
                   alt="Trade Before"
                 />
@@ -131,8 +147,9 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
               Finish Trade
             </Typography>
             {imageAfter && (
-              <PreviewContainer>
+              <PreviewContainer className="container">
                 <img
+                  onClick={() => clickImage(imageAfter)}
                   src={`data:image/png;base64,${imageAfter}`}
                   alt="Trade After"
                 />
@@ -141,6 +158,28 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
           </Grid>
         </Grid>
       )}
+
+      <ContentDialog open={openImage} onClose={onCloseImage} fullScreen>
+        <Grid
+          container
+          spacing={2}
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <img
+            src={`data:image/png;base64,${currentImage}`}
+            alt="Trade Before"
+          />
+          <Button
+            variant="outlined"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={onCloseImage}
+          >
+            Close
+          </Button>
+        </Grid>
+      </ContentDialog>
 
       <Card sx={{ mt: 2 }}>
         <CardContent>

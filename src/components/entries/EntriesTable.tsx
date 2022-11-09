@@ -31,8 +31,6 @@ export const EntriesTable: React.FC<{
   const [entryDialogOpen, setEntryDialogOpen] = useState(false);
   const [entryImagesDialogOpen, setEntryImagesDialogOpen] = useState(false);
 
-  const EntryDialog = ContentDialog(Entry);
-  const EntryImagesDialog = ContentDialog(EntryImages);
   const modalContext = useConfirmationModalContext();
   const deleteMutation = useEntryDelete(journal.id);
 
@@ -294,19 +292,19 @@ export const EntriesTable: React.FC<{
         },
       }}
     >
-      <EntryDialog
-        open={entryDialogOpen}
-        journal={journal}
-        entry={entry}
-        onCancel={onCancel}
-        onSave={onSave}
-      />
-      <EntryImagesDialog
-        open={entryImagesDialogOpen}
-        journal={journal}
-        entry={entry}
-        onCancel={onCancel}
-      />
+      <ContentDialog open={entryDialogOpen} onClose={onCancel}>
+        <Entry
+          journal={journal}
+          entry={entry}
+          onCancel={onCancel}
+          onSave={onSave}
+        />
+      </ContentDialog>
+
+      <ContentDialog open={entryImagesDialogOpen} onClose={onCancel}>
+        <EntryImages journal={journal} entry={entry!} onCancel={onCancel} />
+      </ContentDialog>
+
       <DataGrid
         autoHeight={true}
         rows={entries}
