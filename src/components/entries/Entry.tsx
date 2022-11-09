@@ -91,7 +91,7 @@ const Header = ({
   finished: boolean;
   entry?: EntryModel;
 }) => {
-  if (entry) {
+  if (entry && entry.id) {
     return (
       <div>
         <Typography fontSize={20}>

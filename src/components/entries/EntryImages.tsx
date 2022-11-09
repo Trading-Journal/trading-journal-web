@@ -98,6 +98,8 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
     onCancel();
   };
 
+  // EXPAND IMAGE
+
   return (
     <Box
       sx={{
