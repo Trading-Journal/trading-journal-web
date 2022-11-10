@@ -14,7 +14,7 @@ import { Uploader } from '../uploader/Uploader';
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { ContentDialog } from '../dialog/ContentDialog';
+import { ZoomImage } from '../zoom-image/ZoomImage';
 
 interface ImageProps {
   journal: JournalModel;
@@ -45,8 +45,7 @@ const PreviewContainer = styled('div')`
     max-height: 260px;
   }
   img:hover {
-    cursor: pointer;
-    opacity: 0.5;
+    opacity: 0.8;
   }
 `;
 
@@ -56,9 +55,6 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
   const [imageBefore, setImageBefore] = useState<string | undefined>('');
   const [imageAfter, setImageAfter] = useState<string | undefined>('');
   const [hasAnyImage, setHasAnyImage] = useState<boolean>(false);
-  const [openImage, setOpenImage] = useState<boolean>(false);
-  const [currentImage, setCurrentImage] = useState<string>('');
-
   const accessToken = useAccessTokenState();
 
   useEffect(() => {
@@ -105,16 +101,6 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
     onCancel();
   };
 
-  const clickImage = (image: string) => {
-    setCurrentImage(image);
-    setOpenImage(true);
-  };
-
-  const onCloseImage = () => {
-    setCurrentImage('');
-    setOpenImage(false);
-  };
-
   return (
     <Box
       sx={{
@@ -134,11 +120,7 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
             </Typography>
             {imageBefore && (
               <PreviewContainer className="container">
-                <img
-                  onClick={() => clickImage(imageBefore)}
-                  src={`data:image/png;base64,${imageBefore}`}
-                  alt="Trade Before"
-                />
+                <ZoomImage image={imageBefore} />
               </PreviewContainer>
             )}
           </Grid>
@@ -148,38 +130,12 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
             </Typography>
             {imageAfter && (
               <PreviewContainer className="container">
-                <img
-                  onClick={() => clickImage(imageAfter)}
-                  src={`data:image/png;base64,${imageAfter}`}
-                  alt="Trade After"
-                />
+                <ZoomImage image={imageAfter} />
               </PreviewContainer>
             )}
           </Grid>
         </Grid>
       )}
-
-      <ContentDialog open={openImage} onClose={onCloseImage} fullScreen>
-        <Grid
-          container
-          spacing={2}
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <img
-            src={`data:image/png;base64,${currentImage}`}
-            alt="Trade Before"
-          />
-          <Button
-            variant="outlined"
-            sx={{ mt: 3, mb: 2 }}
-            onClick={onCloseImage}
-          >
-            Close
-          </Button>
-        </Grid>
-      </ContentDialog>
 
       <Card sx={{ mt: 2 }}>
         <CardContent>
