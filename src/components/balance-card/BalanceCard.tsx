@@ -3,7 +3,7 @@ import { currencyFormatter } from '../../util/NumberFormat';
 import { SimpleCard } from '../card/SimpleCard';
 
 interface CardProps {
-  value: number;
+  value: number | string;
   subtitle: string;
   changeColors?: boolean;
   positiveColor?: string;
@@ -13,7 +13,6 @@ interface CardProps {
 export const BalanceCard: React.FC<CardProps> = ({
   value,
   subtitle,
-  changeColors = false,
   positiveColor = 'green',
   negativeColor = 'red',
 }) => {
@@ -22,11 +21,15 @@ export const BalanceCard: React.FC<CardProps> = ({
   const [titleColor, setTitleColor] = useState(defaultColor);
 
   useEffect(() => {
-    setFormattedValue(currencyFormatter(value));
+    if (typeof value === 'number') {
+      setFormattedValue(currencyFormatter(value));
+    } else {
+      setFormattedValue(value);
+    }
   }, [value]);
 
   useEffect(() => {
-    if (changeColors) {
+    if (typeof value === 'number') {
       if (value > 0) {
         setTitleColor(positiveColor);
       } else if (value < 0) {
@@ -35,7 +38,7 @@ export const BalanceCard: React.FC<CardProps> = ({
         setTitleColor(defaultColor);
       }
     }
-  }, [value, changeColors, positiveColor, negativeColor]);
+  }, [value, positiveColor, negativeColor]);
 
   return (
     <SimpleCard

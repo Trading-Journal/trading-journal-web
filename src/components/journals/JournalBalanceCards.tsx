@@ -9,6 +9,7 @@ import { WithdrawalsCard } from '../balance-card/WithdrawalsCard';
 
 import React from 'react';
 import { BalanceModel } from '../../model/BalanceModel';
+import { SimpleCard } from '../card/SimpleCard';
 
 export const JournalBalanceCards: React.FC<{ balance: BalanceModel }> = ({
   balance,
@@ -17,12 +18,18 @@ export const JournalBalanceCards: React.FC<{ balance: BalanceModel }> = ({
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         <Grid xs={12} sm={4}>
+          <SimpleCard title="20-02-1984" subtitle="Start Journal" />
+        </Grid>
+        <Grid xs={12} sm={4}>
           <StartBalanceCard balance={balance} />
         </Grid>
         <Grid xs={12} sm={4}>
           <AccountBalanceCard balance={balance} />
         </Grid>
-        <Grid xs={12} sm={4}>
+        <Grid xs={12} sm={6}>
+          <SimpleCard title="$ 1.253,03" subtitle="Open Positions" />
+        </Grid>
+        <Grid xs={12} sm={6}>
           <ClosedPositionsCard balance={balance} />
         </Grid>
         <Grid xs={12} sm={4}>
