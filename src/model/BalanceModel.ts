@@ -5,4 +5,7 @@ export interface BalanceModel {
   deposits: number;
   taxes: number;
   withdrawals: number;
+  openedPositions: number;
+  available: number;
+  startJournal: Date;
 }
