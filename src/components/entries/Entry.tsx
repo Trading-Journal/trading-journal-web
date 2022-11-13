@@ -31,7 +31,7 @@ const initialState: EntryModel = {
   date: new Date(),
   type: EntryTypeEnum.TRADE,
   price: 0,
-  size: 0,
+  size: undefined,
   symbol: '',
   direction: DirectionEnum.LONG,
   graphType: undefined,
