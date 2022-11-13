@@ -1,3 +1,5 @@
+import { CurrencyEnum } from './CurrencyEnum';
+
 export interface BalanceModel {
   startBalance: number;
   accountBalance: number;
@@ -8,4 +10,5 @@ export interface BalanceModel {
   openedPositions: number;
   available: number;
   startJournal: Date;
+  currency: CurrencyEnum;
 }

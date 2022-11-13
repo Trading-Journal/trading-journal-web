@@ -1,3 +1,5 @@
+import { CurrencyEnum } from '../model/CurrencyEnum';
+
 interface Format {
   digits?: number;
   thousandsSeparator?: string;
@@ -20,6 +22,16 @@ export const currencyFormatter = (
   const formatted = currencyFormat(value, options);
 
   return `${options.symbol} ${formatted}`;
+};
+
+export const getSymbol = (currency: CurrencyEnum) => {
+  if (currency === CurrencyEnum.DOLLAR) {
+    return '$';
+  } else if (currency === CurrencyEnum.EURO) {
+    return '€';
+  } else {
+    return 'R$';
+  }
 };
 
 export const percentFormatter = (value: number | undefined) => {

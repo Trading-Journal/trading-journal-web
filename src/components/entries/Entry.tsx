@@ -14,7 +14,11 @@ import { DirectionEnum } from '../../model/DirectionEnum';
 import { EntryModel } from '../../model/EntryModel';
 import { EntryTypeEnum } from '../../model/EntryTypeEnum';
 import { JournalModel } from '../../model/JournalModel';
-import { currencyFormatter, percentFormatter } from '../../util/NumberFormat';
+import {
+  currencyFormatter,
+  getSymbol,
+  percentFormatter,
+} from '../../util/NumberFormat';
 import { AlertCard } from '../card/AlertCard';
 import { Datetime } from '../date-time/DateTime';
 import { NumberInput } from '../number-input/NumberInput';
@@ -118,6 +122,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
   const [entry, setEntry] = useState<EntryModel>(initialState);
   const [finished, setFinished] = useState<boolean>(false);
   const mutation = useEntrySave(journal.id);
+  const [currency] = useState(getSymbol(journal.currentBalance.currency));
 
   useEffect(() => {
     if (selectedEntry) {
@@ -212,7 +217,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
             <FormControl fullWidth>
               <NumberInput
                 name="price"
-                label="Price (€)"
+                label={`Price (${currency})`}
                 scale={2}
                 value={entry.price}
                 onChange={(value) => setEntry({ ...entry, price: value! })}
@@ -248,7 +253,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
               <FormControl fullWidth>
                 <NumberInput
                   name="profit"
-                  label="Profit Price (€)"
+                  label={`Profit Price (${currency})`}
                   scale={2}
                   value={entry.profitPrice}
                   onChange={(value) =>
@@ -261,7 +266,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
               <FormControl fullWidth>
                 <NumberInput
                   name="loss"
-                  label="Loss Price (€)"
+                  label={`Loss Price (${currency})`}
                   scale={2}
                   value={entry.lossPrice}
                   onChange={(value) => setEntry({ ...entry, lossPrice: value })}
@@ -272,7 +277,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
               <FormControl fullWidth>
                 <NumberInput
                   name="costs"
-                  label="Costs Price (€)"
+                  label={`Costs Price (${currency})`}
                   scale={2}
                   value={entry.costs}
                   onChange={(value) => setEntry({ ...entry, costs: value })}
@@ -288,7 +293,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
               <FormControl fullWidth>
                 <NumberInput
                   name="exit-price"
-                  label="Exit Price (€)"
+                  label={`Exit Price (${currency})`}
                   scale={2}
                   value={entry.exitPrice}
                   onChange={(value) =>
@@ -408,7 +413,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
                       <DetailField
                         value={entry.grossResult}
                         text={currencyFormatter(entry.grossResult)}
-                        label="Gross Result"
+                        label={`Gross Result (${currency})`}
                       />
                     </Grid>
                   )}
@@ -416,7 +421,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
                     <DetailField
                       value={entry.netResult}
                       text={currencyFormatter(entry.netResult)}
-                      label="Net Result"
+                      label={`Net Result (${currency})`}
                     />
                   </Grid>
                 </Grid>
@@ -433,7 +438,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
                     <DetailField
                       value={entry.accountBalance}
                       text={currencyFormatter(entry.accountBalance)}
-                      label="Account Balance"
+                      label={`Account Balance (${currency})`}
                     />
                   </Grid>
                 </Grid>

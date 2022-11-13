@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BalanceModel } from '../../model/BalanceModel';
+import { getSymbol } from '../../util/NumberFormat';
 import { BalanceCard } from './BalanceCard';
 
 export const ClosedPositionsCard: React.FC<{ balance: BalanceModel }> = ({
@@ -18,6 +19,7 @@ export const ClosedPositionsCard: React.FC<{ balance: BalanceModel }> = ({
       value={value}
       changeColors={true}
       subtitle="Closed Positions"
+      currency={getSymbol(balance.currency)}
     />
   );
 };

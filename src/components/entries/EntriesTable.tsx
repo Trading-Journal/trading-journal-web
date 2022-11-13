@@ -11,6 +11,7 @@ import { EntryModel } from '../../model/EntryModel';
 import { EntryTypeEnum } from '../../model/EntryTypeEnum';
 import { JournalModel } from '../../model/JournalModel';
 import { displayFormat } from '../../util/DateFormat';
+import { getSymbol } from '../../util/NumberFormat';
 import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
 import { useEntryDelete } from '../queries/EntriesQueries';
 import { SidePanel } from '../side-panel/SidePanel';
@@ -30,6 +31,7 @@ export const EntriesTable: React.FC<{
   const [entry, setEntry] = useState<EntryModel>();
   const [entryOpen, setEntryOpen] = useState(false);
   const [imagesOpen, setImagesOpen] = useState(false);
+  const [currency] = useState(getSymbol(journal.currentBalance.currency));
 
   const modalContext = useConfirmationModalContext();
   const deleteMutation = useEntryDelete(journal.id);
@@ -152,42 +154,42 @@ export const EntriesTable: React.FC<{
       headerName: 'Entry Price',
       type: 'number',
       width: 130,
-      valueFormatter: formatCurrency,
+      valueFormatter: (params) => formatCurrency(params, currency),
     },
     {
       field: 'size',
       headerName: 'Entry Size',
       type: 'number',
       width: 115,
-      valueFormatter: (params) => formatCurrency(params, false),
+      valueFormatter: formatCurrency,
     },
     {
       field: 'profitPrice',
       headerName: 'Profit',
       type: 'number',
       width: 130,
-      valueFormatter: formatCurrency,
+      valueFormatter: (params) => formatCurrency(params, currency),
     },
     {
       field: 'lossPrice',
       headerName: 'Loss',
       type: 'number',
       width: 130,
-      valueFormatter: formatCurrency,
+      valueFormatter: (params) => formatCurrency(params, currency),
     },
     {
       field: 'costs',
       headerName: 'Costs',
       type: 'number',
       width: 100,
-      valueFormatter: formatCurrency,
+      valueFormatter: (params) => formatCurrency(params, currency),
     },
     {
       field: 'exitPrice',
       headerName: 'Exit Price',
       type: 'number',
       width: 130,
-      valueFormatter: formatCurrency,
+      valueFormatter: (params) => formatCurrency(params, currency),
     },
     {
       field: 'exitDate',
@@ -208,7 +210,7 @@ export const EntriesTable: React.FC<{
       field: 'plannedRR',
       headerName: 'RR',
       type: 'number',
-      valueFormatter: (params) => formatCurrency(params, false),
+      valueFormatter: formatCurrency,
       headerClassName: 'super-app-calculated',
     },
     {
@@ -216,7 +218,7 @@ export const EntriesTable: React.FC<{
       headerName: 'Gross Result',
       type: 'number',
       width: 130,
-      valueFormatter: formatCurrency,
+      valueFormatter: (params) => formatCurrency(params, currency),
       headerClassName: 'super-app-calculated',
     },
     {
@@ -224,7 +226,7 @@ export const EntriesTable: React.FC<{
       headerName: 'Net Result',
       type: 'number',
       width: 130,
-      valueFormatter: formatCurrency,
+      valueFormatter: (params) => formatCurrency(params, currency),
       headerClassName: 'super-app-calculated',
       cellClassName: formatCellValue,
     },
@@ -242,7 +244,7 @@ export const EntriesTable: React.FC<{
       headerName: 'Account Balance',
       type: 'number',
       width: 130,
-      valueFormatter: formatCurrency,
+      valueFormatter: (params) => formatCurrency(params, currency),
       headerClassName: 'super-app-calculated',
       cellClassName: formatCellValue,
     },

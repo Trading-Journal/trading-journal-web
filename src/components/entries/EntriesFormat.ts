@@ -5,14 +5,14 @@ import { displayFormat } from './../../util/DateFormat';
 
 export const formatCurrency = (
   params: GridValueFormatterParams<number>,
-  withSymbol: boolean = true
+  symbol?: string
 ) => {
   if (params.value == null) {
     return '';
   }
   var valueFormatted = '';
-  if (withSymbol) {
-    valueFormatted = currencyFormatter(params.value);
+  if (symbol) {
+    valueFormatted = currencyFormatter(params.value, { symbol });
   } else {
     valueFormatted = currencyFormatter(params.value, { symbol: '' });
   }
