@@ -55,6 +55,7 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
   const [imageBefore, setImageBefore] = useState<string | undefined>('');
   const [imageAfter, setImageAfter] = useState<string | undefined>('');
   const [hasAnyImage, setHasAnyImage] = useState<boolean>(false);
+  const [reload, setReload] = useState<boolean>(false);
   const accessToken = useAccessTokenState();
 
   useEffect(() => {
@@ -70,7 +71,7 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
       entry,
       UploadTypeEnum.IMAGE_AFTER
     ).then((resp: EntryImageResponse) => setImageAfter(resp.image));
-  }, [journal, entry, accessToken]);
+  }, [journal, entry, accessToken, reload]);
 
   useEffect(() => {
     if (imageBefore || imageAfter) {
@@ -85,20 +86,27 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
     mt: 2,
   };
 
+  const onFinish = () => {
+    console.log('upload finished');
+    setReload(!reload);
+  };
+
+  const handleClose = () => {
+    onCancel();
+  };
+
   const imageBeforeRequest = {
     url: `http://localhost:8081/entries/${journal.id}/${entry.id}/image`,
     paramName: 'file  ',
     params: { type: 'IMAGE_BEFORE' },
+    onFinish: onFinish,
   };
 
   const imageAfterRequest = {
     url: `http://localhost:8081/entries/${journal.id}/${entry.id}/image`,
     paramName: 'file  ',
     params: { type: 'IMAGE_AFTER' },
-  };
-
-  const handleClose = () => {
-    onCancel();
+    onFinish: onFinish,
   };
 
   return (

@@ -16,6 +16,7 @@ const theme = createTheme({
   },
   zIndex: {
     modal: 0,
+    drawer: 0,
   },
 });
 

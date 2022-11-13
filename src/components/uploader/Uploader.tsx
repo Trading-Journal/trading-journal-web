@@ -13,7 +13,7 @@ import Uploady, {
   useItemProgressListener,
   useItemStartListener,
 } from '@rpldy/uploady';
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import { useAccessTokenState } from '../../context/UserContext';
 import { AlertCard } from '../card/AlertCard';
 import { SimpleCard } from '../card/SimpleCard';
@@ -41,62 +41,12 @@ const PasteUploadDropZone = withPasteUpload(UploadDropZone);
 const SimpleContainer = styled('div')``;
 const PasteArea = withPasteUpload(SimpleContainer);
 
-const UploadStatusView = () => {
-  const [status, setStatus] = useState<UploadStatus>({
-    status: Status.NONE,
-    message: '',
-  });
-
-  useItemStartListener(() =>
-    setStatus({
-      status: Status.UPLOADING,
-      message: 'Uploading',
-    })
-  );
-  useItemFinishListener(() =>
-    setStatus({
-      status: Status.SUCCESS,
-      message: 'Successfully Uploaded',
-    })
-  );
-  useItemProgressListener((item: any) =>
-    setStatus({
-      status: Status.UPLOADING,
-      message: `item is ${item.completed}% done and ${item.loaded} bytes uploaded`,
-    })
-  );
-
-  useItemErrorListener((item: any) => {
-    setStatus({
-      status: Status.ERROR,
-      message: `Failed to upload\n${item.uploadResponse.data.error}`,
-    });
-  });
-
-  if (status.status === Status.NONE) {
-    return <label></label>;
-  }
-
-  const severity =
-    status.status === Status.SUCCESS
-      ? 'success'
-      : status.status === Status.UPLOADING
-      ? 'info'
-      : 'error';
-
-  return (
-    <AlertCard
-      show={true}
-      message={status.message}
-      severity={severity}
-    ></AlertCard>
-  );
-};
-
 interface UploadProps {
   url: string;
   paramName: string;
   params?: Record<string, string> | undefined;
+  preview?: boolean;
+  onFinish?: () => void;
 }
 
 const ButtonAsUploadButton = asUploadButton(
@@ -110,7 +60,7 @@ const ButtonAsUploadButton = asUploadButton(
 );
 
 export const Uploader: React.FC<UploadProps> = (props: UploadProps) => {
-  const { url, paramName, params } = props;
+  const { url, paramName, params, onFinish, preview } = props;
   const center = {
     display: 'flex',
     alignItems: 'center',
@@ -125,6 +75,65 @@ export const Uploader: React.FC<UploadProps> = (props: UploadProps) => {
     method: 'POST',
     headers: { Authorization: `Bearer ${accessToken}` },
     params,
+  };
+
+  const [status, setStatus] = useState<UploadStatus>({
+    status: Status.NONE,
+    message: '',
+  });
+
+  useEffect(() => {
+    if (status.status === Status.SUCCESS && onFinish) {
+      onFinish();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
+
+  const UploadStatusView = () => {
+    useItemStartListener(() =>
+      setStatus({
+        status: Status.UPLOADING,
+        message: 'Uploading',
+      })
+    );
+    useItemFinishListener(() =>
+      setStatus({
+        status: Status.SUCCESS,
+        message: 'Successfully Uploaded',
+      })
+    );
+    useItemProgressListener((item: any) =>
+      setStatus({
+        status: Status.UPLOADING,
+        message: `item is ${item.completed}% done and ${item.loaded} bytes uploaded`,
+      })
+    );
+
+    useItemErrorListener((item: any) => {
+      setStatus({
+        status: Status.ERROR,
+        message: `Failed to upload\n${item.uploadResponse.data.error}`,
+      });
+    });
+
+    if (status.status === Status.NONE) {
+      return <label></label>;
+    }
+
+    const severity =
+      status.status === Status.SUCCESS
+        ? 'success'
+        : status.status === Status.UPLOADING
+        ? 'info'
+        : 'error';
+
+    return (
+      <AlertCard
+        show={true}
+        message={status.message}
+        severity={severity}
+      ></AlertCard>
+    );
   };
 
   return (
@@ -149,9 +158,11 @@ export const Uploader: React.FC<UploadProps> = (props: UploadProps) => {
           </PasteUploadDropZone>
           <ButtonAsUploadButton />
           <UploadStatusView />
-          <PreviewContainer>
-            <UploadPreview />
-          </PreviewContainer>
+          {preview && (
+            <PreviewContainer>
+              <UploadPreview />
+            </PreviewContainer>
+          )}
         </Stack>
       </Uploady>
     </Box>

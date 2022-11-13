@@ -12,8 +12,8 @@ import { EntryTypeEnum } from '../../model/EntryTypeEnum';
 import { JournalModel } from '../../model/JournalModel';
 import { displayFormat } from '../../util/DateFormat';
 import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
-import { ContentDialog } from '../dialog/ContentDialog';
 import { useEntryDelete } from '../queries/EntriesQueries';
+import { SidePanel } from '../side-panel/SidePanel';
 import {
   formatCellValue,
   formatCurrency,
@@ -28,34 +28,34 @@ export const EntriesTable: React.FC<{
   journal: JournalModel;
 }> = ({ entries, journal }) => {
   const [entry, setEntry] = useState<EntryModel>();
-  const [entryDialogOpen, setEntryDialogOpen] = useState(false);
-  const [entryImagesDialogOpen, setEntryImagesDialogOpen] = useState(false);
+  const [entryOpen, setEntryOpen] = useState(false);
+  const [imagesOpen, setImagesOpen] = useState(false);
 
   const modalContext = useConfirmationModalContext();
   const deleteMutation = useEntryDelete(journal.id);
 
-  const onCancel = () => {
-    setEntryDialogOpen(false);
-    setEntryImagesDialogOpen(false);
+  const onClose = () => {
+    setEntryOpen(false);
+    setImagesOpen(false);
   };
 
   const onSave = () => {
-    setEntryDialogOpen(false);
+    setEntryOpen(false);
   };
 
   const addClick = () => {
     setEntry(undefined);
-    setEntryDialogOpen(true);
+    setEntryOpen(true);
   };
 
   const editClick = (entry: EntryModel) => {
     setEntry(entry);
-    setEntryDialogOpen(true);
+    setEntryOpen(true);
   };
 
   const imagesClick = (entry: EntryModel) => {
     setEntry(entry);
-    setEntryImagesDialogOpen(true);
+    setImagesOpen(true);
   };
 
   const deleteClick = async (entry: EntryModel) => {
@@ -292,18 +292,18 @@ export const EntriesTable: React.FC<{
         },
       }}
     >
-      <ContentDialog open={entryDialogOpen} onClose={onCancel}>
+      <SidePanel open={entryOpen} onClose={onClose}>
         <Entry
           journal={journal}
           entry={entry}
-          onCancel={onCancel}
+          onCancel={onClose}
           onSave={onSave}
         />
-      </ContentDialog>
+      </SidePanel>
 
-      <ContentDialog open={entryImagesDialogOpen} onClose={onCancel}>
-        <EntryImages journal={journal} entry={entry!} onCancel={onCancel} />
-      </ContentDialog>
+      <SidePanel open={imagesOpen} onClose={onClose}>
+        <EntryImages journal={journal} entry={entry!} onCancel={onClose} />
+      </SidePanel>
 
       <DataGrid
         autoHeight={true}
