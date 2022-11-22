@@ -1,4 +1,4 @@
-export enum GraphTypeEnum {
+export enum GraphType {
   CANDLESTICK = 'CANDLESTICK',
   RENKO = 'RENKO',
   KAGI = 'KAGI',

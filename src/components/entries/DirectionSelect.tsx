@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { DirectionEnum } from '../../model/DirectionEnum';
+import { Direction } from '../../model/Direction';
 import { EntryModel } from '../../model/EntryModel';
 import { Dropdown } from '../dropdown/Dropdown';
 
 interface Props {
-  onChange: (item: DirectionEnum) => void;
+  onChange: (item: Direction) => void;
   entry?: EntryModel;
 }
 
@@ -12,8 +12,8 @@ export const DirectionSelect: React.FC<Props> = (props: Props) => {
   const { onChange, entry, ...rest } = props;
 
   const [direction, setDirection] = useState({
-    key: DirectionEnum.LONG,
-    value: DirectionEnum.LONG,
+    key: Direction.LONG,
+    value: Direction.LONG,
   });
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const DirectionSelect: React.FC<Props> = (props: Props) => {
     }
   }, [entry]);
 
-  const directions = Object.entries(DirectionEnum).map(([key, value]) => ({
+  const directions = Object.entries(Direction).map(([key, value]) => ({
     key,
     value,
   }));

@@ -10,10 +10,10 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
-import { DirectionEnum } from '../../model/DirectionEnum';
+import { Direction } from '../../model/Direction';
 import { EntryModel } from '../../model/EntryModel';
-import { EntryTypeEnum } from '../../model/EntryTypeEnum';
-import { JournalModel } from '../../model/JournalModel';
+import { EntryType } from '../../model/EntryType';
+import { Journal } from '../../model/Journal';
 import {
   currencyFormatter,
   getSymbol,
@@ -29,11 +29,11 @@ import { GraphTypeSelect } from './GraphTypeSelect';
 
 const initialState: EntryModel = {
   date: new Date(),
-  type: EntryTypeEnum.TRADE,
+  type: EntryType.TRADE,
   price: 0,
   size: undefined,
   symbol: '',
-  direction: DirectionEnum.LONG,
+  direction: Direction.LONG,
   graphType: undefined,
   graphMeasure: '',
   profitPrice: undefined,
@@ -51,7 +51,7 @@ const initialState: EntryModel = {
 };
 
 interface EntryProps {
-  journal: JournalModel;
+  journal: Journal;
   entry?: EntryModel;
   onSave: (entry: EntryModel | undefined) => void;
   onCancel: () => void;
@@ -91,7 +91,7 @@ const Header = ({
   finished,
   entry,
 }: {
-  journal: JournalModel;
+  journal: Journal;
   finished: boolean;
   entry?: EntryModel;
 }) => {
@@ -145,7 +145,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
   };
 
   const isTrade = () => {
-    return entry.type === EntryTypeEnum.TRADE;
+    return entry.type === EntryType.TRADE;
   };
 
   return (
@@ -163,7 +163,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
           <Grid item xs={12} sm={6}>
             <EntryTypeSelect
               key="entry-select"
-              onChange={(value: EntryTypeEnum) =>
+              onChange={(value: EntryType) =>
                 setEntry({ ...entry, type: value })
               }
               entry={entry}

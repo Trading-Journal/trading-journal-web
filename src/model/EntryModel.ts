@@ -1,23 +1,23 @@
-import { DirectionEnum } from './DirectionEnum';
-import { EntryTypeEnum } from './EntryTypeEnum';
-import { GraphTypeEnum } from './GraphTypeEnum';
+import { Direction } from './Direction';
+import { EntryType } from './EntryType';
+import { GraphType } from './GraphType';
 
 export interface EntryModel {
   id?: string;
 
   date: Date;
 
-  type: EntryTypeEnum;
+  type: EntryType;
 
   price: number;
 
   symbol?: string;
 
-  direction?: DirectionEnum;
+  direction?: Direction;
 
   size?: number;
 
-  graphType?: GraphTypeEnum;
+  graphType?: GraphType;
 
   graphMeasure?: string;
 

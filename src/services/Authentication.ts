@@ -1,5 +1,5 @@
 import { ChangePasswordRequest } from '../model/ChangePasswordRequest';
-import { RegisterModel } from '../model/RegisterModel';
+import { RegisterRequest } from '../model/RegisterRequest';
 import { SignUpResponse } from '../model/SignUpResponse';
 import { LoginResponse } from './../model/LoginResponse';
 import { readErrors } from './ErrorsReader';
@@ -22,7 +22,7 @@ const signIn = (email: string, password: string): Promise<LoginResponse> => {
     .then((response: LoginResponse) => response);
 };
 
-const signUp = (register: RegisterModel): Promise<SignUpResponse> => {
+const signUp = (register: RegisterRequest): Promise<SignUpResponse> => {
   return fetch('http://localhost:8080/authentication/signup', {
     method: 'POST',
     body: JSON.stringify(register),

@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import { BalanceModel } from '../../model/BalanceModel';
+import { Balance } from '../../model/Balance';
 import { getSymbol } from '../../util/NumberFormat';
 import { BalanceCard } from './BalanceCard';
 
-export const AvailableCard: React.FC<{ balance: BalanceModel }> = ({
-  balance,
-}) => {
+export const AvailableCard: React.FC<{ balance: Balance }> = ({ balance }) => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {

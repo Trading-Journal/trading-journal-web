@@ -8,12 +8,12 @@ import { TaxesCard } from '../balance-card/TaxesCard';
 import { WithdrawalsCard } from '../balance-card/WithdrawalsCard';
 
 import React from 'react';
-import { BalanceModel } from '../../model/BalanceModel';
+import { Balance } from '../../model/Balance';
 import { AvailableCard } from '../balance-card/AvailableCard';
 import { OpenPositionsCard } from '../balance-card/OpenPositionsCard';
 import { StartJournalCard } from '../balance-card/StartJournalCard';
 
-export const JournalBalanceCards: React.FC<{ balance: BalanceModel }> = ({
+export const JournalBalanceCards: React.FC<{ balance: Balance }> = ({
   balance,
 }) => {
   return (

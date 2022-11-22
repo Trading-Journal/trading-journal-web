@@ -12,12 +12,12 @@ import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { RegisterModel } from '../../model/RegisterModel';
+import { RegisterRequest } from '../../model/RegisterRequest';
 import { signUp } from '../../services/Authentication';
 import { AlertCard } from '../card/AlertCard';
 import { PortalFeedback } from '../portal/PortalFeedback';
 
-const initialState: RegisterModel = {
+const initialState: RegisterRequest = {
   companyName: '',
   email: '',
   firstName: '',
@@ -29,8 +29,8 @@ const initialState: RegisterModel = {
 };
 
 export const Register = () => {
-  const mutation = useMutation((request: RegisterModel) => signUp(request));
-  const [request, setRequest] = useState<RegisterModel>(initialState);
+  const mutation = useMutation((request: RegisterRequest) => signUp(request));
+  const [request, setRequest] = useState<RegisterRequest>(initialState);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

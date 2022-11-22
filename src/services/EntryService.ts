@@ -1,5 +1,5 @@
 import { EntryImageResponse } from '../model/EntryImageResponse';
-import { UploadTypeEnum } from '../model/UploadTypeEnum';
+import { UploadType } from '../model/UploadType';
 import { apiFormat } from '../util/DateFormat';
 import { EntryModel } from './../model/EntryModel';
 import { readErrors } from './ErrorsReader';
@@ -73,7 +73,7 @@ export const getEntryImage = (
   accessToken: string,
   journalId: string,
   entry: EntryModel,
-  type: UploadTypeEnum
+  type: UploadType
 ): Promise<EntryImageResponse> => {
   return fetch(
     `http://localhost:8081/entries/${journalId}/${entry.id}/image?type=${type}`,

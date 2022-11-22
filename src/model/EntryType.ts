@@ -1,4 +1,4 @@
-export enum EntryTypeEnum {
+export enum EntryType {
   TRADE = 'TRADE',
   WITHDRAWAL = 'WITHDRAWAL',
   DEPOSIT = 'DEPOSIT',

@@ -1,4 +1,4 @@
-import { CurrencyEnum } from '../model/CurrencyEnum';
+import { Currency } from '../model/Currency';
 
 interface Format {
   digits?: number;
@@ -24,10 +24,10 @@ export const currencyFormatter = (
   return `${options.symbol} ${formatted}`;
 };
 
-export const getSymbol = (currency: CurrencyEnum) => {
-  if (currency === CurrencyEnum.DOLLAR) {
+export const getSymbol = (currency: Currency) => {
+  if (currency === Currency.DOLLAR) {
     return '$';
-  } else if (currency === CurrencyEnum.EURO) {
+  } else if (currency === Currency.EURO) {
     return '€';
   } else {
     return 'R$';

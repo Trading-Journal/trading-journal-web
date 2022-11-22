@@ -1,6 +1,7 @@
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs, { Dayjs } from 'dayjs';
 import 'dayjs/locale/en-gb';
@@ -11,11 +12,12 @@ interface DateTimeProps {
   required: boolean;
   value?: string | Date | null;
   startNow?: boolean;
+  onlyDate?: boolean;
   onChange: (date: Date | null) => void;
 }
 
 export const Datetime: React.FC<DateTimeProps> = (props: DateTimeProps) => {
-  const { label, required, value, startNow, onChange } = props;
+  const { label, required, value, startNow, onlyDate, onChange } = props;
 
   const now = startNow ? dayjs() : null;
   const [current, setCurrentValue] = React.useState<Dayjs | null>(now);
@@ -38,13 +40,24 @@ export const Datetime: React.FC<DateTimeProps> = (props: DateTimeProps) => {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
-      <DateTimePicker
-        renderInput={(props) => <TextField required={required} {...props} />}
-        label={label}
-        value={current}
-        ampm={false}
-        onChange={onDateChange}
-      />
+      {onlyDate && (
+        <DesktopDatePicker
+          renderInput={(props) => <TextField required={required} {...props} />}
+          label={label}
+          value={current}
+          onChange={onDateChange}
+        />
+      )}
+
+      {!onlyDate && (
+        <DateTimePicker
+          renderInput={(props) => <TextField required={required} {...props} />}
+          label={label}
+          value={current}
+          ampm={false}
+          onChange={onDateChange}
+        />
+      )}
     </LocalizationProvider>
   );
 };

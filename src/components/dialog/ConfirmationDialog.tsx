@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import React, { useContext, useRef, useState } from 'react';
 
@@ -87,11 +86,7 @@ const ConfirmationModalContextProvider: React.FC<
       {content && (
         <Dialog open={show}>
           <DialogTitle>{content.title}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              {content.message}
-            </DialogContentText>
-          </DialogContent>
+          <DialogContent>{content.message}</DialogContent>
           <DialogActions>
             <Button
               onClick={handleCancel}

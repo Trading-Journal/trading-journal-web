@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { EntryModel } from '../../model/EntryModel';
-import { GraphTypeEnum } from '../../model/GraphTypeEnum';
+import { GraphType } from '../../model/GraphType';
 import { Dropdown } from '../dropdown/Dropdown';
 
 interface Props {
-  onChange: (item: GraphTypeEnum | undefined) => void;
+  onChange: (item: GraphType | undefined) => void;
   entry?: EntryModel;
 }
 
@@ -26,7 +26,7 @@ export const GraphTypeSelect: React.FC<Props> = (props: Props) => {
   }, [entry]);
 
   const graphTypes = [{ key: '', value: 'No Graph' }];
-  const enumTypes = Object.entries(GraphTypeEnum).map(([key, value]) => ({
+  const enumTypes = Object.entries(GraphType).map(([key, value]) => ({
     key: key as string,
     value: value as string,
   }));

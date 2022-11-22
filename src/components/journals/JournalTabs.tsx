@@ -3,8 +3,9 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import React, { useEffect, useState } from 'react';
-import { JournalModel } from '../../model/JournalModel';
+import { Journal } from '../../model/Journal';
 import { JournalEntries } from './JournalEntries';
+import { JournalTable } from './JournalTable';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -22,7 +23,7 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export const JournalTabs: React.FC<{ journals: JournalModel[] }> = ({
+export const JournalTabs: React.FC<{ journals: Journal[] }> = ({
   journals,
 }) => {
   const [value, setValue] = useState(0);
@@ -47,7 +48,7 @@ export const JournalTabs: React.FC<{ journals: JournalModel[] }> = ({
           sx={{ borderRight: 1, borderColor: 'divider' }}
         >
           <Tab icon={<TuneIcon sx={{ fontSize: 30 }} />} />
-          {journals.map((journal: JournalModel) => (
+          {journals.map((journal: Journal) => (
             <Tab
               key={`journal-item-${journal.id}`}
               label={journal.name}
@@ -56,7 +57,10 @@ export const JournalTabs: React.FC<{ journals: JournalModel[] }> = ({
           ))}
         </Tabs>
       </Box>
-      {journals.map((journal: JournalModel, index: number) => (
+      <TabPanel key={'journal-tab-panel-options'} value={value} index={0}>
+        <JournalTable />
+      </TabPanel>
+      {journals.map((journal: Journal, index: number) => (
         <TabPanel
           key={`journal-tab-panel-${journal.id}`}
           value={value}

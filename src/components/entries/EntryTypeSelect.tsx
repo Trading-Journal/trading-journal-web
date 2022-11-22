@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { EntryModel } from '../../model/EntryModel';
-import { EntryTypeEnum } from '../../model/EntryTypeEnum';
+import { EntryType } from '../../model/EntryType';
 import { Dropdown } from '../dropdown/Dropdown';
 
 interface Props {
-  onChange: (item: EntryTypeEnum) => void;
+  onChange: (item: EntryType) => void;
   entry?: EntryModel;
 }
 
@@ -12,8 +12,8 @@ export const EntryTypeSelect: React.FC<Props> = (props: Props) => {
   const { onChange, entry, ...rest } = props;
 
   const [entryType, setEntryType] = useState({
-    key: EntryTypeEnum.TRADE,
-    value: EntryTypeEnum.TRADE,
+    key: EntryType.TRADE,
+    value: EntryType.TRADE,
   });
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export const EntryTypeSelect: React.FC<Props> = (props: Props) => {
     }
   }, [entry]);
 
-  const entryTypes = Object.entries(EntryTypeEnum).map(([key, value]) => ({
+  const entryTypes = Object.entries(EntryType).map(([key, value]) => ({
     key,
     value,
   }));

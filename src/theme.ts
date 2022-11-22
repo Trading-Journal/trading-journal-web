@@ -14,10 +14,6 @@ const theme = createTheme({
       main: red.A400,
     },
   },
-  zIndex: {
-    modal: 0,
-    drawer: 0,
-  },
 });
 
 export default theme;

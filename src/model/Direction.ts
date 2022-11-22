@@ -1,4 +1,4 @@
-export enum DirectionEnum {
+export enum Direction {
   LONG = 'LONG',
   SHORT = 'SHORT',
 }

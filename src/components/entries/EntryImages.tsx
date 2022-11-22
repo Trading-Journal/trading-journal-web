@@ -7,8 +7,8 @@ import React, { useEffect, useState } from 'react';
 import { useAccessTokenState } from '../../context/UserContext';
 import { EntryImageResponse } from '../../model/EntryImageResponse';
 import { EntryModel } from '../../model/EntryModel';
-import { JournalModel } from '../../model/JournalModel';
-import { UploadTypeEnum } from '../../model/UploadTypeEnum';
+import { Journal } from '../../model/Journal';
+import { UploadType } from '../../model/UploadType';
 import { getEntryImage } from '../../services/EntryService';
 import { Uploader } from '../uploader/Uploader';
 
@@ -17,7 +17,7 @@ import CardContent from '@mui/material/CardContent';
 import { ZoomImage } from '../zoom-image/ZoomImage';
 
 interface ImageProps {
-  journal: JournalModel;
+  journal: Journal;
   entry: EntryModel;
   onCancel: () => void;
 }
@@ -59,18 +59,12 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
   const accessToken = useAccessTokenState();
 
   useEffect(() => {
-    getEntryImage(
-      accessToken,
-      journal.id,
-      entry,
-      UploadTypeEnum.IMAGE_BEFORE
-    ).then((resp: EntryImageResponse) => setImageBefore(resp.image));
-    getEntryImage(
-      accessToken,
-      journal.id,
-      entry,
-      UploadTypeEnum.IMAGE_AFTER
-    ).then((resp: EntryImageResponse) => setImageAfter(resp.image));
+    getEntryImage(accessToken, journal.id, entry, UploadType.IMAGE_BEFORE).then(
+      (resp: EntryImageResponse) => setImageBefore(resp.image)
+    );
+    getEntryImage(accessToken, journal.id, entry, UploadType.IMAGE_AFTER).then(
+      (resp: EntryImageResponse) => setImageAfter(resp.image)
+    );
   }, [journal, entry, accessToken, reload]);
 
   useEffect(() => {

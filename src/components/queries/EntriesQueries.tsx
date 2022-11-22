@@ -1,14 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAccessTokenState } from '../../context/UserContext';
 import { EntryModel } from '../../model/EntryModel';
-import { JournalModel } from '../../model/JournalModel';
+import { Journal } from '../../model/Journal';
 import {
   deleteEntry,
   getAllEntries,
   saveEntry,
 } from '../../services/EntryService';
 
-export const useEntriesQuery = (journal: JournalModel) => {
+export const useEntriesQuery = (journal: Journal) => {
   const accessToken = useAccessTokenState();
   return useQuery<EntryModel[], Error>(
     [`entries-${journal.id}`],

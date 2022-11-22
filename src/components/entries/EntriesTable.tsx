@@ -8,25 +8,25 @@ import Tooltip from '@mui/material/Tooltip';
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import React, { useState } from 'react';
 import { EntryModel } from '../../model/EntryModel';
-import { EntryTypeEnum } from '../../model/EntryTypeEnum';
-import { JournalModel } from '../../model/JournalModel';
-import { displayFormat } from '../../util/DateFormat';
-import { getSymbol } from '../../util/NumberFormat';
-import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
-import { useEntryDelete } from '../queries/EntriesQueries';
-import { SidePanel } from '../side-panel/SidePanel';
+import { EntryType } from '../../model/EntryType';
+import { Journal } from '../../model/Journal';
 import {
   formatCellValue,
   formatCurrency,
   formatDate,
   formatPercentage,
-} from './EntriesFormat';
+} from '../../util/DataGridFormat';
+import { displayFormat } from '../../util/DateFormat';
+import { getSymbol } from '../../util/NumberFormat';
+import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
+import { useEntryDelete } from '../queries/EntriesQueries';
+import { SidePanel } from '../side-panel/SidePanel';
 import { Entry } from './Entry';
 import { EntryImages } from './EntryImages';
 
 export const EntriesTable: React.FC<{
   entries: EntryModel[];
-  journal: JournalModel;
+  journal: Journal;
 }> = ({ entries, journal }) => {
   const [entry, setEntry] = useState<EntryModel>();
   const [entryOpen, setEntryOpen] = useState(false);
@@ -105,7 +105,7 @@ export const EntriesTable: React.FC<{
         <GridActionsCellItem
           sx={{
             visibility:
-              params.row.type === EntryTypeEnum.TRADE ? 'visible' : 'collapse',
+              params.row.type === EntryType.TRADE ? 'visible' : 'collapse',
           }}
           icon={
             <Tooltip title="Add or Edit Images">

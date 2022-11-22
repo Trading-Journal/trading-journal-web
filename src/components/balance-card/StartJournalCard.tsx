@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { BalanceModel } from '../../model/BalanceModel';
+import { Balance } from '../../model/Balance';
 import { displayFormatDate } from '../../util/DateFormat';
 import { SimpleCard } from '../card/SimpleCard';
 
-export const StartJournalCard: React.FC<{ balance: BalanceModel }> = ({
+export const StartJournalCard: React.FC<{ balance: Balance }> = ({
   balance,
 }) => {
   const [value, setValue] = useState('');
