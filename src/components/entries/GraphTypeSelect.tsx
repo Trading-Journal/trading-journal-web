@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { EntryModel } from '../../model/EntryModel';
 import { GraphType } from '../../model/GraphType';
 import { Dropdown } from '../dropdown/Dropdown';
 
 interface Props {
   onChange: (item: GraphType | undefined) => void;
-  entry?: EntryModel;
+  value?: GraphType;
 }
 
 export const GraphTypeSelect: React.FC<Props> = (props: Props) => {
-  const { onChange, entry, ...rest } = props;
+  const { onChange, value, ...rest } = props;
 
   const [graphType, setGraphType] = useState({
     key: '',
@@ -17,13 +16,13 @@ export const GraphTypeSelect: React.FC<Props> = (props: Props) => {
   });
 
   useEffect(() => {
-    if (entry && entry.graphType) {
+    if (value) {
       setGraphType({
-        key: entry.graphType,
-        value: entry.graphType,
+        key: value,
+        value: value,
       });
     }
-  }, [entry]);
+  }, [value]);
 
   const graphTypes = [{ key: '', value: 'No Graph' }];
   const enumTypes = Object.entries(GraphType).map(([key, value]) => ({

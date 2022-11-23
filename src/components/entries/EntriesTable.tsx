@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import React, { useState } from 'react';
-import { EntryModel } from '../../model/EntryModel';
+import { Entry } from '../../model/Entry';
 import { EntryType } from '../../model/EntryType';
 import { Journal } from '../../model/Journal';
 import {
@@ -21,14 +21,14 @@ import { getSymbol } from '../../util/NumberFormat';
 import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
 import { useEntryDelete } from '../queries/EntriesQueries';
 import { SidePanel } from '../side-panel/SidePanel';
-import { Entry } from './Entry';
+import { EntryForm } from './EntryForm';
 import { EntryImages } from './EntryImages';
 
 export const EntriesTable: React.FC<{
-  entries: EntryModel[];
+  entries: Entry[];
   journal: Journal;
 }> = ({ entries, journal }) => {
-  const [entry, setEntry] = useState<EntryModel>();
+  const [entry, setEntry] = useState<Entry>();
   const [entryOpen, setEntryOpen] = useState(false);
   const [imagesOpen, setImagesOpen] = useState(false);
   const [currency] = useState(getSymbol(journal.currentBalance.currency));
@@ -50,17 +50,17 @@ export const EntriesTable: React.FC<{
     setEntryOpen(true);
   };
 
-  const editClick = (entry: EntryModel) => {
+  const editClick = (entry: Entry) => {
     setEntry(entry);
     setEntryOpen(true);
   };
 
-  const imagesClick = (entry: EntryModel) => {
+  const imagesClick = (entry: Entry) => {
     setEntry(entry);
     setImagesOpen(true);
   };
 
-  const deleteClick = async (entry: EntryModel) => {
+  const deleteClick = async (entry: Entry) => {
     const result = await modalContext.showConfirmation(
       'Delete entry',
       `Are you sure do you want to remove ${entry.type} ${
@@ -295,7 +295,7 @@ export const EntriesTable: React.FC<{
       }}
     >
       <SidePanel open={entryOpen} onClose={onClose}>
-        <Entry
+        <EntryForm
           journal={journal}
           entry={entry}
           onCancel={onClose}

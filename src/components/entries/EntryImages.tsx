@@ -5,8 +5,8 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import { useAccessTokenState } from '../../context/UserContext';
+import { Entry } from '../../model/Entry';
 import { EntryImageResponse } from '../../model/EntryImageResponse';
-import { EntryModel } from '../../model/EntryModel';
 import { Journal } from '../../model/Journal';
 import { UploadType } from '../../model/UploadType';
 import { getEntryImage } from '../../services/EntryService';
@@ -18,11 +18,11 @@ import { ZoomImage } from '../zoom-image/ZoomImage';
 
 interface ImageProps {
   journal: Journal;
-  entry: EntryModel;
+  entry: Entry;
   onCancel: () => void;
 }
 
-const Header = ({ entry }: { entry: EntryModel }) => {
+const Header = ({ entry }: { entry: Entry }) => {
   return (
     <Typography fontSize={20}>
       Upload Images for {entry.type} {entry.symbol}
@@ -90,14 +90,14 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
   };
 
   const imageBeforeRequest = {
-    url: `http://localhost:8081/entries/${journal.id}/${entry.id}/image`,
+    url: `http://localhost:8081/journals/${journal.id}/entries/${entry.id}/image`,
     paramName: 'file  ',
     params: { type: 'IMAGE_BEFORE' },
     onFinish: onFinish,
   };
 
   const imageAfterRequest = {
-    url: `http://localhost:8081/entries/${journal.id}/${entry.id}/image`,
+    url: `http://localhost:8081/journals/${journal.id}/entries/${entry.id}/image`,
     paramName: 'file  ',
     params: { type: 'IMAGE_AFTER' },
     onFinish: onFinish,

@@ -1,14 +1,17 @@
+import { Deposit } from '../model/Deposit';
+import { Entry } from '../model/Entry';
 import { EntryImageResponse } from '../model/EntryImageResponse';
+import { Taxes } from '../model/Taxes';
 import { UploadType } from '../model/UploadType';
+import { Withdrawal } from '../model/Withdrawal';
 import { apiFormat } from '../util/DateFormat';
-import { EntryModel } from './../model/EntryModel';
 import { readErrors } from './ErrorsReader';
 
 export const getAllEntries = (
   accessToken: string,
   journalId: string
-): Promise<EntryModel[]> => {
-  return fetch(`http://localhost:8081/entries/${journalId}`, {
+): Promise<Entry[]> => {
+  return fetch(`http://localhost:8081/journals/${journalId}/entries`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${accessToken}` },
   })
@@ -19,15 +22,15 @@ export const getAllEntries = (
         throw new Error(errors);
       }
     })
-    .then((response: EntryModel[]) => response);
+    .then((response: Entry[]) => response);
 };
 
-export const saveEntry = (
+export const saveTrade = (
   accessToken: string,
   journalId: string,
-  entry: EntryModel
-): Promise<EntryModel> => {
-  return fetch(`http://localhost:8081/entries/${journalId}`, {
+  entry: Entry
+): Promise<Entry> => {
+  return fetch(`http://localhost:8081/journals/${journalId}/entries/trade`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -46,21 +49,105 @@ export const saveEntry = (
         throw new Error(errors);
       }
     })
-    .then((response: EntryModel) => response);
+    .then((response: Entry) => response);
+};
+
+export const saveWithdrawal = (
+  accessToken: string,
+  journalId: string,
+  withdrawal: Withdrawal
+): Promise<Entry> => {
+  return fetch(
+    `http://localhost:8081/journals/${journalId}/entries/withdrawal`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...withdrawal,
+        date: apiFormat(withdrawal.date),
+      }),
+    }
+  )
+    .then(async (response) => {
+      if (response.ok) return response.json();
+      else {
+        const errors = await readErrors(response);
+        throw new Error(errors);
+      }
+    })
+    .then((response: Entry) => response);
+};
+
+export const saveDeposit = (
+  accessToken: string,
+  journalId: string,
+  deposit: Deposit
+): Promise<Entry> => {
+  return fetch(`http://localhost:8081/journals/${journalId}/entries/deposit`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      ...deposit,
+      date: apiFormat(deposit.date),
+    }),
+  })
+    .then(async (response) => {
+      if (response.ok) return response.json();
+      else {
+        const errors = await readErrors(response);
+        throw new Error(errors);
+      }
+    })
+    .then((response: Entry) => response);
+};
+
+export const saveTaxes = (
+  accessToken: string,
+  journalId: string,
+  taxes: Taxes
+): Promise<Entry> => {
+  return fetch(`http://localhost:8081/journals/${journalId}/entries/taxes`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      ...taxes,
+      date: apiFormat(taxes.date),
+    }),
+  })
+    .then(async (response) => {
+      if (response.ok) return response.json();
+      else {
+        const errors = await readErrors(response);
+        throw new Error(errors);
+      }
+    })
+    .then((response: Entry) => response);
 };
 
 export const deleteEntry = (
   accessToken: string,
   journalId: string,
-  entry: EntryModel
+  entry: Entry
 ): Promise<any> => {
-  return fetch(`http://localhost:8081/entries/${journalId}/${entry.id}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-  }).then(async (response) => {
+  return fetch(
+    `http://localhost:8081/journals/${journalId}/entries/${entry.id}`,
+    {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  ).then(async (response) => {
     if (response.ok) return response;
     else {
       const errors = await readErrors(response);
@@ -72,11 +159,11 @@ export const deleteEntry = (
 export const getEntryImage = (
   accessToken: string,
   journalId: string,
-  entry: EntryModel,
+  entry: Entry,
   type: UploadType
 ): Promise<EntryImageResponse> => {
   return fetch(
-    `http://localhost:8081/entries/${journalId}/${entry.id}/image?type=${type}`,
+    `http://localhost:8081/journals/${journalId}/entries/${entry.id}/image?type=${type}`,
     {
       headers: {
         Authorization: `Bearer ${accessToken}`,

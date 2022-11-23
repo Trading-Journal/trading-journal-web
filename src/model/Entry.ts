@@ -2,7 +2,7 @@ import { Direction } from './Direction';
 import { EntryType } from './EntryType';
 import { GraphType } from './GraphType';
 
-export interface EntryModel {
+export interface Entry {
   id?: string;
 
   date: Date;

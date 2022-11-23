@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import { Direction } from '../../model/Direction';
-import { EntryModel } from '../../model/EntryModel';
+import { Entry } from '../../model/Entry';
 import { EntryType } from '../../model/EntryType';
 import { Journal } from '../../model/Journal';
 import {
@@ -27,7 +27,7 @@ import { DirectionSelect } from './DirectionSelect';
 import { EntryTypeSelect } from './EntryTypeSelect';
 import { GraphTypeSelect } from './GraphTypeSelect';
 
-const initialState: EntryModel = {
+const initialState: Entry = {
   date: new Date(),
   type: EntryType.TRADE,
   price: 0,
@@ -52,8 +52,8 @@ const initialState: EntryModel = {
 
 interface EntryProps {
   journal: Journal;
-  entry?: EntryModel;
-  onSave: (entry: EntryModel | undefined) => void;
+  entry?: Entry;
+  onSave: (entry: Entry | undefined) => void;
   onCancel: () => void;
 }
 
@@ -93,7 +93,7 @@ const Header = ({
 }: {
   journal: Journal;
   finished: boolean;
-  entry?: EntryModel;
+  entry?: Entry;
 }) => {
   if (entry && entry.id) {
     return (
@@ -117,9 +117,9 @@ const isEntryFinished = (entry: any) => {
   return entry && entry.netResult;
 };
 
-export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
+export const EntryForm: React.FC<EntryProps> = (props: EntryProps) => {
   const { journal, entry: selectedEntry, onCancel, onSave } = props;
-  const [entry, setEntry] = useState<EntryModel>(initialState);
+  const [entry, setEntry] = useState<Entry>(initialState);
   const [finished, setFinished] = useState<boolean>(false);
   const mutation = useEntrySave(journal.id);
   const [currency] = useState(getSymbol(journal.currentBalance.currency));
@@ -166,7 +166,8 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
               onChange={(value: EntryType) =>
                 setEntry({ ...entry, type: value })
               }
-              entry={entry}
+              value={entry.type}
+              {...{ disabled: entry?.id !== undefined }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -206,7 +207,8 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
                 onChange={(value: any) =>
                   setEntry({ ...entry, direction: value })
                 }
-                entry={entry}
+                value={entry.direction}
+                {...{ disabled: entry.id !== undefined }}
               />
             </Grid>
           </Grid>
@@ -326,7 +328,7 @@ export const Entry: React.FC<EntryProps> = (props: EntryProps) => {
                 onChange={(value: any) =>
                   setEntry({ ...entry, graphType: value })
                 }
-                entry={entry}
+                value={entry.graphType}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
