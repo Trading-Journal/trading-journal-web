@@ -7,8 +7,11 @@ interface Props {
   onChange: (value: number | undefined) => void;
   value: number | undefined;
   label: string;
-  name: string;
   scale: number;
+  name?: string;
+  required?: boolean;
+  autoFocus?: boolean;
+  disabled?: boolean;
   thousandSeparator?: boolean;
   decimalSeparator?: boolean;
   zeroIsNull?: boolean;
@@ -56,6 +59,9 @@ export const NumberInput: React.FC<Props> = (props: Props) => {
     thousandSeparator,
     decimalSeparator,
     zeroIsNull,
+    required,
+    autoFocus,
+    disabled,
     ...rest
   } = props;
 
@@ -79,13 +85,16 @@ export const NumberInput: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <FormControl>
+    <FormControl fullWidth>
       <TextField
         value={current ? current.toString() : ''}
         onChange={handleChange}
         name={name}
         label={label}
         id={name}
+        required={required}
+        autoFocus={autoFocus}
+        disabled={disabled}
         InputProps={{
           inputComponent: TextMaskCustom as any,
           inputProps: {

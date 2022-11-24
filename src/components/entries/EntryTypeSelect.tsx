@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { EntryType } from '../../model/EntryType';
-import { Dropdown } from '../dropdown/Dropdown';
+import { Dropdown } from '../input/dropdown/Dropdown';
 
 interface Props {
   onChange: (item: EntryType) => void;

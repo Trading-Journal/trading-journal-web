@@ -4,11 +4,13 @@ import { Deposit } from '../../model/Deposit';
 import { Entry } from '../../model/Entry';
 import { Journal } from '../../model/Journal';
 import { Taxes } from '../../model/Taxes';
+import { Trade } from '../../model/Trade';
 import { Withdrawal } from '../../model/Withdrawal';
 import {
   deleteEntry,
   getAllEntries,
   saveDeposit,
+  saveEntry,
   saveTaxes,
   saveTrade,
   saveWithdrawal,
@@ -26,7 +28,21 @@ export const useEntrySave = (journalId: string) => {
   const queryClient = useQueryClient();
   const accessToken = useAccessTokenState();
   return useMutation(
-    (entry: Entry) => saveTrade(accessToken, journalId, entry),
+    (entry: Entry) => saveEntry(accessToken, journalId, entry),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([`journal-balance-${journalId}`]);
+        queryClient.invalidateQueries([`entries-${journalId}`]);
+      },
+    }
+  );
+};
+
+export const useSaveTrade = (journalId: string, tradeId?: string) => {
+  const queryClient = useQueryClient();
+  const accessToken = useAccessTokenState();
+  return useMutation(
+    (trade: Trade) => saveTrade(accessToken, journalId, trade, tradeId),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([`journal-balance-${journalId}`]);

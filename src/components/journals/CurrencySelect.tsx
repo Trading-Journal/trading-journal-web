@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Currency } from '../../model/Currency';
-import { Dropdown } from '../dropdown/Dropdown';
+import { Dropdown } from '../input/dropdown/Dropdown';
 
 interface Props {
   value?: Currency;

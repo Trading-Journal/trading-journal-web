@@ -1,12 +1,10 @@
-import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ImageIcon from '@mui/icons-material/Image';
 import { Box } from '@mui/material';
-import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Entry } from '../../model/Entry';
 import { EntryType } from '../../model/EntryType';
 import { Journal } from '../../model/Journal';
@@ -20,45 +18,22 @@ import { displayFormat } from '../../util/DateFormat';
 import { getSymbol } from '../../util/NumberFormat';
 import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
 import { useEntryDelete } from '../queries/EntriesQueries';
-import { SidePanel } from '../side-panel/SidePanel';
-import { EntryForm } from './EntryForm';
-import { EntryImages } from './EntryImages';
 
-export const EntriesTable: React.FC<{
+export const EntriesTable = ({
+  entries,
+  journal,
+  onEdit,
+  onImage,
+}: {
   entries: Entry[];
   journal: Journal;
-}> = ({ entries, journal }) => {
-  const [entry, setEntry] = useState<Entry>();
-  const [entryOpen, setEntryOpen] = useState(false);
-  const [imagesOpen, setImagesOpen] = useState(false);
+  onEdit: (entry: Entry) => void;
+  onImage: (entry: Entry) => void;
+}) => {
   const [currency] = useState(getSymbol(journal.currentBalance.currency));
 
   const modalContext = useConfirmationModalContext();
   const deleteMutation = useEntryDelete(journal.id);
-
-  const onClose = () => {
-    setEntryOpen(false);
-    setImagesOpen(false);
-  };
-
-  const onSave = () => {
-    setEntryOpen(false);
-  };
-
-  const addClick = () => {
-    setEntry(undefined);
-    setEntryOpen(true);
-  };
-
-  const editClick = (entry: Entry) => {
-    setEntry(entry);
-    setEntryOpen(true);
-  };
-
-  const imagesClick = (entry: Entry) => {
-    setEntry(entry);
-    setImagesOpen(true);
-  };
 
   const deleteClick = async (entry: Entry) => {
     const result = await modalContext.showConfirmation(
@@ -72,21 +47,6 @@ export const EntriesTable: React.FC<{
     }
   };
 
-  function CustomFooter() {
-    return (
-      <Box sx={{ p: 1, display: 'flex' }}>
-        <Button
-          color="primary"
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={addClick}
-        >
-          Add Trade
-        </Button>
-      </Box>
-    );
-  }
-
   const columns: GridColDef[] = [
     {
       field: 'actions',
@@ -98,7 +58,7 @@ export const EntriesTable: React.FC<{
               <EditIcon color="primary" />
             </Tooltip>
           }
-          onClick={() => editClick(params.row)}
+          onClick={() => onEdit(params.row)}
           label="Edit"
           key={`edit-${params.row.id}`}
         />,
@@ -112,7 +72,7 @@ export const EntriesTable: React.FC<{
               <ImageIcon color="primary" />
             </Tooltip>
           }
-          onClick={() => imagesClick(params.row)}
+          onClick={() => onImage(params.row)}
           label="Images"
           key={`images-${params.row.id}`}
         />,
@@ -220,6 +180,7 @@ export const EntriesTable: React.FC<{
       width: 130,
       valueFormatter: (params) => formatCurrency(params, currency),
       headerClassName: 'super-app-calculated',
+      cellClassName: formatCellValue,
     },
     {
       field: 'netResult',
@@ -294,19 +255,6 @@ export const EntriesTable: React.FC<{
         },
       }}
     >
-      <SidePanel open={entryOpen} onClose={onClose}>
-        <EntryForm
-          journal={journal}
-          entry={entry}
-          onCancel={onClose}
-          onSave={onSave}
-        />
-      </SidePanel>
-
-      <SidePanel open={imagesOpen} onClose={onClose}>
-        <EntryImages journal={journal} entry={entry!} onCancel={onClose} />
-      </SidePanel>
-
       <DataGrid
         autoHeight={true}
         rows={entries}
@@ -314,9 +262,6 @@ export const EntriesTable: React.FC<{
         pageSize={100}
         rowsPerPageOptions={[100]}
         disableSelectionOnClick
-        components={{
-          Footer: CustomFooter,
-        }}
       />
     </Box>
   );

@@ -16,10 +16,12 @@ interface DropdownProps {
   items: Item[];
   onChange: (item: Item) => void;
   selected?: Item;
+  disabled?: boolean;
 }
 
 export const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
-  const { label, required, items, selected, onChange, id, ...rest } = props;
+  const { label, required, items, selected, disabled, onChange, id, ...rest } =
+    props;
   const [current, setCurrentValue] = React.useState<Item>(selected!);
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -44,6 +46,7 @@ export const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         label={label}
         onChange={handleChange}
         required={required}
+        disabled={disabled}
         {...rest}
       >
         {items.map((item: Item, index: number) => (

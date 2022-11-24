@@ -1,3 +1,4 @@
+import { FormControl } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -9,15 +10,17 @@ import React, { useEffect } from 'react';
 
 interface DateTimeProps {
   label: string;
-  required: boolean;
+  required?: boolean;
   value?: string | Date | null;
   startNow?: boolean;
   onlyDate?: boolean;
+  disabled?: boolean;
   onChange: (date: Date | null) => void;
 }
 
 export const Datetime: React.FC<DateTimeProps> = (props: DateTimeProps) => {
-  const { label, required, value, startNow, onlyDate, onChange } = props;
+  const { label, required, value, startNow, onlyDate, disabled, onChange } =
+    props;
 
   const now = startNow ? dayjs() : null;
   const [current, setCurrentValue] = React.useState<Dayjs | null>(now);
@@ -41,22 +44,32 @@ export const Datetime: React.FC<DateTimeProps> = (props: DateTimeProps) => {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
       {onlyDate && (
-        <DesktopDatePicker
-          renderInput={(props) => <TextField required={required} {...props} />}
-          label={label}
-          value={current}
-          onChange={onDateChange}
-        />
+        <FormControl fullWidth>
+          <DesktopDatePicker
+            renderInput={(props) => (
+              <TextField required={required} {...props} />
+            )}
+            label={label}
+            value={current}
+            disabled={disabled}
+            onChange={onDateChange}
+          />
+        </FormControl>
       )}
 
       {!onlyDate && (
-        <DateTimePicker
-          renderInput={(props) => <TextField required={required} {...props} />}
-          label={label}
-          value={current}
-          ampm={false}
-          onChange={onDateChange}
-        />
+        <FormControl fullWidth>
+          <DateTimePicker
+            renderInput={(props) => (
+              <TextField required={required} {...props} />
+            )}
+            label={label}
+            value={current}
+            ampm={false}
+            disabled={disabled}
+            onChange={onDateChange}
+          />
+        </FormControl>
       )}
     </LocalizationProvider>
   );

@@ -2,6 +2,7 @@ import { Deposit } from '../model/Deposit';
 import { Entry } from '../model/Entry';
 import { EntryImageResponse } from '../model/EntryImageResponse';
 import { Taxes } from '../model/Taxes';
+import { Trade } from '../model/Trade';
 import { UploadType } from '../model/UploadType';
 import { Withdrawal } from '../model/Withdrawal';
 import { apiFormat } from '../util/DateFormat';
@@ -25,7 +26,7 @@ export const getAllEntries = (
     .then((response: Entry[]) => response);
 };
 
-export const saveTrade = (
+export const saveEntry = (
   accessToken: string,
   journalId: string,
   entry: Entry
@@ -40,6 +41,41 @@ export const saveTrade = (
       ...entry,
       date: apiFormat(entry.date),
       exitDate: apiFormat(entry.exitDate),
+    }),
+  })
+    .then(async (response) => {
+      if (response.ok) return response.json();
+      else {
+        const errors = await readErrors(response);
+        throw new Error(errors);
+      }
+    })
+    .then((response: Entry) => response);
+};
+
+export const saveTrade = (
+  accessToken: string,
+  journalId: string,
+  trade: Trade,
+  tradeId?: string
+): Promise<Entry> => {
+  let url = `http://localhost:8081/journals/${journalId}/entries/trade`;
+  let method = 'POST';
+  if (tradeId) {
+    url += `/${tradeId}`;
+    method = 'PATCH';
+  }
+
+  return fetch(url, {
+    method,
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      ...trade,
+      date: apiFormat(trade.date),
+      exitDate: apiFormat(trade.exitDate),
     }),
   })
     .then(async (response) => {

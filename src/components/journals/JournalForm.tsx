@@ -9,8 +9,8 @@ import { Currency } from '../../model/Currency';
 import { Journal, JournalRequest } from '../../model/Journal';
 import { getSymbol } from '../../util/NumberFormat';
 import { AlertCard } from '../card/AlertCard';
-import { Datetime } from '../date-time/DateTime';
-import { NumberInput } from '../number-input/NumberInput';
+import { Datetime } from '../input/date-time/DateTime';
+import { NumberInput } from '../input/number-input/NumberInput';
 import { useJournalSave } from '../queries/JournalQueries';
 import { CurrencySelect } from './CurrencySelect';
 

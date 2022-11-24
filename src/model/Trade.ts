@@ -1,4 +1,5 @@
 import { Direction } from './Direction';
+import { Entry } from './Entry';
 import { GraphType } from './GraphType';
 
 export interface Trade {
@@ -12,19 +13,37 @@ export interface Trade {
 
   size: number;
 
-  graphType: GraphType;
+  graphType?: GraphType;
 
-  graphMeasure: string;
+  graphMeasure?: string;
 
-  profitPrice: number;
+  profitPrice?: number;
 
-  lossPrice: number;
+  lossPrice?: number;
 
-  costs: number;
+  costs?: number;
 
-  exitPrice: number;
+  exitPrice?: number;
 
-  exitDate: Date;
+  exitDate?: Date;
 
-  notes: string;
+  notes?: string;
 }
+
+export const fromEntry = (entry: Entry): Trade => {
+  return {
+    date: entry.date,
+    price: entry.price,
+    symbol: entry.symbol!,
+    direction: entry.direction!,
+    size: entry.size!,
+    graphType: entry.graphType,
+    graphMeasure: entry.graphMeasure,
+    profitPrice: entry.profitPrice,
+    lossPrice: entry.lossPrice,
+    costs: entry.costs,
+    exitPrice: entry.exitPrice,
+    exitDate: entry.exitDate,
+    notes: entry.notes,
+  };
+};

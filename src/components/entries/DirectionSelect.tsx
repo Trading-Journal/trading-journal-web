@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Direction } from '../../model/Direction';
-import { Dropdown } from '../dropdown/Dropdown';
+import { Dropdown } from '../input/dropdown/Dropdown';
 
 interface Props {
   onChange: (item: Direction) => void;
   value?: Direction;
+  disabled?: boolean;
 }
 
 export const DirectionSelect: React.FC<Props> = (props: Props) => {
-  const { onChange, value, ...rest } = props;
+  const { onChange, value, disabled, ...rest } = props;
 
   const [direction, setDirection] = useState({
     key: Direction.LONG,
@@ -41,6 +42,7 @@ export const DirectionSelect: React.FC<Props> = (props: Props) => {
       items={directions}
       onChange={handleChange}
       selected={direction}
+      disabled={disabled}
       {...rest}
     />
   );
