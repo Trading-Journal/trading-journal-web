@@ -10,38 +10,44 @@ import { AddEntryDial } from './AddEntryDial';
 import { DepositForm } from './DepositForm';
 import { EntriesTable } from './EntriesTable';
 import { EntryImages } from './EntryImages';
+import { TaxesForm } from './TaxesForm';
 import { TradeForm } from './TradeForm';
+import { WithdrawalForm } from './WithdrawalForm';
 
 const Form = ({
   type,
   journal,
   onClose,
-  update,
+  entry,
 }: {
   type: EntryType;
   journal: Journal;
   onClose: () => void;
-  update?: Entry;
+  entry?: Entry;
 }) => {
   if (type === EntryType.TRADE) {
-    let updateTrade: Trade | undefined = undefined;
-    if (update) {
-      updateTrade = fromEntry(update);
+    let trade: Trade | undefined = undefined;
+    if (entry) {
+      trade = fromEntry(entry);
     }
     return (
       <TradeForm
         journal={journal}
         onCancel={onClose}
         onSave={onClose}
-        {...(update && { update: updateTrade, entryId: update.id })}
+        {...(entry && { update: trade, entryId: entry.id })}
       />
     );
   } else if (type === EntryType.DEPOSIT) {
     return (
       <DepositForm journal={journal} onCancel={onClose} onSave={onClose} />
     );
+  } else if (type === EntryType.WITHDRAWAL) {
+    return (
+      <WithdrawalForm journal={journal} onCancel={onClose} onSave={onClose} />
+    );
   } else {
-    return <h3>Invalid</h3>;
+    return <TaxesForm journal={journal} onCancel={onClose} onSave={onClose} />;
   }
 };
 
@@ -52,15 +58,15 @@ export const Entries: React.FC<{ journal: Journal }> = ({ journal }) => {
   const [entryOpen, setEntryOpen] = useState(false);
   const [imagesOpen, setImagesOpen] = useState(false);
   const [entry, setEntry] = useState<Entry | undefined>(undefined);
-  const [action, setAction] = useState<EntryType | undefined>(undefined);
+  const [type, setType] = useState<EntryType | undefined>(undefined);
   const [anchor, setAnchor] = useState<'left' | 'top' | 'right' | 'bottom'>(
     'left'
   );
 
   const onEdit = (entry: Entry) => {
-    setAction(entry.type);
-    setAnchor('left');
     setEntry(entry);
+    setType(entry.type);
+    setAnchor('left');
     setEntryOpen(true);
   };
 
@@ -72,12 +78,14 @@ export const Entries: React.FC<{ journal: Journal }> = ({ journal }) => {
   const onClose = () => {
     setEntryOpen(false);
     setImagesOpen(false);
+    setEntry(undefined);
+    setType(undefined);
   };
 
   const onAction = (type: EntryType) => {
     setAnchor('right');
     setEntry(undefined);
-    setAction(type);
+    setType(type);
     setEntryOpen(true);
   };
 
@@ -94,12 +102,12 @@ export const Entries: React.FC<{ journal: Journal }> = ({ journal }) => {
       <AddEntryDial onSelect={onAction} />
 
       <SidePanel anchor={anchor} open={entryOpen} onClose={onClose}>
-        {action && (
+        {type && (
           <Form
-            type={action}
+            type={type}
             journal={journal}
             onClose={onClose}
-            {...(entry && { update: entry })}
+            {...(entry && { entry: entry })}
           />
         )}
       </SidePanel>

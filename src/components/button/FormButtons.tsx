@@ -16,7 +16,7 @@ export const FormButtons: React.FC<FormButtonsProps> = ({
   handleCancel,
   submitChildren = undefined,
   cancelChildren = undefined,
-  submitDisabled = true,
+  submitDisabled = false,
 }) => {
   return (
     <Grid container spacing={2}>

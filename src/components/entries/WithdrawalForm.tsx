@@ -1,17 +1,17 @@
 import { Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Deposit } from '../../model/Deposit';
 import { Entry } from '../../model/Entry';
 import { Journal } from '../../model/Journal';
+import { Withdrawal } from '../../model/Withdrawal';
 import { getSymbol } from '../../util/NumberFormat';
 import { FormButtons } from '../button/FormButtons';
 import { FormAlert } from '../card/FormAlert';
 import { Form } from '../form/Form';
 import { Datetime } from '../input/date-time/DateTime';
 import { NumberInput } from '../input/number-input/NumberInput';
-import { useSaveDeposit } from '../queries/EntriesQueries';
+import { useSaveWithdrawal } from '../queries/EntriesQueries';
 
-const initialState: Deposit = {
+const initialState: Withdrawal = {
   date: new Date(),
   price: 0,
 };
@@ -22,16 +22,16 @@ interface FormProps {
   onCancel: () => void;
 }
 
-export const DepositForm: React.FC<FormProps> = (props: FormProps) => {
+export const WithdrawalForm: React.FC<FormProps> = (props: FormProps) => {
   const { journal, onSave, onCancel } = props;
-  const [deposit, setDeposit] = useState<Deposit>(initialState);
+  const [withdrawal, setWithdrawal] = useState<Withdrawal>(initialState);
   const [currency] = useState(getSymbol(journal.currentBalance.currency));
 
-  const mutation = useSaveDeposit(journal.id);
+  const mutation = useSaveWithdrawal(journal.id);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    mutation.mutate(deposit);
+    mutation.mutate(withdrawal);
   };
 
   useEffect(() => {
@@ -45,23 +45,25 @@ export const DepositForm: React.FC<FormProps> = (props: FormProps) => {
   };
 
   return (
-    <Form title="Deposit" maxWidth={500} onSubmit={handleSubmit}>
+    <Form title="Withdrawal" maxWidth={500} onSubmit={handleSubmit}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <Datetime
-            label="Deposit date"
+            label="Withdrawal date"
             required
-            value={deposit.date}
-            onChange={(value) => setDeposit({ ...deposit, date: value! })}
+            value={withdrawal.date}
+            onChange={(value) => setWithdrawal({ ...withdrawal, date: value! })}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <NumberInput
-            label={`Deposit Value (${currency})`}
+            label={`Withdrawal Value (${currency})`}
             scale={2}
-            value={deposit.price}
+            value={withdrawal.price}
             required
-            onChange={(value) => setDeposit({ ...deposit, price: value! })}
+            onChange={(value) =>
+              setWithdrawal({ ...withdrawal, price: value! })
+            }
           />
         </Grid>
       </Grid>
