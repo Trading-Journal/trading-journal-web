@@ -53,8 +53,12 @@ export const EntriesTable = ({
       type: 'actions',
       renderCell: (params) => [
         <GridActionsCellItem
+          sx={{
+            visibility:
+              params.row.type === EntryType.TRADE ? 'visible' : 'collapse',
+          }}
           icon={
-            <Tooltip title="Edit Entry">
+            <Tooltip title={`Edit ${params.row.type}`}>
               <EditIcon color="primary" />
             </Tooltip>
           }
@@ -78,7 +82,7 @@ export const EntriesTable = ({
         />,
         <GridActionsCellItem
           icon={
-            <Tooltip title="Delete Entry">
+            <Tooltip title={`Delete ${params.row.type}`}>
               <DeleteIcon color="primary" />
             </Tooltip>
           }
