@@ -78,7 +78,6 @@ export const Entries: React.FC<{ journal: Journal }> = ({ journal }) => {
   const onClose = () => {
     setEntryOpen(false);
     setImagesOpen(false);
-    setEntry(undefined);
     setType(undefined);
   };
 
