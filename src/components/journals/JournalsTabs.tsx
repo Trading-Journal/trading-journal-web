@@ -5,7 +5,7 @@ import Tabs from '@mui/material/Tabs';
 import React, { useEffect, useState } from 'react';
 import { Journal } from '../../model/Journal';
 import { JournalEntries } from './JournalEntries';
-import { JournalTable } from './JournalTable';
+import { Journals } from './Journals';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -23,7 +23,7 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export const JournalTabs: React.FC<{ journals: Journal[] }> = ({
+export const JournalsTabs: React.FC<{ journals: Journal[] }> = ({
   journals,
 }) => {
   const [value, setValue] = useState(0);
@@ -58,7 +58,7 @@ export const JournalTabs: React.FC<{ journals: Journal[] }> = ({
         </Tabs>
       </Box>
       <TabPanel key={'journal-tab-panel-options'} value={value} index={0}>
-        <JournalTable />
+        <Journals />
       </TabPanel>
       {journals.map((journal: Journal, index: number) => (
         <TabPanel

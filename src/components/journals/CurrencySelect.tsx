@@ -3,12 +3,13 @@ import { Currency } from '../../model/Currency';
 import { Dropdown } from '../input/dropdown/Dropdown';
 
 interface Props {
-  value?: Currency;
   onChange: (item: Currency) => void;
+  value?: Currency;
+  required?: boolean;
 }
 
 export const CurrencySelect: React.FC<Props> = (props: Props) => {
-  const { onChange, value, ...rest } = props;
+  const { onChange, value, required, ...rest } = props;
 
   const [currency, setCurrency] = useState({
     key: Currency.DOLLAR,
@@ -37,7 +38,7 @@ export const CurrencySelect: React.FC<Props> = (props: Props) => {
     <Dropdown
       id="direction-"
       label="Currency"
-      required={true}
+      required={required}
       items={currencies}
       onChange={handleChange}
       selected={currency}

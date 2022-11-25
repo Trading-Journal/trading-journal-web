@@ -1,9 +1,5 @@
-import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Box } from '@mui/material';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import {
@@ -12,41 +8,21 @@ import {
   GridColDef,
   GridValueGetterParams,
 } from '@mui/x-data-grid';
-import { useState } from 'react';
 import { Journal } from '../../model/Journal';
 import { displayFormatDate } from '../../util/DateFormat';
 import { currencyFormatter, getSymbol } from '../../util/NumberFormat';
 import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
-import { useJournalDelete, useJournalsQuery } from '../queries/JournalQueries';
-import { SidePanel } from '../side-panel/SidePanel';
-import { JournalForm } from './JournalForm';
+import { useJournalDelete } from '../queries/JournalQueries';
 
-export const JournalTable = () => {
-  const { data } = useJournalsQuery();
-  const [journal, setJournal] = useState<Journal>();
-  const [open, setOpen] = useState(false);
+export const JournalsTable = ({
+  journals,
+  onEdit,
+}: {
+  journals: Journal[];
+  onEdit: (journal: Journal) => void;
+}) => {
   const modalContext = useConfirmationModalContext();
   const deleteMutation = useJournalDelete();
-
-  const editClick = (journal: Journal) => {
-    setJournal(journal);
-    setOpen(true);
-  };
-
-  const addClick = () => {
-    setJournal(undefined);
-    setOpen(true);
-  };
-
-  const onClose = () => {
-    setJournal(undefined);
-    setOpen(false);
-  };
-
-  const onSave = () => {
-    setJournal(undefined);
-    setOpen(false);
-  };
 
   const deleteClick = async (journal: Journal) => {
     const result = await modalContext.showConfirmation(
@@ -66,23 +42,6 @@ export const JournalTable = () => {
     }
   };
 
-  function CustomFooter() {
-    return (
-      <>
-        <Divider />
-        <Button
-          sx={{ m: 2 }}
-          color="primary"
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={addClick}
-        >
-          Add New Journal
-        </Button>
-      </>
-    );
-  }
-
   const columns: GridColDef[] = [
     {
       field: 'actions',
@@ -94,7 +53,7 @@ export const JournalTable = () => {
               <EditIcon color="primary" />
             </Tooltip>
           }
-          onClick={() => editClick(params.row)}
+          onClick={() => onEdit(params.row)}
           label="Edit"
           key={`edit-${params.row.id}`}
         />,
@@ -147,21 +106,13 @@ export const JournalTable = () => {
   ];
 
   return (
-    <Box sx={{ p: 2, flexGrow: 1, width: '100%' }}>
-      <SidePanel open={open} onClose={onClose}>
-        <JournalForm journal={journal} onCancel={onClose} onSave={onSave} />
-      </SidePanel>
-      <DataGrid
-        autoHeight={true}
-        rows={data!}
-        columns={columns}
-        pageSize={100}
-        rowsPerPageOptions={[100]}
-        disableSelectionOnClick
-        components={{
-          Footer: CustomFooter,
-        }}
-      />
-    </Box>
+    <DataGrid
+      autoHeight={true}
+      rows={journals}
+      columns={columns}
+      pageSize={100}
+      rowsPerPageOptions={[100]}
+      disableSelectionOnClick
+    />
   );
 };
