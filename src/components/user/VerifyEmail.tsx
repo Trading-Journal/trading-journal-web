@@ -8,7 +8,6 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
@@ -19,6 +18,7 @@ import {
 } from 'react-router-dom';
 import { sendVerification, verify } from '../../services/Authentication';
 import { AlertCard } from '../card/AlertCard';
+import { TextInput } from '../input/text-input/TextInput';
 import { PortalFeedback } from '../portal/PortalFeedback';
 
 export const VerifyEmail = () => {
@@ -106,17 +106,12 @@ export const VerifyEmail = () => {
           Failed to verify email
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
+          <TextInput
             required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
             autoFocus
+            label="Email Address"
+            onChange={(value) => setEmail(value)}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
           <LoadingButton
             type="submit"

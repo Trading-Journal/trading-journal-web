@@ -5,7 +5,6 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
@@ -17,6 +16,7 @@ import {
 import { ChangePasswordRequest } from '../../model/ChangePasswordRequest';
 import { changePassword } from '../../services/Authentication';
 import { AlertCard } from '../card/AlertCard';
+import { TextInput } from '../input/text-input/TextInput';
 import { PortalFeedback } from '../portal/PortalFeedback';
 
 export const ChangePassword = () => {
@@ -70,44 +70,36 @@ export const ChangePassword = () => {
         Change Password
       </Typography>
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label="Email Address"
-          name="email"
-          autoComplete="email"
-          autoFocus
-          value={request.email}
-          onChange={(e) => setRequest({ ...request, email: e.target.value })}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label="Password"
-          type="password"
-          id="password"
-          value={request.password}
-          autoComplete="current-password"
-          onChange={(e) => setRequest({ ...request, password: e.target.value })}
-        />
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          name="confirm-password"
-          label="Confirm Password"
-          type="password"
-          id="confirm-password"
-          value={request.confirmPassword}
-          autoComplete="current-password"
-          onChange={(e) =>
-            setRequest({ ...request, confirmPassword: e.target.value })
-          }
-        />
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12}>
+            <TextInput
+              required
+              label="Email Address"
+              onChange={(value) => setRequest({ ...request, email: value })}
+              value={request.email}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextInput
+              required
+              label="Password"
+              type="password"
+              onChange={(value) => setRequest({ ...request, password: value })}
+              value={request.password}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <TextInput
+              required
+              label="Confirm password"
+              type="password"
+              onChange={(value) =>
+                setRequest({ ...request, confirmPassword: value })
+              }
+              value={request.confirmPassword}
+            />
+          </Grid>
+        </Grid>
         <LoadingButton
           type="submit"
           fullWidth

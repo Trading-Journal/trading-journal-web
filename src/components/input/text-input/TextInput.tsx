@@ -5,6 +5,7 @@ import React from 'react';
 interface TextInputProps {
   label: string;
   onChange: (value: string) => void;
+  type?: string;
   required?: boolean;
   value?: string | null | undefined;
   autoFocus?: boolean;
@@ -18,6 +19,7 @@ export const TextInput: React.FC<TextInputProps> = (props: TextInputProps) => {
     label,
     required,
     onChange,
+    type,
     value,
     autoFocus,
     disabled,
@@ -39,6 +41,7 @@ export const TextInput: React.FC<TextInputProps> = (props: TextInputProps) => {
         onChange={(e) => onChange(e.target.value)}
         multiline={multiline}
         {...(maxRows && { rows: maxRows })}
+        {...(type && { type: type })}
         {...rest}
       />
     </FormControl>

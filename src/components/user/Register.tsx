@@ -7,7 +7,6 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
@@ -15,6 +14,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { RegisterRequest } from '../../model/RegisterRequest';
 import { signUp } from '../../services/Authentication';
 import { AlertCard } from '../card/AlertCard';
+import { TextInput } from '../input/text-input/TextInput';
 import { PortalFeedback } from '../portal/PortalFeedback';
 
 const initialState: RegisterRequest = {
@@ -79,104 +79,65 @@ export const Register = () => {
       <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
-            <TextField
-              autoComplete="given-name"
-              name="firstName"
+            <TextInput
               required
-              fullWidth
-              id="firstName"
+              autoFocus
               label="First Name"
-              autoFocus
-              value={request?.firstName}
-              onChange={(e) =>
-                setRequest({ ...request, firstName: e.target.value })
-              }
+              onChange={(value) => setRequest({ ...request, firstName: value })}
+              value={request.firstName}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
+            <TextInput
               required
-              fullWidth
-              id="lastName"
               label="Last Name"
-              name="lastName"
-              autoComplete="family-name"
-              value={request?.lastName}
-              onChange={(e) =>
-                setRequest({ ...request, lastName: e.target.value })
-              }
+              onChange={(value) => setRequest({ ...request, lastName: value })}
+              value={request.lastName}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              autoComplete="user-name"
-              name="userName"
+            <TextInput
               required
-              fullWidth
-              id="userName"
               label="User Name"
-              autoFocus
-              value={request?.userName}
-              onChange={(e) =>
-                setRequest({ ...request, userName: e.target.value })
-              }
+              onChange={(value) => setRequest({ ...request, userName: value })}
+              value={request.userName}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              id="companyName"
+            <TextInput
               label="Company Name"
-              name="companyName"
-              autoComplete="family-name"
-              value={request?.companyName}
-              onChange={(e) =>
-                setRequest({ ...request, companyName: e.target.value })
+              onChange={(value) =>
+                setRequest({ ...request, companyName: value })
               }
+              value={request.companyName}
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
+            <TextInput
               required
-              fullWidth
-              id="email"
               label="Email Address"
-              name="email"
-              autoComplete="email"
+              onChange={(value) => setRequest({ ...request, email: value })}
               value={request.email}
-              onChange={(e) =>
-                setRequest({ ...request, email: e.target.value })
-              }
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
+            <TextInput
               required
-              fullWidth
-              name="password"
               label="Password"
               type="password"
-              id="password"
-              autoComplete="new-password"
-              value={request?.password}
-              onChange={(e) =>
-                setRequest({ ...request, password: e.target.value })
-              }
+              onChange={(value) => setRequest({ ...request, password: value })}
+              value={request.password}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <TextField
+            <TextInput
               required
-              fullWidth
-              name="confirm-password"
               label="Confirm Password"
               type="password"
-              id="confirm-password"
-              autoComplete="confirm-password"
-              value={request?.confirmPassword}
-              onChange={(e) =>
-                setRequest({ ...request, confirmPassword: e.target.value })
+              onChange={(value) =>
+                setRequest({ ...request, confirmPassword: value })
               }
+              value={request.confirmPassword}
             />
           </Grid>
           <Grid item xs={12}>

@@ -4,13 +4,13 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
-import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { requestChangePassword } from '../../services/Authentication';
 import { AlertCard } from '../card/AlertCard';
+import { TextInput } from '../input/text-input/TextInput';
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -64,17 +64,11 @@ export const ForgotPassword = () => {
           Change Password
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
+          <TextInput
             required
-            fullWidth
-            id="email"
             label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
+            onChange={(value) => setEmail(value)}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
           />
           <LoadingButton
             type="submit"
