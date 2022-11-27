@@ -1,4 +1,4 @@
-import { Currency } from '../model';
+import { Currency } from 'model';
 
 interface Format {
   digits?: number;

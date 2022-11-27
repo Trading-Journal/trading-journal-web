@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid';
-import { AlertCard } from '../card/AlertCard';
+import { AlertCard } from './AlertCard';
 
 export const FormAlert = ({ mutation }: { mutation: any }) => {
   return (

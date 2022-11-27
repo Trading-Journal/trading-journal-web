@@ -1,4 +1,4 @@
-import { UnauthorizedError } from '../model';
+import { UnauthorizedError } from 'model';
 
 export async function readErrors(rawResponse: Response): Promise<any> {
   if (rawResponse.status === 401) {

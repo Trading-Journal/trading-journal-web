@@ -6,12 +6,12 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import ConfirmationModalContextProvider from 'components/dialog/ConfirmationDialog';
+import { Routes } from 'components/routes/Routes';
+import { Footer } from 'containers/footer/Footer';
+import { TopBar } from 'containers/top-bar/TopBar';
 import { BrowserRouter } from 'react-router-dom';
 import './App.scss';
-import ConfirmationModalContextProvider from './components/dialog/ConfirmationDialog';
-import { Routes } from './components/routes/Routes';
-import { TopBar } from './components/top-bar/TopBar';
-import { Footer } from './containers/footer/Footer';
 import { AuthProvider } from './context/UserContext';
 import { UnauthorizedError } from './model';
 

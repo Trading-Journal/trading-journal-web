@@ -4,10 +4,10 @@ import ImageIcon from '@mui/icons-material/Image';
 import { Box } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
+import { useConfirmationModalContext } from 'components/dialog/ConfirmationDialog';
+import { Entry, EntryType, Journal } from 'model';
+import { useEntryDelete } from 'queries';
 import { useState } from 'react';
-import { useConfirmationModalContext } from '../../components/dialog/ConfirmationDialog';
-import { Entry, EntryType, Journal } from '../../model';
-import { useEntryDelete } from '../../queries';
 import {
   displayFormat,
   formatCellValue,
@@ -15,7 +15,7 @@ import {
   formatDate,
   formatPercentage,
   getSymbol,
-} from '../../util';
+} from 'utilities';
 
 export const EntriesTable = ({
   entries,

@@ -1,13 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useAccessTokenState } from '../context/UserContext';
-import { Balance, Journal, JournalRequest } from '../model';
+import { useAccessTokenState } from 'context/UserContext';
 import {
   deleteJournal,
   getAllJournals,
   getJournal,
   getJournalBalance,
   saveJournal,
-} from '../services';
+} from 'services';
+import { Balance, Journal, JournalRequest } from '../model';
 
 export const useJournalsQuery = () => {
   const accessToken = useAccessTokenState();

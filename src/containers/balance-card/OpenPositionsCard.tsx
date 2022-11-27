@@ -1,6 +1,6 @@
+import { Balance } from 'model';
 import { useEffect, useState } from 'react';
-import { Balance } from '../../model';
-import { getSymbol } from '../../util';
+import { getSymbol } from 'utilities';
 import { BalanceCard } from './BalanceCard';
 
 export const OpenPositionsCard: React.FC<{ balance: Balance }> = ({

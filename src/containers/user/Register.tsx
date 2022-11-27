@@ -9,13 +9,13 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
+import { AlertCard } from 'components/card';
+import { TextInput } from 'components/input';
+import { PortalFeedback } from 'components/portal/PortalFeedback';
+import { RegisterRequest } from 'model';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { AlertCard } from '../../components/card';
-import { TextInput } from '../../components/input';
-import { PortalFeedback } from '../../components/portal/PortalFeedback';
-import { RegisterRequest } from '../../model';
-import { signUp } from '../../services';
+import { signUp } from 'services';
 
 const initialState: RegisterRequest = {
   companyName: '',

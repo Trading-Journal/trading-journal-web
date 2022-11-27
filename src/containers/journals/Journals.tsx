@@ -1,11 +1,11 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Box } from '@mui/material';
 import Fab from '@mui/material/Fab';
+import { Loading } from 'components/loading/Loading';
+import { SidePanel } from 'components/side-panel/SidePanel';
+import { Journal } from 'model';
+import { useJournalsQuery } from 'queries';
 import { useState } from 'react';
-import { Loading } from '../../components/loading/Loading';
-import { SidePanel } from '../../components/side-panel/SidePanel';
-import { Journal } from '../../model';
-import { useJournalsQuery } from '../../queries';
 import { JournalForm } from './JournalForm';
 import { JournalsTable } from './JournalsTable';
 

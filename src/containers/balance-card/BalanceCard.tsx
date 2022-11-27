@@ -1,6 +1,6 @@
+import { SimpleCard } from 'components/card';
 import React, { useEffect, useState } from 'react';
-import { SimpleCard } from '../../components/card';
-import { currencyFormatter } from '../../util';
+import { currencyFormatter } from 'utilities';
 
 interface CardProps {
   value: number;

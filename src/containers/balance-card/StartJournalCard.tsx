@@ -1,7 +1,7 @@
+import { SimpleCard } from 'components/card';
+import { Balance } from 'model';
 import { useEffect, useState } from 'react';
-import { SimpleCard } from '../../components/card';
-import { Balance } from '../../model';
-import { displayFormatDate } from '../../util';
+import { displayFormatDate } from 'utilities';
 
 export const StartJournalCard: React.FC<{ balance: Balance }> = ({
   balance,

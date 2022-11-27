@@ -1,6 +1,6 @@
+import { Direction } from 'model';
 import React, { useEffect, useState } from 'react';
-import { Dropdown } from '..';
-import { Direction } from '../../../model';
+import { Dropdown } from '../dropdown/Dropdown';
 
 interface Props {
   onChange: (item: Direction) => void;

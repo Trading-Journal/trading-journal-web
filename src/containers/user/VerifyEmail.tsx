@@ -10,16 +10,16 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
+import { AlertCard } from 'components/card';
+import { TextInput } from 'components/input';
+import { PortalFeedback } from 'components/portal/PortalFeedback';
 import { useEffect, useState } from 'react';
 import {
   Link as RouterLink,
   Navigate,
   useSearchParams,
 } from 'react-router-dom';
-import { AlertCard } from '../../components/card';
-import { TextInput } from '../../components/input';
-import { PortalFeedback } from '../../components/portal/PortalFeedback';
-import { sendVerification, verify } from '../../services';
+import { sendVerification, verify } from 'services';
 
 export const VerifyEmail = () => {
   const mutationVerify = useMutation((hash: string) => verify(hash));

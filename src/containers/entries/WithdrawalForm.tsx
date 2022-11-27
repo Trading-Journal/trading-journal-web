@@ -1,12 +1,12 @@
 import { Grid } from '@mui/material';
+import { FormButtons } from 'components/button';
+import { FormAlert } from 'components/card';
+import { Form } from 'components/form/Form';
+import { Datetime, NumberInput } from 'components/input';
+import { Entry, Journal, Withdrawal } from 'model';
+import { useSaveWithdrawal } from 'queries';
 import React, { useEffect, useState } from 'react';
-import { FormButtons } from '../../components/button';
-import { FormAlert } from '../../components/card';
-import { Form } from '../../components/form/Form';
-import { Datetime, NumberInput } from '../../components/input';
-import { Entry, Journal, Withdrawal } from '../../model';
-import { useSaveWithdrawal } from '../../queries';
-import { getSymbol } from '../../util';
+import { getSymbol } from 'utilities';
 
 const initialState: Withdrawal = {
   date: new Date(),

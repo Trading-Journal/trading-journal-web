@@ -6,7 +6,7 @@ import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import SavingsIcon from '@mui/icons-material/Savings';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import { EntryType } from '../../model';
+import { EntryType } from 'model';
 
 export const AddEntryDial = ({
   onSelect,

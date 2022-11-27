@@ -1,5 +1,5 @@
-import { Balance, Journal, JournalRequest } from '../model';
-import { apiFormat } from '../util';
+import { Balance, Journal, JournalRequest } from 'model';
+import { apiFormat } from 'utilities';
 import { readErrors } from './ErrorsReader';
 
 export const getAllJournals = (accessToken: string): Promise<Journal[]> => {

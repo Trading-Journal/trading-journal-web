@@ -6,8 +6,8 @@ import {
   Trade,
   UploadType,
   Withdrawal,
-} from '../model';
-import { apiFormat } from '../util';
+} from 'model';
+import { apiFormat } from 'utilities';
 import { readErrors } from './ErrorsReader';
 
 export const getAllEntries = (

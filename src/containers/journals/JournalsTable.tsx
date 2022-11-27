@@ -8,10 +8,10 @@ import {
   GridColDef,
   GridValueGetterParams,
 } from '@mui/x-data-grid';
-import { useConfirmationModalContext } from '../../components/dialog/ConfirmationDialog';
-import { Journal } from '../../model';
-import { useJournalDelete } from '../../queries';
-import { currencyFormatter, displayFormatDate, getSymbol } from '../../util';
+import { useConfirmationModalContext } from 'components/dialog/ConfirmationDialog';
+import { Journal } from 'model';
+import { useJournalDelete } from 'queries';
+import { currencyFormatter, displayFormatDate, getSymbol } from 'utilities';
 
 export const JournalsTable = ({
   journals,

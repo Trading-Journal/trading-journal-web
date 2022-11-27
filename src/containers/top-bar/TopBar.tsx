@@ -11,13 +11,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import { doLogout, useAuthDispatch, useAuthState } from 'context/UserContext';
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import {
-  doLogout,
-  useAuthDispatch,
-  useAuthState,
-} from '../../context/UserContext';
 
 interface Navigation {
   label: string;

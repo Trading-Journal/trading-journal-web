@@ -1,18 +1,18 @@
 import { Grid } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { FormButtons } from '../../components/button';
-import { FormAlert } from '../../components/card';
-import { Form } from '../../components/form/Form';
+import { FormButtons } from 'components/button';
+import { FormAlert } from 'components/card';
+import { Form } from 'components/form/Form';
 import {
   Datetime,
   DirectionSelect,
   GraphTypeSelect,
   NumberInput,
   TextInput,
-} from '../../components/input';
-import { Direction, Entry, Journal, Trade } from '../../model';
-import { useSaveTrade } from '../../queries';
-import { currencyFormatter, getSymbol } from '../../util';
+} from 'components/input';
+import { Direction, Entry, Journal, Trade } from 'model';
+import { useSaveTrade } from 'queries';
+import React, { useEffect, useState } from 'react';
+import { currencyFormatter, getSymbol } from 'utilities';
 
 const initialState: Trade = {
   date: new Date(),

@@ -1,11 +1,11 @@
+import { ChangePassword } from 'pages/change-password/change-password';
+import { EmailVerified } from 'pages/email-verified/EmailVerified';
+import { ForgotPassword } from 'pages/forgot-password/forgot-password';
+import { HomePage } from 'pages/home/HomePage';
+import { JournalsPage } from 'pages/journals/JournalsPage';
+import { SignIn } from 'pages/signIn/SignIn';
+import { SignUp } from 'pages/signup/SignUp';
 import { Navigate, Route, Routes as ReactRoutes } from 'react-router-dom';
-import { ChangePassword } from '../../pages/change-password/change-password';
-import { EmailVerified } from '../../pages/email-verified/EmailVerified';
-import { ForgotPassword } from '../../pages/forgot-password/forgot-password';
-import { HomePage } from '../../pages/home/HomePage';
-import { JournalsPage } from '../../pages/journals/JournalsPage';
-import { SignIn } from '../../pages/signIn/SignIn';
-import { SignUp } from '../../pages/signup/SignUp';
 import { PrivateRoute } from './PrivateRoute';
 
 export const Routes = () => {

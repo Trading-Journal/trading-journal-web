@@ -1,5 +1,5 @@
-import { Portal } from '../../components/portal/Portal';
-import { ChangePassword as ChangePasswordComp } from '../../containers/user/ChangePassword';
+import { Portal } from 'components/portal/Portal';
+import { ChangePassword as ChangePasswordComp } from 'containers/user/ChangePassword';
 
 export const ChangePassword = () => {
   return (

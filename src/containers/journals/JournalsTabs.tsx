@@ -2,8 +2,8 @@ import TuneIcon from '@mui/icons-material/Tune';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
+import { Journal } from 'model';
 import React, { useEffect, useState } from 'react';
-import { Journal } from '../../model';
 import { JournalEntries } from './JournalEntries';
 import { Journals } from './Journals';
 

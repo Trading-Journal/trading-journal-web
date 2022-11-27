@@ -7,17 +7,17 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
+import { AlertCard } from 'components/card';
+import { TextInput } from 'components/input';
+import { PortalFeedback } from 'components/portal/PortalFeedback';
+import { ChangePasswordRequest } from 'model';
 import React, { useState } from 'react';
 import {
   Link as RouterLink,
   Navigate,
   useSearchParams,
 } from 'react-router-dom';
-import { AlertCard } from '../../components/card';
-import { TextInput } from '../../components/input';
-import { PortalFeedback } from '../../components/portal/PortalFeedback';
-import { ChangePasswordRequest } from '../../model';
-import { changePassword } from '../../services';
+import { changePassword } from 'services';
 
 export const ChangePassword = () => {
   const mutation = useMutation((request: ChangePasswordRequest) =>

@@ -13,8 +13,8 @@ import Uploady, {
   useItemProgressListener,
   useItemStartListener,
 } from '@rpldy/uploady';
+import { useAccessTokenState } from 'context/UserContext';
 import React, { forwardRef, useEffect, useState } from 'react';
-import { useAccessTokenState } from '../../context/UserContext';
 import { AlertCard, SimpleCard } from '../card';
 
 enum Status {

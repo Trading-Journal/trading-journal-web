@@ -1,18 +1,18 @@
 import Grid from '@mui/material/Grid';
-import React, { useEffect, useState } from 'react';
 import {
   CurrencySelect,
   Datetime,
   NumberInput,
   TextInput,
-} from '../../components/input';
-import { Currency, Journal, JournalRequest } from '../../model';
-import { useJournalSave } from '../../queries';
-import { getSymbol } from '../../util';
+} from 'components/input';
+import { Currency, Journal, JournalRequest } from 'model';
+import { useJournalSave } from 'queries';
+import React, { useEffect, useState } from 'react';
+import { getSymbol } from 'utilities';
 
-import { FormButtons } from '../../components/button';
-import { FormAlert } from '../../components/card';
-import { Form } from '../../components/form/Form';
+import { FormButtons } from 'components/button';
+import { FormAlert } from 'components/card';
+import { Form } from 'components/form/Form';
 
 const initialState: JournalRequest = {
   name: '',

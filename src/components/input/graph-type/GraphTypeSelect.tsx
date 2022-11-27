@@ -1,6 +1,6 @@
+import { GraphType } from 'model';
 import React, { useEffect, useState } from 'react';
-import { Dropdown } from '..';
-import { GraphType } from '../../../model';
+import { Dropdown } from '../dropdown/Dropdown';
 
 interface Props {
   onChange: (item: GraphType | undefined) => void;
