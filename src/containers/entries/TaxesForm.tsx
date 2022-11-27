@@ -1,14 +1,14 @@
 import { Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Deposit, Entry, Journal } from '../../model';
+import { FormButtons } from '../../components/button';
+import { FormAlert } from '../../components/card';
+import { Form } from '../../components/form/Form';
+import { Datetime, NumberInput } from '../../components/input';
+import { Entry, Journal, Taxes } from '../../model';
+import { useSaveTaxes } from '../../queries';
 import { getSymbol } from '../../util';
-import { FormButtons } from '../button';
-import { FormAlert } from '../card';
-import { Form } from '../form/Form';
-import { Datetime, NumberInput } from '../input';
-import { useSaveDeposit } from '../queries';
 
-const initialState: Deposit = {
+const initialState: Taxes = {
   date: new Date(),
   price: 0,
 };
@@ -19,16 +19,16 @@ interface FormProps {
   onCancel: () => void;
 }
 
-export const DepositForm: React.FC<FormProps> = (props: FormProps) => {
+export const TaxesForm: React.FC<FormProps> = (props: FormProps) => {
   const { journal, onSave, onCancel } = props;
-  const [deposit, setDeposit] = useState<Deposit>(initialState);
+  const [taxes, setTaxes] = useState<Taxes>(initialState);
   const [currency] = useState(getSymbol(journal.currentBalance.currency));
 
-  const mutation = useSaveDeposit(journal.id);
+  const mutation = useSaveTaxes(journal.id);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    mutation.mutate(deposit);
+    mutation.mutate(taxes);
   };
 
   useEffect(() => {
@@ -42,23 +42,23 @@ export const DepositForm: React.FC<FormProps> = (props: FormProps) => {
   };
 
   return (
-    <Form title="Deposit" maxWidth={500} onSubmit={handleSubmit}>
+    <Form title="Taxes" maxWidth={500} onSubmit={handleSubmit}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <Datetime
-            label="Deposit date"
+            label="Taxes date"
             required
-            value={deposit.date}
-            onChange={(value) => setDeposit({ ...deposit, date: value! })}
+            value={taxes.date}
+            onChange={(value) => setTaxes({ ...taxes, date: value! })}
           />
         </Grid>
         <Grid item xs={12} sm={12}>
           <NumberInput
-            label={`Deposit Value (${currency})`}
+            label={`Taxes Value (${currency})`}
             scale={2}
-            value={deposit.price}
+            value={taxes.price}
             required
-            onChange={(value) => setDeposit({ ...deposit, price: value! })}
+            onChange={(value) => setTaxes({ ...taxes, price: value! })}
           />
         </Grid>
       </Grid>

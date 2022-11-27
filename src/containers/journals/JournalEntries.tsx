@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import React from 'react';
-import { AlertCard } from '../card';
+import { AlertCard } from '../../components/card';
+import { useJournalQuery } from '../../queries';
 import { Entries } from '../entries/Entries';
-import { useJournalQuery } from '../queries';
 import { JournalBalance } from './JournalBalance';
 
 export const JournalEntries: React.FC<{ journalId: string }> = ({

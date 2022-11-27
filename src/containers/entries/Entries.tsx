@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { Loading } from '../../components/loading/Loading';
+import { SidePanel } from '../../components/side-panel/SidePanel';
 import { Entry, EntryType, fromEntry, Journal, Trade } from '../../model';
-import { Loading } from '../loading/Loading';
-import { useEntriesQuery } from '../queries';
-import { SidePanel } from '../side-panel/SidePanel';
+import { useEntriesQuery } from '../../queries';
 import { AddEntryDial } from './AddEntryDial';
 import { DepositForm } from './DepositForm';
 import { EntriesTable } from './EntriesTable';

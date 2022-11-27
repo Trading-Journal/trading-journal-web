@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import React from 'react';
-import { Header } from '../entries/Header';
+import { Header } from '../../containers/entries/Header';
 
 interface FormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

@@ -1,6 +1,6 @@
-import { JournalsTabs } from '../../components/journals/JournalsTabs';
 import { Loading } from '../../components/loading/Loading';
-import { useJournalsQuery } from '../../components/queries';
+import { JournalsTabs } from '../../containers/journals/JournalsTabs';
+import { useJournalsQuery } from '../../queries';
 
 export const JournalsPage = () => {
   const JournalsLoading = Loading(JournalsTabs);

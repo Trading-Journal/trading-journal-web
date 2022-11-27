@@ -13,11 +13,11 @@ import {
   Navigate,
   useSearchParams,
 } from 'react-router-dom';
+import { AlertCard } from '../../components/card';
+import { TextInput } from '../../components/input';
+import { PortalFeedback } from '../../components/portal/PortalFeedback';
 import { ChangePasswordRequest } from '../../model';
 import { changePassword } from '../../services';
-import { AlertCard } from '../card';
-import { TextInput } from '../input';
-import { PortalFeedback } from '../portal/PortalFeedback';
 
 export const ChangePassword = () => {
   const mutation = useMutation((request: ChangePasswordRequest) =>

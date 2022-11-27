@@ -7,13 +7,13 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import { Link as RouterLink, Navigate } from 'react-router-dom';
+import { AlertCard } from '../../components/card';
+import { TextInput } from '../../components/input';
 import {
   doLogin,
   useAuthDispatch,
   useAuthState,
 } from '../../context/UserContext';
-import { AlertCard } from '../card';
-import { TextInput } from '../input';
 
 export const Login = () => {
   const { user: loggedUser, status, error } = useAuthState();

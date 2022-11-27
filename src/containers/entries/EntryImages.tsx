@@ -4,14 +4,14 @@ import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
+import { Uploader } from '../../components/uploader/Uploader';
 import { useAccessTokenState } from '../../context/UserContext';
 import { Entry, EntryImageResponse, Journal, UploadType } from '../../model';
 import { getEntryImage } from '../../services';
-import { Uploader } from '../uploader/Uploader';
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { ZoomImage } from '../zoom-image/ZoomImage';
+import { ZoomImage } from '../../components/zoom-image/ZoomImage';
 
 interface ImageProps {
   journal: Journal;

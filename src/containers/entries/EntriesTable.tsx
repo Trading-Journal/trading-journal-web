@@ -5,7 +5,9 @@ import { Box } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { useState } from 'react';
+import { useConfirmationModalContext } from '../../components/dialog/ConfirmationDialog';
 import { Entry, EntryType, Journal } from '../../model';
+import { useEntryDelete } from '../../queries';
 import {
   displayFormat,
   formatCellValue,
@@ -14,8 +16,6 @@ import {
   formatPercentage,
   getSymbol,
 } from '../../util';
-import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
-import { useEntryDelete } from '../queries';
 
 export const EntriesTable = ({
   entries,
