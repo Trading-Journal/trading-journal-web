@@ -4,12 +4,11 @@ import { Deposit } from '../../model/Deposit';
 import { Entry } from '../../model/Entry';
 import { Journal } from '../../model/Journal';
 import { getSymbol } from '../../util/NumberFormat';
-import { FormButtons } from '../button/FormButtons';
-import { FormAlert } from '../card/FormAlert';
+import { FormButtons } from '../button';
+import { FormAlert } from '../card';
 import { Form } from '../form/Form';
-import { Datetime } from '../input/date-time/DateTime';
-import { NumberInput } from '../input/number-input/NumberInput';
-import { useSaveDeposit } from '../queries/EntriesQueries';
+import { Datetime, NumberInput } from '../input';
+import { useSaveDeposit } from '../queries';
 
 const initialState: Deposit = {
   date: new Date(),

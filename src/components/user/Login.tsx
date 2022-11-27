@@ -12,8 +12,8 @@ import {
   useAuthDispatch,
   useAuthState,
 } from '../../context/UserContext';
-import { AlertCard } from '../card/AlertCard';
-import { TextInput } from '../input/text-input/TextInput';
+import { AlertCard } from '../card';
+import { TextInput } from '../input';
 
 export const Login = () => {
   const { user: loggedUser, status, error } = useAuthState();

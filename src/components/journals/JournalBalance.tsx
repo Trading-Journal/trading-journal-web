@@ -4,7 +4,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { useJournalBalanceQuery } from '../queries/JournalQueries';
+import { useJournalBalanceQuery } from '../queries';
 import { JournalBalanceCards } from './JournalBalanceCards';
 
 export const JournalBalance: React.FC<{ journalId: string }> = ({

@@ -12,7 +12,7 @@ import { Journal } from '../../model/Journal';
 import { displayFormatDate } from '../../util/DateFormat';
 import { currencyFormatter, getSymbol } from '../../util/NumberFormat';
 import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
-import { useJournalDelete } from '../queries/JournalQueries';
+import { useJournalDelete } from '../queries';
 
 export const JournalsTable = ({
   journals,

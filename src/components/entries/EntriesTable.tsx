@@ -17,7 +17,7 @@ import {
 import { displayFormat } from '../../util/DateFormat';
 import { getSymbol } from '../../util/NumberFormat';
 import { useConfirmationModalContext } from '../dialog/ConfirmationDialog';
-import { useEntryDelete } from '../queries/EntriesQueries';
+import { useEntryDelete } from '../queries';
 
 export const EntriesTable = ({
   entries,

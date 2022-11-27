@@ -13,8 +13,8 @@ import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { RegisterRequest } from '../../model/RegisterRequest';
 import { signUp } from '../../services/Authentication';
-import { AlertCard } from '../card/AlertCard';
-import { TextInput } from '../input/text-input/TextInput';
+import { AlertCard } from '../card';
+import { TextInput } from '../input';
 import { PortalFeedback } from '../portal/PortalFeedback';
 
 const initialState: RegisterRequest = {

@@ -3,15 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { Currency } from '../../model/Currency';
 import { Journal, JournalRequest } from '../../model/Journal';
 import { getSymbol } from '../../util/NumberFormat';
-import { Datetime } from '../input/date-time/DateTime';
-import { NumberInput } from '../input/number-input/NumberInput';
-import { useJournalSave } from '../queries/JournalQueries';
+import { Datetime, NumberInput, TextInput } from '../input';
+import { useJournalSave } from '../queries';
 import { CurrencySelect } from './CurrencySelect';
 
-import { FormButtons } from '../button/FormButtons';
-import { FormAlert } from '../card/FormAlert';
+import { FormButtons } from '../button';
+import { FormAlert } from '../card';
 import { Form } from '../form/Form';
-import { TextInput } from '../input/text-input/TextInput';
 
 const initialState: JournalRequest = {
   name: '',

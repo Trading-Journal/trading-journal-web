@@ -4,7 +4,7 @@ import Fab from '@mui/material/Fab';
 import { useState } from 'react';
 import { Journal } from '../../model/Journal';
 import { Loading } from '../loading/Loading';
-import { useJournalsQuery } from '../queries/JournalQueries';
+import { useJournalsQuery } from '../queries';
 import { SidePanel } from '../side-panel/SidePanel';
 import { JournalForm } from './JournalForm';
 import { JournalsTable } from './JournalsTable';

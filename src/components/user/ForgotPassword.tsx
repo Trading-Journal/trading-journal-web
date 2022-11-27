@@ -9,8 +9,8 @@ import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { requestChangePassword } from '../../services/Authentication';
-import { AlertCard } from '../card/AlertCard';
-import { TextInput } from '../input/text-input/TextInput';
+import { AlertCard } from '../card';
+import { TextInput } from '../input';
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState('');

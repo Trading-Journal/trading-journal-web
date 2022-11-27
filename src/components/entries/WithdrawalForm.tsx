@@ -4,12 +4,11 @@ import { Entry } from '../../model/Entry';
 import { Journal } from '../../model/Journal';
 import { Withdrawal } from '../../model/Withdrawal';
 import { getSymbol } from '../../util/NumberFormat';
-import { FormButtons } from '../button/FormButtons';
-import { FormAlert } from '../card/FormAlert';
+import { FormButtons } from '../button';
+import { FormAlert } from '../card';
 import { Form } from '../form/Form';
-import { Datetime } from '../input/date-time/DateTime';
-import { NumberInput } from '../input/number-input/NumberInput';
-import { useSaveWithdrawal } from '../queries/EntriesQueries';
+import { Datetime, NumberInput } from '../input';
+import { useSaveWithdrawal } from '../queries';
 
 const initialState: Withdrawal = {
   date: new Date(),

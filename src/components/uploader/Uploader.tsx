@@ -15,8 +15,7 @@ import Uploady, {
 } from '@rpldy/uploady';
 import React, { forwardRef, useEffect, useState } from 'react';
 import { useAccessTokenState } from '../../context/UserContext';
-import { AlertCard } from '../card/AlertCard';
-import { SimpleCard } from '../card/SimpleCard';
+import { AlertCard, SimpleCard } from '../card';
 
 enum Status {
   NONE,

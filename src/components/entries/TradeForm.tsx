@@ -5,13 +5,11 @@ import { Entry } from '../../model/Entry';
 import { Journal } from '../../model/Journal';
 import { Trade } from '../../model/Trade';
 import { currencyFormatter, getSymbol } from '../../util/NumberFormat';
-import { FormButtons } from '../button/FormButtons';
-import { FormAlert } from '../card/FormAlert';
+import { FormButtons } from '../button';
+import { FormAlert } from '../card';
 import { Form } from '../form/Form';
-import { Datetime } from '../input/date-time/DateTime';
-import { NumberInput } from '../input/number-input/NumberInput';
-import { TextInput } from '../input/text-input/TextInput';
-import { useSaveTrade } from '../queries/EntriesQueries';
+import { Datetime, NumberInput, TextInput } from '../input';
+import { useSaveTrade } from '../queries';
 import { DirectionSelect } from './DirectionSelect';
 import { GraphTypeSelect } from './GraphTypeSelect';
 

@@ -4,7 +4,7 @@ import { EntryType } from '../../model/EntryType';
 import { Journal } from '../../model/Journal';
 import { fromEntry, Trade } from '../../model/Trade';
 import { Loading } from '../loading/Loading';
-import { useEntriesQuery } from '../queries/EntriesQueries';
+import { useEntriesQuery } from '../queries';
 import { SidePanel } from '../side-panel/SidePanel';
 import { AddEntryDial } from './AddEntryDial';
 import { DepositForm } from './DepositForm';
