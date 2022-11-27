@@ -9,7 +9,7 @@ import {
   saveTaxes,
   saveTrade,
   saveWithdrawal,
-} from '../../services/EntryService';
+} from '../../services';
 
 export const useEntriesQuery = (journal: Journal) => {
   const accessToken = useAccessTokenState();

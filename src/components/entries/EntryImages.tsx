@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import { useAccessTokenState } from '../../context/UserContext';
 import { Entry, EntryImageResponse, Journal, UploadType } from '../../model';
-import { getEntryImage } from '../../services/EntryService';
+import { getEntryImage } from '../../services';
 import { Uploader } from '../uploader/Uploader';
 
 import Card from '@mui/material/Card';

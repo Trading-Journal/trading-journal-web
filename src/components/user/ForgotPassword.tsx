@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { requestChangePassword } from '../../services/Authentication';
+import { requestChangePassword } from '../../services';
 import { AlertCard } from '../card';
 import { TextInput } from '../input';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { LoginResponse } from '../model';
-import { signIn } from '../services/Authentication';
+import { signIn } from '../services';
 
 interface UserContextState {
   status: string;

@@ -12,7 +12,7 @@ import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { RegisterRequest } from '../../model';
-import { signUp } from '../../services/Authentication';
+import { signUp } from '../../services';
 import { AlertCard } from '../card';
 import { TextInput } from '../input';
 import { PortalFeedback } from '../portal/PortalFeedback';

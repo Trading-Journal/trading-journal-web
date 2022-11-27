@@ -16,7 +16,7 @@ import {
   Navigate,
   useSearchParams,
 } from 'react-router-dom';
-import { sendVerification, verify } from '../../services/Authentication';
+import { sendVerification, verify } from '../../services';
 import { AlertCard } from '../card';
 import { TextInput } from '../input';
 import { PortalFeedback } from '../portal/PortalFeedback';

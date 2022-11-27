@@ -14,7 +14,7 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 import { ChangePasswordRequest } from '../../model';
-import { changePassword } from '../../services/Authentication';
+import { changePassword } from '../../services';
 import { AlertCard } from '../card';
 import { TextInput } from '../input';
 import { PortalFeedback } from '../portal/PortalFeedback';

@@ -7,7 +7,7 @@ import {
   getJournal,
   getJournalBalance,
   saveJournal,
-} from '../../services/JournalService';
+} from '../../services';
 
 export const useJournalsQuery = () => {
   const accessToken = useAccessTokenState();
