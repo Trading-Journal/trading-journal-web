@@ -5,10 +5,14 @@ import { currencyFormatter, getSymbol } from '../../util/NumberFormat';
 import { FormButtons } from '../button';
 import { FormAlert } from '../card';
 import { Form } from '../form/Form';
-import { Datetime, NumberInput, TextInput } from '../input';
+import {
+  Datetime,
+  DirectionSelect,
+  GraphTypeSelect,
+  NumberInput,
+  TextInput,
+} from '../input';
 import { useSaveTrade } from '../queries';
-import { DirectionSelect } from './DirectionSelect';
-import { GraphTypeSelect } from './GraphTypeSelect';
 
 const initialState: Trade = {
   date: new Date(),

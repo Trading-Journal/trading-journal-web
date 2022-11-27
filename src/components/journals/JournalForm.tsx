@@ -2,9 +2,8 @@ import Grid from '@mui/material/Grid';
 import React, { useEffect, useState } from 'react';
 import { Currency, Journal, JournalRequest } from '../../model';
 import { getSymbol } from '../../util/NumberFormat';
-import { Datetime, NumberInput, TextInput } from '../input';
+import { CurrencySelect, Datetime, NumberInput, TextInput } from '../input';
 import { useJournalSave } from '../queries';
-import { CurrencySelect } from './CurrencySelect';
 
 import { FormButtons } from '../button';
 import { FormAlert } from '../card';

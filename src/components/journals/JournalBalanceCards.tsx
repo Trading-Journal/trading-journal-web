@@ -1,17 +1,21 @@
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import { AccountBalanceCard } from '../balance-card/AccountBalanceCard';
-import { ClosedPositionsCard } from '../balance-card/ClosedPositionsCard';
-import { DepositsCard } from '../balance-card/DepositsCard';
-import { StartBalanceCard } from '../balance-card/StartBalanceCard';
-import { TaxesCard } from '../balance-card/TaxesCard';
-import { WithdrawalsCard } from '../balance-card/WithdrawalsCard';
+import {
+  AccountBalanceCard,
+  ClosedPositionsCard,
+  DepositsCard,
+  StartBalanceCard,
+  TaxesCard,
+  WithdrawalsCard,
+} from '../balance-card';
 
 import React from 'react';
 import { Balance } from '../../model';
-import { AvailableCard } from '../balance-card/AvailableCard';
-import { OpenPositionsCard } from '../balance-card/OpenPositionsCard';
-import { StartJournalCard } from '../balance-card/StartJournalCard';
+import {
+  AvailableCard,
+  OpenPositionsCard,
+  StartJournalCard,
+} from '../balance-card';
 
 export const JournalBalanceCards: React.FC<{ balance: Balance }> = ({
   balance,
