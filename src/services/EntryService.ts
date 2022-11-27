@@ -7,7 +7,7 @@ import {
   UploadType,
   Withdrawal,
 } from '../model';
-import { apiFormat } from '../util/DateFormat';
+import { apiFormat } from '../util';
 import { readErrors } from './ErrorsReader';
 
 export const getAllEntries = (

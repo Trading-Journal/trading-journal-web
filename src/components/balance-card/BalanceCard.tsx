@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { currencyFormatter } from '../../util/NumberFormat';
+import { currencyFormatter } from '../../util';
 import { SimpleCard } from '../card';
 
 interface CardProps {

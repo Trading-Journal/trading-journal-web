@@ -1,7 +1,7 @@
 import Grid from '@mui/material/Grid';
 import React, { useEffect, useState } from 'react';
 import { Currency, Journal, JournalRequest } from '../../model';
-import { getSymbol } from '../../util/NumberFormat';
+import { getSymbol } from '../../util';
 import { CurrencySelect, Datetime, NumberInput, TextInput } from '../input';
 import { useJournalSave } from '../queries';
 
