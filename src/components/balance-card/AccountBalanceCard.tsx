@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Balance } from '../../model/Balance';
+import { Balance } from '../../model';
 import { getSymbol } from '../../util/NumberFormat';
 import { BalanceCard } from './BalanceCard';
 

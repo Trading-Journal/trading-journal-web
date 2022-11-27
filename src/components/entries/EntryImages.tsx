@@ -5,10 +5,7 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
 import { useAccessTokenState } from '../../context/UserContext';
-import { Entry } from '../../model/Entry';
-import { EntryImageResponse } from '../../model/EntryImageResponse';
-import { Journal } from '../../model/Journal';
-import { UploadType } from '../../model/UploadType';
+import { Entry, EntryImageResponse, Journal, UploadType } from '../../model';
 import { getEntryImage } from '../../services/EntryService';
 import { Uploader } from '../uploader/Uploader';
 

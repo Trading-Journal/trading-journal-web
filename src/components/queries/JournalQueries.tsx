@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAccessTokenState } from '../../context/UserContext';
-import { Balance } from '../../model/Balance';
-import { Journal, JournalRequest } from '../../model/Journal';
+import { Balance, Journal, JournalRequest } from '../../model';
 import {
   deleteJournal,
   getAllJournals,

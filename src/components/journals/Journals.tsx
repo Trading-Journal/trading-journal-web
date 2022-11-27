@@ -2,7 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { Box } from '@mui/material';
 import Fab from '@mui/material/Fab';
 import { useState } from 'react';
-import { Journal } from '../../model/Journal';
+import { Journal } from '../../model';
 import { Loading } from '../loading/Loading';
 import { useJournalsQuery } from '../queries';
 import { SidePanel } from '../side-panel/SidePanel';

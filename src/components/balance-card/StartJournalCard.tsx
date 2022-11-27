@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Balance } from '../../model/Balance';
+import { Balance } from '../../model';
 import { displayFormatDate } from '../../util/DateFormat';
 import { SimpleCard } from '../card';
 

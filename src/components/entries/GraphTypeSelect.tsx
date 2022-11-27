@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { GraphType } from '../../model/GraphType';
+import { GraphType } from '../../model';
 import { Dropdown } from '../input';
 
 interface Props {

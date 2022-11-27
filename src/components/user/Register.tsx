@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { RegisterRequest } from '../../model/RegisterRequest';
+import { RegisterRequest } from '../../model';
 import { signUp } from '../../services/Authentication';
 import { AlertCard } from '../card';
 import { TextInput } from '../input';

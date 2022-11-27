@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoginResponse } from '../model/LoginResponse';
+import { LoginResponse } from '../model';
 import { signIn } from '../services/Authentication';
 
 interface UserContextState {

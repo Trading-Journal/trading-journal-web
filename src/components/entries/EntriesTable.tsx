@@ -5,9 +5,7 @@ import { Box } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { useState } from 'react';
-import { Entry } from '../../model/Entry';
-import { EntryType } from '../../model/EntryType';
-import { Journal } from '../../model/Journal';
+import { Entry, EntryType, Journal } from '../../model';
 import {
   formatCellValue,
   formatCurrency,

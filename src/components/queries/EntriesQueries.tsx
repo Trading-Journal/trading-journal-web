@@ -1,11 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAccessTokenState } from '../../context/UserContext';
-import { Deposit } from '../../model/Deposit';
-import { Entry } from '../../model/Entry';
-import { Journal } from '../../model/Journal';
-import { Taxes } from '../../model/Taxes';
-import { Trade } from '../../model/Trade';
-import { Withdrawal } from '../../model/Withdrawal';
+import { Deposit, Entry, Journal, Taxes, Trade, Withdrawal } from '../../model';
 import {
   deleteEntry,
   getAllEntries,

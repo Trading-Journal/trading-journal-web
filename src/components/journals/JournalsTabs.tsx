@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import React, { useEffect, useState } from 'react';
-import { Journal } from '../../model/Journal';
+import { Journal } from '../../model';
 import { JournalEntries } from './JournalEntries';
 import { Journals } from './Journals';
 

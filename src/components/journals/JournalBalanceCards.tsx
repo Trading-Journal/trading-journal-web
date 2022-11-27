@@ -8,7 +8,7 @@ import { TaxesCard } from '../balance-card/TaxesCard';
 import { WithdrawalsCard } from '../balance-card/WithdrawalsCard';
 
 import React from 'react';
-import { Balance } from '../../model/Balance';
+import { Balance } from '../../model';
 import { AvailableCard } from '../balance-card/AvailableCard';
 import { OpenPositionsCard } from '../balance-card/OpenPositionsCard';
 import { StartJournalCard } from '../balance-card/StartJournalCard';

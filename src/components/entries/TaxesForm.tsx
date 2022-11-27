@@ -1,8 +1,6 @@
 import { Grid } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Entry } from '../../model/Entry';
-import { Journal } from '../../model/Journal';
-import { Taxes } from '../../model/Taxes';
+import { Entry, Journal, Taxes } from '../../model';
 import { getSymbol } from '../../util/NumberFormat';
 import { FormButtons } from '../button';
 import { FormAlert } from '../card';

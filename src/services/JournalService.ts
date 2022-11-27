@@ -1,5 +1,4 @@
-import { Balance } from '../model/Balance';
-import { Journal, JournalRequest } from '../model/Journal';
+import { Balance, Journal, JournalRequest } from '../model';
 import { apiFormat } from '../util/DateFormat';
 import { readErrors } from './ErrorsReader';
 

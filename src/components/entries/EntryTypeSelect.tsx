@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { EntryType } from '../../model/EntryType';
+import { EntryType } from '../../model';
 import { Dropdown } from '../input';
 
 interface Props {

@@ -13,7 +13,7 @@ import {
   Navigate,
   useSearchParams,
 } from 'react-router-dom';
-import { ChangePasswordRequest } from '../../model/ChangePasswordRequest';
+import { ChangePasswordRequest } from '../../model';
 import { changePassword } from '../../services/Authentication';
 import { AlertCard } from '../card';
 import { TextInput } from '../input';

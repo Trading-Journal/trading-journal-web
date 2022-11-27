@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Direction } from '../../model/Direction';
+import { Direction } from '../../model';
 import { Dropdown } from '../input';
 
 interface Props {

@@ -1,7 +1,9 @@
-import { ChangePasswordRequest } from '../model/ChangePasswordRequest';
-import { RegisterRequest } from '../model/RegisterRequest';
-import { SignUpResponse } from '../model/SignUpResponse';
-import { LoginResponse } from './../model/LoginResponse';
+import {
+  ChangePasswordRequest,
+  RegisterRequest,
+  SignUpResponse,
+} from '../model';
+import { LoginResponse } from './../model';
 import { readErrors } from './ErrorsReader';
 
 const signIn = (email: string, password: string): Promise<LoginResponse> => {

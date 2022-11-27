@@ -1,10 +1,12 @@
-import { Deposit } from '../model/Deposit';
-import { Entry } from '../model/Entry';
-import { EntryImageResponse } from '../model/EntryImageResponse';
-import { Taxes } from '../model/Taxes';
-import { Trade } from '../model/Trade';
-import { UploadType } from '../model/UploadType';
-import { Withdrawal } from '../model/Withdrawal';
+import {
+  Deposit,
+  Entry,
+  EntryImageResponse,
+  Taxes,
+  Trade,
+  UploadType,
+  Withdrawal,
+} from '../model';
 import { apiFormat } from '../util/DateFormat';
 import { readErrors } from './ErrorsReader';
 

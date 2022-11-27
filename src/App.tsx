@@ -13,7 +13,7 @@ import { Footer } from './components/footer/Footer';
 import { Routes } from './components/routes/Routes';
 import { TopBar } from './components/top-bar/TopBar';
 import { AuthProvider } from './context/UserContext';
-import { UnauthorizedError } from './model/UnauthorizedError';
+import { UnauthorizedError } from './model';
 
 const queryClient = new QueryClient({
   defaultOptions: {

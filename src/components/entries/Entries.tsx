@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { Entry } from '../../model/Entry';
-import { EntryType } from '../../model/EntryType';
-import { Journal } from '../../model/Journal';
-import { fromEntry, Trade } from '../../model/Trade';
+import { Entry, EntryType, fromEntry, Journal, Trade } from '../../model';
 import { Loading } from '../loading/Loading';
 import { useEntriesQuery } from '../queries';
 import { SidePanel } from '../side-panel/SidePanel';

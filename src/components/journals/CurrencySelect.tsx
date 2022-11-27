@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Currency } from '../../model/Currency';
+import { Currency } from '../../model';
 import { Dropdown } from '../input/dropdown/Dropdown';
 
 interface Props {
