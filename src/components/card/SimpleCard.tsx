@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 
 interface CardProps {
-  title: any;
+  title?: any;
   subtitle?: string;
   minWidth?: number;
   titleColor?: string;

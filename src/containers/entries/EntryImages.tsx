@@ -9,8 +9,7 @@ import { Entry, EntryImageResponse, Journal, UploadType } from 'model';
 import React, { useEffect, useState } from 'react';
 import { getEntryImage } from 'services';
 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import { SimpleCard } from 'components/card';
 import { ZoomImage } from 'components/zoom-image/ZoomImage';
 
 interface ImageProps {
@@ -23,15 +22,6 @@ const Header = ({ entry }: { entry: Entry }) => {
   return (
     <Typography fontSize={20}>
       Upload Images for {entry.type} {entry.symbol}
-    </Typography>
-  );
-};
-
-const SubHeader = () => {
-  return (
-    <Typography fontSize={15} marginTop={3}>
-      You can upload two images: one for when you started and one when you
-      finished the trade
     </Typography>
   );
 };
@@ -136,26 +126,25 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
         </Grid>
       )}
 
-      <Card sx={{ mt: 2 }}>
-        <CardContent>
-          <SubHeader />
-
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <Typography fontWeight="bold" fontSize={15} sx={center}>
-                Start Trade
-              </Typography>
-              <Uploader {...imageBeforeRequest} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Typography fontWeight="bold" fontSize={15} sx={center}>
-                Finish Trade
-              </Typography>
-              <Uploader {...imageAfterRequest} />
-            </Grid>
+      <SimpleCard
+        subtitle="You can upload two images: one for when you started and one when you
+      finished the trade"
+      >
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Typography fontWeight="bold" fontSize={15} sx={center}>
+              Start Trade
+            </Typography>
+            <Uploader {...imageBeforeRequest} />
           </Grid>
-        </CardContent>
-      </Card>
+          <Grid item xs={12} sm={6}>
+            <Typography fontWeight="bold" fontSize={15} sx={center}>
+              Finish Trade
+            </Typography>
+            <Uploader {...imageAfterRequest} />
+          </Grid>
+        </Grid>
+      </SimpleCard>
 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
