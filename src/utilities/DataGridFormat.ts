@@ -1,20 +1,25 @@
 import { GridCellParams, GridValueFormatterParams } from '@mui/x-data-grid';
 import clsx from 'clsx';
+import { Currency } from './../model/Currency';
 import { displayFormat } from './DateFormat';
-import { currencyFormatter, percentFormatter } from './NumberFormat';
+import {
+  currencyFormat,
+  currencyFormatter,
+  percentFormatter,
+} from './NumberFormat';
 
 export const formatCurrency = (
   params: GridValueFormatterParams<number>,
-  symbol?: string
+  currency?: Currency
 ) => {
   if (params.value == null) {
     return '';
   }
   var valueFormatted = '';
-  if (symbol) {
-    valueFormatted = currencyFormatter(params.value, { symbol });
+  if (currency) {
+    valueFormatted = currencyFormatter(params.value, currency);
   } else {
-    valueFormatted = currencyFormatter(params.value, { symbol: '' });
+    valueFormatted = currencyFormat(params.value);
   }
   return `${valueFormatted}`;
 };

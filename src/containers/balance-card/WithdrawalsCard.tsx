@@ -1,6 +1,5 @@
 import { Balance } from 'model';
 import { useEffect, useState } from 'react';
-import { getSymbol } from 'utilities';
 import { BalanceCard } from './BalanceCard';
 
 export const WithdrawalsCard: React.FC<{ balance: Balance }> = ({
@@ -18,7 +17,7 @@ export const WithdrawalsCard: React.FC<{ balance: Balance }> = ({
     <BalanceCard
       value={value}
       subtitle="Withdrawals"
-      currency={getSymbol(balance.currency)}
+      currency={balance.currency}
     />
   );
 };

@@ -54,9 +54,7 @@ export const TradeForm: React.FC<TradeProps> = (props: TradeProps) => {
       setTitle(
         `Edit Trade ${update.symbol} ${update.direction} ${currencyFormatter(
           update.price,
-          {
-            symbol: currency,
-          }
+          journal.currentBalance.currency
         )}`
       );
       if (update.exitPrice) {
@@ -66,7 +64,7 @@ export const TradeForm: React.FC<TradeProps> = (props: TradeProps) => {
     } else {
       setTitle('Add a new Trade');
     }
-  }, [update, journal, currency]);
+  }, [update, journal]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

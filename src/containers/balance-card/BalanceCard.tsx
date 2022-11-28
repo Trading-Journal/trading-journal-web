@@ -1,4 +1,5 @@
 import { SimpleCard } from 'components/card';
+import { Currency } from 'model';
 import React, { useEffect, useState } from 'react';
 import { currencyFormatter } from 'utilities';
 
@@ -8,7 +9,7 @@ interface CardProps {
   changeColors?: boolean;
   positiveColor?: string;
   negativeColor?: string;
-  currency?: string;
+  currency?: Currency;
 }
 
 export const BalanceCard: React.FC<CardProps> = ({
@@ -16,14 +17,14 @@ export const BalanceCard: React.FC<CardProps> = ({
   subtitle,
   positiveColor = 'green',
   negativeColor = 'red',
-  currency = '$',
+  currency = Currency.DOLLAR,
 }) => {
   const defaultColor = 'black';
   const [formattedValue, setFormattedValue] = useState('');
   const [titleColor, setTitleColor] = useState(defaultColor);
 
   useEffect(() => {
-    setFormattedValue(currencyFormatter(value, { symbol: currency }));
+    setFormattedValue(currencyFormatter(value, currency));
   }, [value, currency]);
 
   useEffect(() => {

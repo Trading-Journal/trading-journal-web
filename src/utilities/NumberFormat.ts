@@ -16,9 +16,9 @@ const defaultOptions: Format = {
 
 export const currencyFormatter = (
   value: number | undefined,
-  options?: Format
+  currency: Currency
 ) => {
-  options = { ...defaultOptions, ...options };
+  const options = { ...defaultOptions, symbol: getSymbol(currency) };
   const formatted = currencyFormat(value, options);
 
   return `${options.symbol} ${formatted}`;
@@ -43,7 +43,7 @@ export const percentFormatter = (value: number | undefined) => {
   }
 };
 
-const currencyFormat = (value: number | undefined, options?: Format) => {
+export const currencyFormat = (value: number | undefined, options?: Format) => {
   if (!value) {
     value = 0;
   }

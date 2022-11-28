@@ -11,7 +11,7 @@ import {
 import { useConfirmationModalContext } from 'components/dialog/ConfirmationDialog';
 import { Journal } from 'model';
 import { useJournalDelete } from 'queries';
-import { currencyFormatter, displayFormatDate, getSymbol } from 'utilities';
+import { currencyFormatter, displayFormatDate } from 'utilities';
 
 export const JournalsTable = ({
   journals,
@@ -80,9 +80,7 @@ export const JournalsTable = ({
       width: 150,
       sortable: false,
       valueGetter: (params: GridValueGetterParams) =>
-        currencyFormatter(params.row.startBalance, {
-          symbol: getSymbol(params.row.currency),
-        }),
+        currencyFormatter(params.row.startBalance, params.row.currency),
     },
     {
       field: 'startJournal',

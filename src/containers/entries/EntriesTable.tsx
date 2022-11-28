@@ -7,14 +7,12 @@ import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { useConfirmationModalContext } from 'components/dialog/ConfirmationDialog';
 import { Entry, EntryType, Journal } from 'model';
 import { useEntryDelete } from 'queries';
-import { useState } from 'react';
 import {
   displayFormat,
   formatCellValue,
   formatCurrency,
   formatDate,
   formatPercentage,
-  getSymbol,
 } from 'utilities';
 
 export const EntriesTable = ({
@@ -28,7 +26,7 @@ export const EntriesTable = ({
   onEdit: (entry: Entry) => void;
   onImage: (entry: Entry) => void;
 }) => {
-  const [currency] = useState(getSymbol(journal.currentBalance.currency));
+  const currency = journal.currentBalance.currency;
 
   const modalContext = useConfirmationModalContext();
   const deleteMutation = useEntryDelete(journal.id);
