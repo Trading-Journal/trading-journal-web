@@ -14,7 +14,9 @@ export const JournalEntries: React.FC<{ journalId: string }> = ({
   return (
     <Box sx={{ p: 2, flexGrow: 1 }}>
       {error && (
-        <AlertCard show={true} message={error.message} severity="error" />
+        <AlertCard show={true} severity="error">
+          {error.message}
+        </AlertCard>
       )}
 
       {isSuccess && (

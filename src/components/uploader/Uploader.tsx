@@ -127,11 +127,9 @@ export const Uploader: React.FC<UploadProps> = (props: UploadProps) => {
         : 'error';
 
     return (
-      <AlertCard
-        show={true}
-        message={status.message}
-        severity={severity}
-      ></AlertCard>
+      <AlertCard show={true} severity={severity}>
+        {status.message}
+      </AlertCard>
     );
   };
 

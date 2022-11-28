@@ -1,7 +1,6 @@
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { AlertCard } from 'components/card';
 
 export const Loading = (Component: any) => {
   return function LoadingComponent({
@@ -11,10 +10,9 @@ export const Loading = (Component: any) => {
   }: any) {
     if (error) {
       return (
-        <Alert severity="error">
-          <AlertTitle>Error</AlertTitle>
+        <AlertCard severity="error" show={true}>
           {error.message}
-        </Alert>
+        </AlertCard>
       );
     }
 

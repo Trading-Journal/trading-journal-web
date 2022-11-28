@@ -127,21 +127,18 @@ export const VerifyEmail = () => {
         {mutationSendAgain.isError &&
         mutationSendAgain.error instanceof Error ? (
           <Box sx={{ mt: 5 }}>
-            <AlertCard
-              show={true}
-              message={mutationSendAgain.error.message}
-              severity="error"
-            />
+            <AlertCard show={true} severity="error">
+              {mutationSendAgain.error.message}
+            </AlertCard>
           </Box>
         ) : null}
 
         {mutationVerify.isError && mutationVerify.error instanceof Error ? (
           <Box sx={{ mt: 5 }}>
-            <AlertCard
-              show={true}
-              message={mutationVerify.error.message}
-              severity="error"
-            />
+            <AlertCard show={true} severity="error">
+              {' '}
+              {mutationVerify.error.message}
+            </AlertCard>
           </Box>
         ) : null}
 

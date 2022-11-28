@@ -80,11 +80,9 @@ export const ForgotPassword = () => {
             Change my password
           </LoadingButton>
           {mutation.isError && mutation.error instanceof Error ? (
-            <AlertCard
-              show={true}
-              message={mutation.error.message}
-              severity="error"
-            />
+            <AlertCard show={true} severity="error">
+              {mutation.error.message}
+            </AlertCard>
           ) : null}
 
           <Grid container>

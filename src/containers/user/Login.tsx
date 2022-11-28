@@ -73,11 +73,9 @@ export const Login = () => {
         >
           Sign In
         </LoadingButton>
-        <AlertCard
-          show={status === 'rejected'}
-          message={error}
-          severity="error"
-        />
+        <AlertCard show={status === 'rejected'} severity="error">
+          {error}
+        </AlertCard>
         <Grid container>
           <Grid item xs>
             <Link component={RouterLink} to="/forgot-password" variant="body2">

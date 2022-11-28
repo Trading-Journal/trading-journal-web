@@ -61,7 +61,7 @@ export const JournalForm: React.FC<JournalProps> = (props: JournalProps) => {
   };
 
   return (
-    <Form title={title} onSubmit={handleSubmit} maxWidth={400}>
+    <Form title={title} onSubmit={handleSubmit} maxWidth={450}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <TextInput
