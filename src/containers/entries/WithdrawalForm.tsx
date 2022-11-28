@@ -1,3 +1,4 @@
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { Grid } from '@mui/material';
 import { FormButtons } from 'components/button';
 import { FormAlert } from 'components/card';
@@ -42,7 +43,12 @@ export const WithdrawalForm: React.FC<FormProps> = (props: FormProps) => {
   };
 
   return (
-    <Form title="Withdrawal" maxWidth={500} onSubmit={handleSubmit}>
+    <Form
+      title="Withdrawal"
+      maxWidth={500}
+      onSubmit={handleSubmit}
+      icon={<CurrencyExchangeIcon />}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <Datetime

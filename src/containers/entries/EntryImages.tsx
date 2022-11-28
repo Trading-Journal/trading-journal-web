@@ -10,6 +10,7 @@ import { getEntryImage } from 'services';
 
 import { CancelButton } from 'components/button';
 import { SimpleCard } from 'components/card';
+import { Header } from 'components/header/Header';
 import { ZoomImage } from 'components/zoom-image/ZoomImage';
 
 interface ImageProps {
@@ -17,14 +18,6 @@ interface ImageProps {
   entry: Entry;
   onCancel: () => void;
 }
-
-const Header = ({ entry }: { entry: Entry }) => {
-  return (
-    <Typography fontSize={20}>
-      Upload Images for {entry.type} {entry.symbol}
-    </Typography>
-  );
-};
 
 const PreviewContainer = styled('div')`
   img {
@@ -99,7 +92,7 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
         alignItems: 'center',
       }}
     >
-      <Header entry={entry} />
+      <Header title={` Upload Images for ${entry.type} ${entry.symbol}`} />
 
       {hasAnyImage && (
         <Grid container spacing={3}>

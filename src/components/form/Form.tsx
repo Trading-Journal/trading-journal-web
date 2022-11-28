@@ -8,10 +8,12 @@ interface FormProps {
   title: string;
   subtitle?: string;
   maxWidth?: number;
+  icon?: React.ReactNode;
 }
 
 export const Form: React.FC<FormProps> = (props: FormProps) => {
-  const { onSubmit, children, title, subtitle, maxWidth, ...rest } = props;
+  const { onSubmit, children, title, subtitle, maxWidth, icon, ...rest } =
+    props;
 
   return (
     <Box
@@ -26,7 +28,7 @@ export const Form: React.FC<FormProps> = (props: FormProps) => {
       onSubmit={onSubmit}
       {...rest}
     >
-      <Header title={title} subtitle={subtitle} />
+      <Header title={title} subtitle={subtitle} icon={icon} />
       <Box sx={{ mt: 3 }}>{children}</Box>
     </Box>
   );

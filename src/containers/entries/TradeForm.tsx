@@ -1,3 +1,4 @@
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import { Grid } from '@mui/material';
 import { FormButtons } from 'components/button';
 import { FormAlert } from 'components/card';
@@ -87,6 +88,7 @@ export const TradeForm: React.FC<TradeProps> = (props: TradeProps) => {
       title={title}
       subtitle={subtitle}
       onSubmit={handleSubmit}
+      icon={<TrendingUpIcon />}
     >
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>

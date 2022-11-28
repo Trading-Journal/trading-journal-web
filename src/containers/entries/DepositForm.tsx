@@ -1,3 +1,4 @@
+import SavingsIcon from '@mui/icons-material/Savings';
 import { Grid } from '@mui/material';
 import { FormButtons } from 'components/button';
 import { FormAlert } from 'components/card';
@@ -42,7 +43,12 @@ export const DepositForm: React.FC<FormProps> = (props: FormProps) => {
   };
 
   return (
-    <Form title="Deposit" maxWidth={500} onSubmit={handleSubmit}>
+    <Form
+      title="Deposit"
+      maxWidth={500}
+      onSubmit={handleSubmit}
+      icon={<SavingsIcon />}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <Datetime

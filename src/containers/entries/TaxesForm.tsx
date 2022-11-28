@@ -1,3 +1,4 @@
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import { Grid } from '@mui/material';
 import { FormButtons } from 'components/button';
 import { FormAlert } from 'components/card';
@@ -42,7 +43,12 @@ export const TaxesForm: React.FC<FormProps> = (props: FormProps) => {
   };
 
   return (
-    <Form title="Taxes" maxWidth={500} onSubmit={handleSubmit}>
+    <Form
+      title="Taxes"
+      maxWidth={500}
+      onSubmit={handleSubmit}
+      icon={<AccountBalanceIcon />}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <Datetime

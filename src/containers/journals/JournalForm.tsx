@@ -10,6 +10,7 @@ import { useJournalSave } from 'queries';
 import React, { useEffect, useState } from 'react';
 import { getSymbol } from 'utilities';
 
+import AutoStories from '@mui/icons-material/AutoStories';
 import { FormButtons } from 'components/button';
 import { FormAlert } from 'components/card';
 import { Form } from 'components/form/Form';
@@ -61,7 +62,12 @@ export const JournalForm: React.FC<JournalProps> = (props: JournalProps) => {
   };
 
   return (
-    <Form title={title} onSubmit={handleSubmit} maxWidth={450}>
+    <Form
+      title={title}
+      onSubmit={handleSubmit}
+      maxWidth={450}
+      icon={<AutoStories />}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <TextInput
