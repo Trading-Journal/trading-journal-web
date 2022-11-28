@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
-import { AlertCard } from 'components/card';
+import { FormAlert } from 'components/card';
 import { TextInput } from 'components/input';
 import { PortalFeedback } from 'components/portal/PortalFeedback';
 import { RegisterRequest } from 'model';
@@ -165,11 +165,7 @@ export const Register = () => {
         >
           Sign Up
         </LoadingButton>
-        {mutation.isError && mutation.error instanceof Error ? (
-          <AlertCard show={true} severity="error">
-            {mutation.error.message}
-          </AlertCard>
-        ) : null}
+        <FormAlert mutation={mutation} />
         <Grid container justifyContent="flex-end">
           <Grid item>
             <Link component={RouterLink} to="/login" variant="body2">

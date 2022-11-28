@@ -10,7 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
-import { AlertCard } from 'components/card';
+import { FormAlert } from 'components/card';
 import { TextInput } from 'components/input';
 import { PortalFeedback } from 'components/portal/PortalFeedback';
 import { useEffect, useState } from 'react';
@@ -123,25 +123,8 @@ export const VerifyEmail = () => {
             Send the verification link again
           </LoadingButton>
         </Box>
-
-        {mutationSendAgain.isError &&
-        mutationSendAgain.error instanceof Error ? (
-          <Box sx={{ mt: 5 }}>
-            <AlertCard show={true} severity="error">
-              {mutationSendAgain.error.message}
-            </AlertCard>
-          </Box>
-        ) : null}
-
-        {mutationVerify.isError && mutationVerify.error instanceof Error ? (
-          <Box sx={{ mt: 5 }}>
-            <AlertCard show={true} severity="error">
-              {' '}
-              {mutationVerify.error.message}
-            </AlertCard>
-          </Box>
-        ) : null}
-
+        <FormAlert mutation={mutationSendAgain} />
+        <FormAlert mutation={mutationVerify} />
         <Link component={RouterLink} to="/login" variant="h5" sx={{ mt: 5 }}>
           Go back to login and start trading
         </Link>
