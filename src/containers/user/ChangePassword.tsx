@@ -1,12 +1,12 @@
 import PasswordIcon from '@mui/icons-material/Password';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import LoadingButton from '@mui/lab/LoadingButton';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
+import { SubmitButton } from 'components/button';
 import { FormAlert } from 'components/card';
 import { TextInput } from 'components/input';
 import { PortalFeedback } from 'components/portal/PortalFeedback';
@@ -100,15 +100,9 @@ export const ChangePassword = () => {
             />
           </Grid>
         </Grid>
-        <LoadingButton
-          type="submit"
-          fullWidth
-          variant="contained"
-          loading={mutation.isLoading}
-          sx={{ mt: 3, mb: 2 }}
-        >
+        <SubmitButton fullWidth loading={mutation.isLoading}>
           Change my password
-        </LoadingButton>
+        </SubmitButton>
         <FormAlert mutation={mutation} />
         <Grid container>
           <Grid item xs>

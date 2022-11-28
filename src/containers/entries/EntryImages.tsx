@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -9,6 +8,7 @@ import { Entry, EntryImageResponse, Journal, UploadType } from 'model';
 import React, { useEffect, useState } from 'react';
 import { getEntryImage } from 'services';
 
+import { CancelButton } from 'components/button';
 import { SimpleCard } from 'components/card';
 import { ZoomImage } from 'components/zoom-image/ZoomImage';
 
@@ -148,14 +148,9 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
-          <Button
-            variant="outlined"
-            fullWidth
-            sx={{ mt: 3, mb: 2 }}
-            onClick={handleClose}
-          >
+          <CancelButton fullWidth onClick={handleClose}>
             Done
-          </Button>
+          </CancelButton>
         </Grid>
       </Grid>
     </Box>

@@ -1,10 +1,10 @@
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import LoadingButton from '@mui/lab/LoadingButton';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
+import { SubmitButton } from 'components/button';
 import { AlertCard } from 'components/card';
 import { TextInput } from 'components/input';
 import { doLogin, useAuthDispatch, useAuthState } from 'context/UserContext';
@@ -64,15 +64,9 @@ export const Login = () => {
             />
           </Grid>
         </Grid>
-        <LoadingButton
-          type="submit"
-          fullWidth
-          variant="contained"
-          loading={loading}
-          sx={{ mt: 3, mb: 2 }}
-        >
+        <SubmitButton fullWidth loading={loading}>
           Sign In
-        </LoadingButton>
+        </SubmitButton>
         <AlertCard show={status === 'rejected'} severity="error">
           {error}
         </AlertCard>

@@ -2,7 +2,6 @@ import GppBadIcon from '@mui/icons-material/GppBad';
 import PendingIcon from '@mui/icons-material/Pending';
 import SecurityIcon from '@mui/icons-material/Security';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import LoadingButton from '@mui/lab/LoadingButton';
 import Avatar from '@mui/material/Avatar';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -10,6 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
+import { SubmitButton } from 'components/button';
 import { FormAlert } from 'components/card';
 import { TextInput } from 'components/input';
 import { PortalFeedback } from 'components/portal/PortalFeedback';
@@ -113,15 +113,9 @@ export const VerifyEmail = () => {
             onChange={(value) => setEmail(value)}
             value={email}
           />
-          <LoadingButton
-            type="submit"
-            fullWidth
-            variant="contained"
-            loading={mutationSendAgain.isLoading}
-            sx={{ mt: 3, mb: 2 }}
-          >
+          <SubmitButton fullWidth loading={mutationSendAgain.isLoading}>
             Send the verification link again
-          </LoadingButton>
+          </SubmitButton>
         </Box>
         <FormAlert mutation={mutationSendAgain} />
         <FormAlert mutation={mutationVerify} />
