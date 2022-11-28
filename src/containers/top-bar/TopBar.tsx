@@ -70,7 +70,7 @@ export const TopBar = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth={false}>
         <Toolbar disableGutters>
           <AutoStories sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
@@ -152,7 +152,7 @@ export const TopBar = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            JOURNAL
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
