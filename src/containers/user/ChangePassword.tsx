@@ -100,19 +100,22 @@ export const ChangePassword = () => {
             />
           </Grid>
         </Grid>
-        <SubmitButton fullWidth loading={mutation.isLoading}>
-          Change my password
-        </SubmitButton>
+
         <FormAlert mutation={mutation} />
-        <Grid container>
-          <Grid item xs>
-            <Link component={RouterLink} to="/login" variant="body2">
+        <Grid container sx={{ mt: 1, justifyContent: 'space-between' }}>
+          <Grid item xs={12} sm={12} sx={{ mb: 1 }}>
+            <SubmitButton fullWidth loading={mutation.isLoading}>
+              Change my password
+            </SubmitButton>
+          </Grid>
+          <Grid item>
+            <Link component={RouterLink} to="/login">
               Back to Login
             </Link>
           </Grid>
           <Grid item>
             <Link component={RouterLink} to="/register">
-              Don't have an account? Sign Up
+              No account? Sign Up
             </Link>
           </Grid>
         </Grid>

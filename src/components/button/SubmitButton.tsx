@@ -20,7 +20,6 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
       type="submit"
       fullWidth={fullWidth}
       variant="contained"
-      sx={{ mt: 3, mb: 2 }}
       loading={loading}
       disabled={disabled}
       {...rest}

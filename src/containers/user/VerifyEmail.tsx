@@ -6,6 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
+import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
@@ -113,15 +114,16 @@ export const VerifyEmail = () => {
             onChange={(value) => setEmail(value)}
             value={email}
           />
-          <SubmitButton fullWidth loading={mutationSendAgain.isLoading}>
-            Send the verification link again
-          </SubmitButton>
+          <Grid container sx={{ mt: 1, justifyContent: 'space-between' }}>
+            <Grid item xs={12} sm={12} sx={{ mb: 1 }}>
+              <SubmitButton fullWidth loading={mutationSendAgain.isLoading}>
+                Send the verification link again
+              </SubmitButton>
+            </Grid>
+          </Grid>
         </Box>
         <FormAlert mutation={mutationSendAgain} />
         <FormAlert mutation={mutationVerify} />
-        <Link component={RouterLink} to="/login" variant="h5" sx={{ mt: 5 }}>
-          Go back to login and start trading
-        </Link>
       </Box>
     );
   }

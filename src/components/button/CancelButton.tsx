@@ -19,7 +19,6 @@ export const CancelButton: React.FC<CancelButtonProps> = ({
     <Button
       fullWidth={fullWidth}
       variant="outlined"
-      sx={{ mt: 3, mb: 2 }}
       onClick={onClick}
       disabled={disabled}
       {...rest}

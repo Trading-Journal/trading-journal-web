@@ -64,21 +64,23 @@ export const Login = () => {
             />
           </Grid>
         </Grid>
-        <SubmitButton fullWidth loading={loading}>
-          Sign In
-        </SubmitButton>
         <AlertCard show={status === 'rejected'} severity="error">
           {error}
         </AlertCard>
-        <Grid container>
-          <Grid item xs>
-            <Link component={RouterLink} to="/forgot-password" variant="body2">
+        <Grid container sx={{ mt: 1, justifyContent: 'space-between' }}>
+          <Grid item xs={12} sm={12} sx={{ mb: 1 }}>
+            <SubmitButton fullWidth loading={loading}>
+              Sign In
+            </SubmitButton>
+          </Grid>
+          <Grid item>
+            <Link component={RouterLink} to="/forgot-password">
               Forgot password?
             </Link>
           </Grid>
           <Grid item>
             <Link component={RouterLink} to="/register">
-              {"Don't have an account? Sign Up"}
+              {'No account? Sign Up'}
             </Link>
           </Grid>
         </Grid>

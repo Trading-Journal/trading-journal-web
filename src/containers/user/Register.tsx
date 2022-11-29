@@ -63,7 +63,7 @@ export const Register = () => {
   return (
     <Box
       sx={{
-        my: 8,
+        my: 2,
         mx: 4,
         display: 'flex',
         flexDirection: 'column',
@@ -162,7 +162,7 @@ export const Register = () => {
         <FormAlert mutation={mutation} />
         <Grid container justifyContent="flex-end">
           <Grid item>
-            <Link component={RouterLink} to="/login" variant="body2">
+            <Link component={RouterLink} to="/login">
               Already have an account? Sign in
             </Link>
           </Grid>

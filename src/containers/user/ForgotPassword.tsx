@@ -6,7 +6,7 @@ import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useMutation } from '@tanstack/react-query';
 import { SubmitButton } from 'components/button';
-import { AlertCard } from 'components/card';
+import { FormAlert } from 'components/card';
 import { TextInput } from 'components/input';
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
@@ -70,24 +70,22 @@ export const ForgotPassword = () => {
             onChange={(value) => setEmail(value)}
             value={email}
           />
-          <SubmitButton fullWidth loading={mutation.isLoading}>
-            Change my password
-          </SubmitButton>
-          {mutation.isError && mutation.error instanceof Error ? (
-            <AlertCard show={true} severity="error">
-              {mutation.error.message}
-            </AlertCard>
-          ) : null}
 
-          <Grid container>
-            <Grid item xs>
-              <Link component={RouterLink} to="/login" variant="body2">
+          <FormAlert mutation={mutation} />
+          <Grid container sx={{ mt: 1, justifyContent: 'space-between' }}>
+            <Grid item xs={12} sm={12} sx={{ mb: 1 }}>
+              <SubmitButton fullWidth loading={mutation.isLoading}>
+                Change my password
+              </SubmitButton>
+            </Grid>
+            <Grid item>
+              <Link component={RouterLink} to="/login">
                 Back to Login
               </Link>
             </Grid>
             <Grid item>
               <Link component={RouterLink} to="/register">
-                {"Don't have an account? Sign Up"}
+                {'No account? Sign Up'}
               </Link>
             </Grid>
           </Grid>
