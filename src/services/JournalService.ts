@@ -1,9 +1,9 @@
 import { Balance, Journal, JournalRequest } from 'model';
-import { apiFormat } from 'utilities';
+import { apiFormat, config } from 'utilities';
 import { readErrors } from './ErrorsReader';
 
 export const getAllJournals = (accessToken: string): Promise<Journal[]> => {
-  return fetch('http://localhost:8081/journals', {
+  return fetch(`${config.entries}/journals`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${accessToken}` },
   })
@@ -21,7 +21,7 @@ export const getJournal = (
   accessToken: string,
   journalId: string
 ): Promise<Journal> => {
-  return fetch(`http://localhost:8081/journals/${journalId}`, {
+  return fetch(`${config.entries}/journals/${journalId}`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${accessToken}` },
   })
@@ -39,7 +39,7 @@ export const getJournalBalance = (
   accessToken: string,
   journalId: string
 ): Promise<Balance> => {
-  return fetch(`http://localhost:8081/journals/${journalId}/balance`, {
+  return fetch(`${config.entries}/journals/${journalId}/balance`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${accessToken}` },
   })
@@ -57,7 +57,7 @@ export const deleteJournal = (
   accessToken: string,
   journalId: string
 ): Promise<any> => {
-  return fetch(`http://localhost:8081/journals/${journalId}`, {
+  return fetch(`${config.entries}/journals/${journalId}`, {
     method: 'DELETE',
     headers: { Authorization: `Bearer ${accessToken}` },
   }).then(async (response) => {
@@ -73,7 +73,7 @@ export const saveJournal = (
   accessToken: string,
   journal: JournalRequest
 ): Promise<Journal> => {
-  return fetch('http://localhost:8081/journals', {
+  return fetch(`${config.entries}/journals`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${accessToken}`,

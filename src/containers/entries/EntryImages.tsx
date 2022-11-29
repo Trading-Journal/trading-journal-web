@@ -12,6 +12,7 @@ import { CancelButton } from 'components/button';
 import { SimpleCard } from 'components/card';
 import { Header } from 'components/header/Header';
 import { ZoomImage } from 'components/zoom-image/ZoomImage';
+import { config } from 'utilities';
 
 interface ImageProps {
   journal: Journal;
@@ -70,14 +71,14 @@ export const EntryImages: React.FC<ImageProps> = (props: ImageProps) => {
   };
 
   const imageBeforeRequest = {
-    url: `http://localhost:8081/journals/${journal.id}/entries/${entry.id}/image`,
+    url: `${config.entries}/journals/${journal.id}/entries/${entry.id}/image`,
     paramName: 'file  ',
     params: { type: 'IMAGE_BEFORE' },
     onFinish: onFinish,
   };
 
   const imageAfterRequest = {
-    url: `http://localhost:8081/journals/${journal.id}/entries/${entry.id}/image`,
+    url: `${config.entries}/journals/${journal.id}/entries/${entry.id}/image`,
     paramName: 'file  ',
     params: { type: 'IMAGE_AFTER' },
     onFinish: onFinish,

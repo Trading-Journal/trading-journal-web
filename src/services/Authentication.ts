@@ -4,10 +4,11 @@ import {
   RegisterRequest,
   SignUpResponse,
 } from 'model';
+import { config } from 'utilities';
 import { readErrors } from './ErrorsReader';
 
 const signIn = (email: string, password: string): Promise<LoginResponse> => {
-  return fetch('http://localhost:8080/authentication/signin', {
+  return fetch(`${config.authentication}/authentication/signin`, {
     method: 'POST',
     body: JSON.stringify({ email, password }),
     headers: {
@@ -25,7 +26,7 @@ const signIn = (email: string, password: string): Promise<LoginResponse> => {
 };
 
 const signUp = (register: RegisterRequest): Promise<SignUpResponse> => {
-  return fetch('http://localhost:8080/authentication/signup', {
+  return fetch(`${config.authentication}/authentication/signup`, {
     method: 'POST',
     body: JSON.stringify(register),
     headers: {
@@ -44,7 +45,7 @@ const signUp = (register: RegisterRequest): Promise<SignUpResponse> => {
 
 const requestChangePassword = (email: string): Promise<any> => {
   return fetch(
-    `http://localhost:8080/authentication/change-password/request?email=${email}`,
+    `${config.authentication}/authentication/change-password/request?email=${email}`,
     {
       method: 'POST',
       headers: {
@@ -61,7 +62,7 @@ const requestChangePassword = (email: string): Promise<any> => {
 };
 
 const changePassword = (request: ChangePasswordRequest): Promise<any> => {
-  return fetch(`http://localhost:8080/authentication/change-password`, {
+  return fetch(`${config.authentication}/authentication/change-password`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ const changePassword = (request: ChangePasswordRequest): Promise<any> => {
 };
 
 const verify = (hash: string): Promise<any> => {
-  return fetch(`http://localhost:8080/authentication/verify?hash=${hash}`, {
+  return fetch(`${config.authentication}/authentication/verify?hash=${hash}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -93,7 +94,7 @@ const verify = (hash: string): Promise<any> => {
 
 const sendVerification = (email: string): Promise<any> => {
   return fetch(
-    `http://localhost:8080/authentication/verify/send?email=${email}`,
+    `${config.authentication}/authentication/verify/send?email=${email}`,
     {
       method: 'POST',
       headers: {
