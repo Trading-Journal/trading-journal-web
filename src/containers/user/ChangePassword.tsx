@@ -77,6 +77,7 @@ export const ChangePassword = () => {
               label="Email Address"
               onChange={(value) => setRequest({ ...request, email: value })}
               value={request.email}
+              autoFocus
             />
           </Grid>
           <Grid item xs={12} sm={12}>

@@ -69,6 +69,7 @@ export const ForgotPassword = () => {
             label="Email Address"
             onChange={(value) => setEmail(value)}
             value={email}
+            autoFocus
           />
 
           <FormAlert mutation={mutation} />

@@ -64,6 +64,7 @@ export const DepositForm: React.FC<FormProps> = (props: FormProps) => {
             scale={2}
             value={deposit.price}
             required
+            autoFocus
             onChange={(value) => setDeposit({ ...deposit, price: value! })}
           />
         </Grid>

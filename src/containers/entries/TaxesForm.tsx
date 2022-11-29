@@ -64,6 +64,7 @@ export const TaxesForm: React.FC<FormProps> = (props: FormProps) => {
             scale={2}
             value={taxes.price}
             required
+            autoFocus
             onChange={(value) => setTaxes({ ...taxes, price: value! })}
           />
         </Grid>

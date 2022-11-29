@@ -64,6 +64,7 @@ export const WithdrawalForm: React.FC<FormProps> = (props: FormProps) => {
             scale={2}
             value={withdrawal.price}
             required
+            autoFocus
             onChange={(value) =>
               setWithdrawal({ ...withdrawal, price: value! })
             }

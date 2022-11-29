@@ -203,7 +203,6 @@ export const TradeForm: React.FC<TradeProps> = (props: TradeProps) => {
           <TextInput
             label="Graph Measure"
             value={trade.graphMeasure}
-            autoFocus
             onChange={(value) => setTrade({ ...trade, graphMeasure: value })}
           />
         </Grid>
@@ -211,7 +210,6 @@ export const TradeForm: React.FC<TradeProps> = (props: TradeProps) => {
           <TextInput
             label="Notes"
             value={trade.notes}
-            autoFocus
             onChange={(value) => setTrade({ ...trade, notes: value })}
             multiline
             maxRows={4}
