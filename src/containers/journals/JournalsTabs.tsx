@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { Journal } from 'model';
+import { useJournalsQuery } from 'queries';
 import React, { useEffect, useState } from 'react';
 import { JournalEntries } from './JournalEntries';
 import { Journals } from './Journals';
@@ -23,15 +24,16 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export const JournalsTabs: React.FC<{ journals: Journal[] }> = ({
-  journals,
-}) => {
+export const JournalsTabs = () => {
+  const { data: journals } = useJournalsQuery();
   const [value, setValue] = useState(0);
+
   useEffect(() => {
-    if (journals.length > 0) {
+    if (journals && journals.length > 0) {
       setValue(1);
     }
-  }, [journals]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -48,27 +50,29 @@ export const JournalsTabs: React.FC<{ journals: Journal[] }> = ({
           sx={{ borderRight: 1, borderColor: 'divider' }}
         >
           <Tab icon={<TuneIcon sx={{ fontSize: 30 }} />} />
-          {journals.map((journal: Journal) => (
-            <Tab
-              key={`journal-item-${journal.id}`}
-              label={journal.name}
-              iconPosition="end"
-            />
-          ))}
+          {journals &&
+            journals.map((journal: Journal) => (
+              <Tab
+                key={`journal-item-${journal.id}`}
+                label={journal.name}
+                iconPosition="end"
+              />
+            ))}
         </Tabs>
       </Box>
       <TabPanel key={'journal-tab-panel-options'} value={value} index={0}>
         <Journals />
       </TabPanel>
-      {journals.map((journal: Journal, index: number) => (
-        <TabPanel
-          key={`journal-tab-panel-${journal.id}`}
-          value={value}
-          index={index + 1}
-        >
-          <JournalEntries journalId={journal.id} />
-        </TabPanel>
-      ))}
+      {journals &&
+        journals.map((journal: Journal, index: number) => (
+          <TabPanel
+            key={`journal-tab-panel-${journal.id}`}
+            value={value}
+            index={index + 1}
+          >
+            <JournalEntries journalId={journal.id} />
+          </TabPanel>
+        ))}
     </Box>
   );
 };
