@@ -2,12 +2,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import ImageIcon from '@mui/icons-material/Image';
 import { Box } from '@mui/material';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
-import { DataGrid, GridActionsCellItem, GridColumns } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridActionsCellItem,
+  GridColumns,
+  GridToolbarContainer,
+} from '@mui/x-data-grid';
 import { useConfirmationModalContext } from 'components/dialog/ConfirmationDialog';
 import { Entry, EntryType, Journal } from 'model';
 import { useEntryDelete } from 'queries';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import {
   displayFormat,
   formatCellValue,
@@ -15,6 +22,57 @@ import {
   formatDate,
   formatPercentage,
 } from 'utilities';
+
+const CustomToolbar = ({
+  filterChanged,
+}: {
+  filterChanged: (type: EntryType | string) => void;
+}) => {
+  const [type, setType] = useState<EntryType | string>('ALL');
+
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    type: EntryType | string
+  ) => {
+    event.preventDefault();
+    setType(type);
+    filterChanged(type);
+  };
+
+  const control = {
+    value: type,
+    onChange: handleChange,
+    exclusive: true,
+  };
+
+  return (
+    <GridToolbarContainer sx={{ mb: 1 }}>
+      <Box>
+        <ToggleButtonGroup {...control} color="primary" size="small">
+          <ToggleButton value="ALL" key="all">
+            All
+          </ToggleButton>
+
+          <ToggleButton value={EntryType.TRADE} key="trade">
+            Trade
+          </ToggleButton>
+
+          <ToggleButton value={EntryType.DEPOSIT} key="deposit">
+            Deposit
+          </ToggleButton>
+
+          <ToggleButton value={EntryType.WITHDRAWAL} key="withdrawal">
+            Withdrawal
+          </ToggleButton>
+
+          <ToggleButton value={EntryType.TAXES} key="taxes">
+            Taxes
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </Box>
+    </GridToolbarContainer>
+  );
+};
 
 export const EntriesTable = ({
   entries,
@@ -28,9 +86,18 @@ export const EntriesTable = ({
   onImage: (entry: Entry) => void;
 }) => {
   const currency = journal.currentBalance.currency;
-
   const modalContext = useConfirmationModalContext();
   const deleteMutation = useEntryDelete(journal.id);
+
+  const [data, setData] = useState(entries);
+
+  const filterChanged = (type: EntryType | string) => {
+    if (type === 'ALL') {
+      setData(entries);
+    } else {
+      setData(entries.filter((entry: Entry) => entry.type === type));
+    }
+  };
 
   const deleteClick = useCallback(
     async (entry: Entry) => {
@@ -266,11 +333,15 @@ export const EntriesTable = ({
     >
       <DataGrid
         autoHeight={true}
-        rows={entries}
+        rows={data}
         columns={columns}
         pageSize={100}
         rowsPerPageOptions={[100]}
         disableSelectionOnClick
+        components={{
+          Toolbar: CustomToolbar,
+        }}
+        componentsProps={{ toolbar: { filterChanged: filterChanged } }}
       />
     </Box>
   );
