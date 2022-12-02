@@ -35,12 +35,13 @@ export const getSymbol = (currency: Currency) => {
 };
 
 export const percentFormatter = (value: number | undefined) => {
+  let valueFormatted;
   if (value) {
-    const valueFormatted = currencyFormat(value * 100);
-    return `${valueFormatted} %`;
+    valueFormatted = currencyFormat(value * 100);
   } else {
-    return '';
+    valueFormatted = currencyFormat(0);
   }
+  return `${valueFormatted} %`;
 };
 
 export const currencyFormat = (value: number | undefined, options?: Format) => {

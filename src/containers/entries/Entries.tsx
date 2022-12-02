@@ -3,7 +3,6 @@ import { SidePanel } from 'components/side-panel/SidePanel';
 import { Entry, EntryType, fromEntry, Journal, Trade } from 'model';
 import { useEntriesQuery } from 'queries';
 import React, { useState } from 'react';
-import { AddEntryDial } from './AddEntryDial';
 import { DepositForm } from './DepositForm';
 import { EntriesTable } from './EntriesTable';
 import { EntryImages } from './EntryImages';
@@ -80,7 +79,6 @@ export const Entries: React.FC<{ journal: Journal }> = ({ journal }) => {
 
   const onAction = (type: EntryType) => {
     setAnchor('right');
-    setEntry(undefined);
     setType(type);
     setEntryOpen(true);
   };
@@ -94,8 +92,8 @@ export const Entries: React.FC<{ journal: Journal }> = ({ journal }) => {
         journal={journal}
         onEdit={onEdit}
         onImage={onImage}
+        onAdd={onAction}
       />
-      <AddEntryDial onSelect={onAction} />
 
       <SidePanel anchor={anchor} open={entryOpen} onClose={onClose}>
         {type && (

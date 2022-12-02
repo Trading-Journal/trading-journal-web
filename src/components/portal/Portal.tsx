@@ -9,7 +9,7 @@ interface PortalProps {
 
 export const Portal: React.FC<PortalProps> = ({ children }) => {
   return (
-    <Grid container component="main" sx={{ height: '96vh' }}>
+    <Grid container component="main" sx={{ height: '97vh' }}>
       <CssBaseline />
       <Grid
         item

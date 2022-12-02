@@ -120,6 +120,7 @@ export const JournalsTable = ({
       pageSize={100}
       rowsPerPageOptions={[100]}
       disableSelectionOnClick
+      disableColumnMenu
     />
   );
 };

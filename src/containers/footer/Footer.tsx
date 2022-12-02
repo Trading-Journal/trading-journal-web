@@ -15,7 +15,7 @@ export const Footer = () => {
           theme.palette.mode === 'light'
             ? theme.palette.grey[200]
             : theme.palette.grey[800],
-        height: '4vh',
+        height: '3vh',
       }}
     >
       <Container maxWidth="sm">

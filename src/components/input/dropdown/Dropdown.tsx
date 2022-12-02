@@ -17,11 +17,23 @@ interface DropdownProps {
   onChange: (item: Item) => void;
   selected?: Item;
   disabled?: boolean;
+  width?: number;
+  small?: boolean;
 }
 
 export const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
-  const { label, required, items, selected, disabled, onChange, id, ...rest } =
-    props;
+  const {
+    label,
+    required,
+    items,
+    selected,
+    disabled,
+    width,
+    small,
+    onChange,
+    id,
+    ...rest
+  } = props;
   const [current, setCurrentValue] = React.useState<Item>(selected!);
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -37,7 +49,10 @@ export const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
   }, [selected]);
 
   return (
-    <FormControl fullWidth>
+    <FormControl
+      fullWidth={width === undefined}
+      size={small ? 'small' : 'medium'}
+    >
       <InputLabel id={`${id}-input-label`}>{label}</InputLabel>
       <Select
         labelId={`${id}-select-label`}
@@ -47,6 +62,9 @@ export const Dropdown: React.FC<DropdownProps> = (props: DropdownProps) => {
         onChange={handleChange}
         required={required}
         disabled={disabled}
+        sx={{
+          width: width,
+        }}
         {...rest}
       >
         {items.map((item: Item, index: number) => (
