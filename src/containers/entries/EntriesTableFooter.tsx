@@ -52,16 +52,23 @@ export const EntriesTableFooter = ({
     <GridFooterContainer>
       <Box sx={{ flexGrow: 1, p: 1, display: 'flex' }}>
         <Grid container spacing={2}>
-          {items.map((item) => (
-            <Grid item xs={12} md={4}>
-              <Stack direction="column" alignItems="center">
+          {items.map((item, index) => (
+            <Grid item xs={12} md={4} key={`footer-grid-${index}`}>
+              <Stack
+                direction="column"
+                alignItems="center"
+                key={`footer-stack-${index}`}
+              >
                 <Chip
+                  key={`footer-chip-${index}`}
                   size="small"
                   sx={{ fontSize: '0.9rem' }}
                   label={item.valueString}
                   color={item.value >= 0 ? 'success' : 'error'}
                 />
-                <Typography fontSize={12}>{item.label}</Typography>
+                <Typography fontSize={12} key={`footer-label-${index}`}>
+                  {item.label}
+                </Typography>
               </Stack>
             </Grid>
           ))}

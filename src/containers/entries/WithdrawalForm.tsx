@@ -23,7 +23,7 @@ interface FormProps {
 export const WithdrawalForm: React.FC<FormProps> = (props: FormProps) => {
   const { journal, onSave, onCancel } = props;
   const [withdrawal, setWithdrawal] = useState<Withdrawal>(initialState);
-  const [currency] = useState(getSymbol(journal.currentBalance.currency));
+  const [currency] = useState(getSymbol(journal.currency));
 
   const mutation = useSaveWithdrawal(journal.id);
 

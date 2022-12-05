@@ -31,7 +31,7 @@ export const EntriesTable = ({
   onImage: (entry: Entry) => void;
   onAdd: (type: EntryType) => void;
 }) => {
-  const currency = journal.currentBalance.currency;
+  const currency = journal.currency;
   const modalContext = useConfirmationModalContext();
   const deleteMutation = useEntryDelete(journal.id);
 
@@ -291,7 +291,7 @@ export const EntriesTable = ({
         }}
         componentsProps={{
           toolbar: { filterChanged: filterChanged, addSelected: onAdd },
-          footer: { entries: data, currency: journal.currentBalance.currency },
+          footer: { entries: data, currency: currency },
         }}
       />
     </Box>

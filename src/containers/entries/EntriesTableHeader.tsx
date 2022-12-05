@@ -130,15 +130,22 @@ export const EntriesTableHeader = ({
         >
           {types
             .filter((type) => type.key !== 'ALL')
-            .map((type) => (
-              <MenuItem onClick={() => addSelected(type.key as EntryType)}>
-                <ListItemIcon>
+            .map((type, index) => (
+              <MenuItem
+                onClick={() => addSelected(type.key as EntryType)}
+                key={`header-menuitem-grid-${index}`}
+              >
+                <ListItemIcon key={`header-listitem-grid-${index}`}>
                   {React.cloneElement(type.icon, {
                     color: 'primary',
                     fontSize: 'small',
+                    key: `header-icon-grid-${index}`,
                   })}
                 </ListItemIcon>
-                <ListItemText> {type.value}</ListItemText>
+                <ListItemText key={`header-itemText-grid-${index}`}>
+                  {' '}
+                  {type.value}
+                </ListItemText>
               </MenuItem>
             ))}
         </Menu>

@@ -23,7 +23,7 @@ interface FormProps {
 export const DepositForm: React.FC<FormProps> = (props: FormProps) => {
   const { journal, onSave, onCancel } = props;
   const [deposit, setDeposit] = useState<Deposit>(initialState);
-  const [currency] = useState(getSymbol(journal.currentBalance.currency));
+  const [currency] = useState(getSymbol(journal.currency));
 
   const mutation = useSaveDeposit(journal.id);
 

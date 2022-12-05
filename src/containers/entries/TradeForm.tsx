@@ -45,7 +45,7 @@ export const TradeForm: React.FC<TradeProps> = (props: TradeProps) => {
   const [finished, setFinished] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [subtitle, setSubtitle] = useState<string | undefined>(undefined);
-  const [currency] = useState(getSymbol(journal.currentBalance.currency));
+  const [currency] = useState(getSymbol(journal.currency));
 
   const mutation = useSaveTrade(journal.id, entryId);
 
@@ -55,7 +55,7 @@ export const TradeForm: React.FC<TradeProps> = (props: TradeProps) => {
       setTitle(
         `Edit Trade ${update.symbol} ${update.direction} ${currencyFormatter(
           update.price,
-          journal.currentBalance.currency
+          journal.currency
         )}`
       );
       if (update.exitPrice) {

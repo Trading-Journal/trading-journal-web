@@ -23,7 +23,7 @@ interface FormProps {
 export const TaxesForm: React.FC<FormProps> = (props: FormProps) => {
   const { journal, onSave, onCancel } = props;
   const [taxes, setTaxes] = useState<Taxes>(initialState);
-  const [currency] = useState(getSymbol(journal.currentBalance.currency));
+  const [currency] = useState(getSymbol(journal.currency));
 
   const mutation = useSaveTaxes(journal.id);
 
